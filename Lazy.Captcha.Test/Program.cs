@@ -3,4 +3,4 @@ using Lazy.Captcha.Test;
 
 Console.WriteLine("Hello, World!");
 
-Demo8.Run();
+Arithmetic.Run();

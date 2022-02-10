@@ -13,15 +13,12 @@ using System.Threading.Tasks;
 
 namespace Lazy.Captcha.Test
 {
-    public class Demo8
+    public  class Arithmetic
     {
-
         public static void Run()
         {
             int width = 130;
             int height = 48;
-
-
 
             using Image<Rgba32> img = new(width, height, Color.White);
 
@@ -37,7 +34,7 @@ namespace Lazy.Captcha.Test
                 // 绘制干扰线
                 DrawInterferenceLine(ctx, width, height);
                 // 绘制文字
-                DrawChinese(ctx, width, height, "我爱天口");
+                DrawChinese(ctx, width, height, "7x8=?");
             });
 
             img.Save("a.png");
@@ -75,10 +72,10 @@ namespace Lazy.Captcha.Test
 
         static void DrawChinese(IImageProcessingContext ctx, int width, int height, string text)
         {
-            Font font = new Font(SystemFonts.Families.Last(), 28);
+            Font font = FontManager.GetFont();
 
             int fW = width / text.Count(); // 每一个字符宽度
-            int fSp = (int)(fW - TextMeasurer.Measure("王", new RendererOptions(font)).Width) / 2;
+            int fSp = (int)(fW - TextMeasurer.Measure("8", new RendererOptions(font)).Width) / 2;
             for (var i = 0; i < text.Count(); i++)
             {
                 var fontHeight = (int)TextMeasurer.Measure(text[i].ToString(), new RendererOptions(font)).Height;

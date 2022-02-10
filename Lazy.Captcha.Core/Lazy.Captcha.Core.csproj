@@ -13,7 +13,47 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="fonts\actionj.ttf" />
+    <None Remove="fonts\epilog.ttf" />
+    <None Remove="fonts\fresnel.ttf" />
+    <None Remove="fonts\headache.ttf" />
+    <None Remove="fonts\lexo.ttf" />
+    <None Remove="fonts\prefix.ttf" />
+    <None Remove="fonts\progbot.ttf" />
+    <None Remove="fonts\ransom.ttf" />
+    <None Remove="fonts\robot.ttf" />
+    <None Remove="fonts\scandal.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="fonts\actionj.ttf" />
+    <EmbeddedResource Include="fonts\epilog.ttf" />
+    <EmbeddedResource Include="fonts\fresnel.ttf" />
+    <EmbeddedResource Include="fonts\headache.ttf" />
+    <EmbeddedResource Include="fonts\lexo.ttf" />
+    <EmbeddedResource Include="fonts\prefix.ttf" />
+    <EmbeddedResource Include="fonts\progbot.ttf" />
+    <EmbeddedResource Include="fonts\ransom.ttf" />
+    <EmbeddedResource Include="fonts\robot.ttf" />
+    <EmbeddedResource Include="fonts\scandal.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.4" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="fonts\actionj.ttf" />
+    <Resource Include="fonts\epilog.ttf" />
+    <Resource Include="fonts\fresnel.ttf" />
+    <Resource Include="fonts\headache.ttf" />
+    <Resource Include="fonts\lexo.ttf" />
+    <Resource Include="fonts\prefix.ttf" />
+    <Resource Include="fonts\progbot.ttf" />
+    <Resource Include="fonts\ransom.ttf" />
+    <Resource Include="fonts\robot.ttf" />
+    <Resource Include="fonts\scandal.ttf" />
   </ItemGroup>
 
 </Project>
