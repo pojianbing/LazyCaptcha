@@ -13,7 +13,7 @@ namespace Lazy.Captcha.Core.Generator
     {
         private CaptchaGeneratorOption _option = new CaptchaGeneratorOption();
 
-        public static DefaultCaptchaBuilder NewBuilder()
+        public static DefaultCaptchaBuilder Create()
         { 
             return new DefaultCaptchaBuilder();
         }
@@ -43,11 +43,33 @@ namespace Lazy.Captcha.Core.Generator
         /// <summary>
         /// 字体
         /// </summary>
-        /// <param name="font"></param>
+        /// <param name="fontFamily"></param>
         /// <returns></returns>
-        public DefaultCaptchaBuilder Font(Font font)
+        public DefaultCaptchaBuilder FontFamily(FontFamily fontFamily)
         {
-            this._option.Font = font;
+            this._option.FontFamily = fontFamily;
+            return this;
+        }
+
+        /// <summary>
+        /// 字体大小
+        /// </summary>
+        /// <param name="fontSize"></param>
+        /// <returns></returns>
+        public DefaultCaptchaBuilder FontFamily(float fontSize)
+        {
+            this._option.FontSize = fontSize;
+            return this;
+        }
+
+        /// <summary>
+        /// fontStyle
+        /// </summary>
+        /// <param name="fontStyle"></param>
+        /// <returns></returns>
+        public DefaultCaptchaBuilder FontFamily(FontStyle fontStyle)
+        {
+            this._option.FontStyle = fontStyle;
             return this;
         }
 

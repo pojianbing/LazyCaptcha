@@ -40,26 +40,17 @@ namespace Lazy.Captcha.Core.Generator
         protected readonly static List<char> NUMBER_ZH_HK_LETTERS = new List<char> { '零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖' };
 
         /// <summary>
-        /// 字体
+        /// 选项
         /// </summary>
         protected CaptchaGeneratorOption Option;
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="option"></param>
         public BaseCaptchaGenerator(CaptchaGeneratorOption option)
         {
             this.Option = option;
-
-            if (this.Option.FontFamily == null)
-            {
-                this.Option.Font = this.IsChineseIn() ?  DefaultFonts.instance.Kaiti() : DefaultFonts.instance.Epilog();
-            }
-        }
-
-        private bool IsChineseIn()
-        {
-            return this.Option.CaptchaType == CaptchaType.CHINESE ||
-                   this.Option.CaptchaType == CaptchaType.NUMBER_ZH_CN ||
-                   this.Option.CaptchaType == CaptchaType.NUMBER_ZH_HK ||
-                   this.Option.CaptchaType == CaptchaType.NUMBER_ZH_HK;
         }
 
         /// <summary>
@@ -88,7 +79,7 @@ namespace Lazy.Captcha.Core.Generator
         protected virtual void DrawBubble(IImageProcessingContext ctx, int width, int height, float thickness = 1)
         {
             var random = new Random();
-            var color = ColorManager.instance.GetRandomColor();
+            var color = DefaultColors.instance.GetRandomColor();
             var w = 5 + random.Next(10);
             var point = new PointF(random.Next(width - 25) + w, random.Next(height - 15) + w);
             var size = new SizeF(w, w);
@@ -107,7 +98,7 @@ namespace Lazy.Captcha.Core.Generator
             var random = new Random();
             for (var i = 0; i < count; i++)
             {
-                var color = ColorManager.instance.GetRandomColor();
+                var color = DefaultColors.instance.GetRandomColor();
                 int x1 = 5, y1 = random.Next(5, height / 2);
                 int x2 = width - 5, y2 = random.Next(height / 2, height - 5);
                 int ctrlx1 = random.Next(width / 4, width / 4 * 3), ctrly1 = random.Next(5, height - 5);
@@ -129,7 +120,7 @@ namespace Lazy.Captcha.Core.Generator
 
             for (var i = 0; i < text.Count(); i++)
             {
-                var color = ColorManager.instance.GetRandomColor();
+                var color = DefaultColors.instance.GetRandomColor();
                 ctx.DrawText(text[i].ToString(), Option.Font, color, textPositions[i]);
             }
         }

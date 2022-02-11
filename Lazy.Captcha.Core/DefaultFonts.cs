@@ -11,15 +11,15 @@ namespace Lazy.Captcha.Core
     public class DefaultFonts
     {
         public static DefaultFonts instance = new DefaultFonts();
+        private static List<FontFamily> _fontFamilies = null;
 
-        private static List<FontFamily> _fontFamilies;
-
-        public DefaultFonts()
+        static DefaultFonts()
         {
             if (_fontFamilies == null)
             {
                 var assembly = Assembly.GetExecutingAssembly();
                 var names = assembly.GetManifestResourceNames();
+                _fontFamilies = new List<FontFamily>();
 
                 if (names?.Length > 0 == true)
                 {

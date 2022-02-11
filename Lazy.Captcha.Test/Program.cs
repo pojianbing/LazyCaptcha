@@ -3,12 +3,27 @@ using Lazy.Captcha.Core;
 using Lazy.Captcha.Core.Generator;
 using Lazy.Captcha.Test;
 using SixLabors.ImageSharp;
+using System.Diagnostics;
 
 Console.WriteLine("Hello, World!");
 
 Chinese.Run();
 
-DefaultFonts.instance.GetFont("");
 
-ICaptchaGenerator g = DefaultCaptchaBuilder.NewBuilder().DrawBubble(false).Build();
-g.Generate();
+for (var i = 0; i < 100; i++)
+{
+
+    Stopwatch st = new Stopwatch();
+    st.Start();
+
+    var generator = DefaultCaptchaBuilder
+    .Create()
+    .DrawBubble(false)
+    .Build();
+
+    generator.Generate();
+    st.Stop();
+
+    Console.WriteLine(st.ElapsedMilliseconds);
+}
+

@@ -51,7 +51,7 @@ namespace Lazy.Captcha.Test
         static void DrawBubble(IImageProcessingContext ctx, int width, int height)
         {
             var random = new Random();
-            var color = ColorManager.instance.GetRandomColor();
+            var color = DefaultColors.instance.GetRandomColor();
             var w = 5 + random.Next(10);
             var point = new PointF(random.Next(width - 25) + w, random.Next(height - 15) + w);
             var size = new SizeF(w, w);
@@ -62,7 +62,7 @@ namespace Lazy.Captcha.Test
         static void DrawInterferenceLine(IImageProcessingContext ctx, int width, int height)
         {
             var random = new Random();
-            var color = ColorManager.instance.GetRandomColor();
+            var color = DefaultColors.instance.GetRandomColor();
             int x1 = 5, y1 = random.Next(5, height / 2);
             int x2 = width - 5, y2 = random.Next(height / 2, height - 5);
             int ctrlx1 = random.Next(width / 4, width / 4 * 3), ctrly1 = random.Next(5, height - 5);
@@ -72,7 +72,7 @@ namespace Lazy.Captcha.Test
 
         static void DrawText(IImageProcessingContext ctx, int width, int height, string text)
         {
-            Font font = DefaultFonts.instance.GetFont("");
+            Font font = new Font(DefaultFonts.instance.Epilog, 28);
             //Font font = new Font(SystemFonts.Families.Last(), 28);
 
             //int fW = width / text.Count(); // 每一个字符宽度
@@ -89,7 +89,7 @@ namespace Lazy.Captcha.Test
 
             for (var i = 0; i < text.Count(); i++)
             {
-                var color = ColorManager.instance.GetRandomColor();
+                var color = DefaultColors.instance.GetRandomColor();
                 ctx.DrawText(text[i].ToString(), font, color, textPositions[i]);
             }
         }
