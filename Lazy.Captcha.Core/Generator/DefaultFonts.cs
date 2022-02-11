@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lazy.Captcha.Core
+namespace Lazy.Captcha.Core.Generator
 {
     public class DefaultFonts
     {

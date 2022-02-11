@@ -16,7 +16,7 @@ namespace Lazy.Captcha.Core.Generator
     /// <summary>
     /// 验证码生成器基类
     /// </summary>
-    public abstract class BaseCaptchaGenerator : ICaptchaGenerator
+    public abstract class BaseCaptchaImageGenerator : ICaptchaImageGenerator
     {
         /// <summary>
         /// 数字列表
@@ -42,13 +42,13 @@ namespace Lazy.Captcha.Core.Generator
         /// <summary>
         /// 选项
         /// </summary>
-        protected CaptchaGeneratorOption Option;
+        protected CaptchaImageGeneratorOption Option;
 
         /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="option"></param>
-        public BaseCaptchaGenerator(CaptchaGeneratorOption option)
+        public BaseCaptchaImageGenerator(CaptchaImageGeneratorOption option)
         {
             this.Option = option;
         }

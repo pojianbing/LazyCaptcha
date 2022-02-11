@@ -7,8 +7,6 @@ using System.Diagnostics;
 
 Console.WriteLine("Hello, World!");
 
-Chinese.Run();
-
 
 for (var i = 0; i < 100; i++)
 {
@@ -16,7 +14,7 @@ for (var i = 0; i < 100; i++)
     Stopwatch st = new Stopwatch();
     st.Start();
 
-    var generator = DefaultCaptchaBuilder
+    var generator = DefaultCaptchaImageBuilder
     .Create()
     .DrawBubble(false)
     .Build();

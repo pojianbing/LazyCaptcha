@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Lazy.Captcha.Core.Generator
 {
-    public class CaptchaGeneratorOption
+    public class CaptchaImageGeneratorOption
     {
         /// <summary>
         /// 验证码类型
