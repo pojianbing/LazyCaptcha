@@ -17,6 +17,7 @@
     <None Remove="fonts\epilog.ttf" />
     <None Remove="fonts\fresnel.ttf" />
     <None Remove="fonts\headache.ttf" />
+    <None Remove="fonts\kaiti.ttf" />
     <None Remove="fonts\lexo.ttf" />
     <None Remove="fonts\prefix.ttf" />
     <None Remove="fonts\progbot.ttf" />
@@ -30,6 +31,7 @@
     <EmbeddedResource Include="fonts\epilog.ttf" />
     <EmbeddedResource Include="fonts\fresnel.ttf" />
     <EmbeddedResource Include="fonts\headache.ttf" />
+    <EmbeddedResource Include="fonts\kaiti.ttf" />
     <EmbeddedResource Include="fonts\lexo.ttf" />
     <EmbeddedResource Include="fonts\prefix.ttf" />
     <EmbeddedResource Include="fonts\progbot.ttf" />

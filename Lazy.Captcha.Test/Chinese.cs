@@ -31,11 +31,11 @@ namespace Lazy.Captcha.Test
                 });
 
                 // 绘制气泡
-                DrawBubble(ctx, width, height, 3);
-                // 绘制干扰线
-                DrawInterferenceLine(ctx, width, height);
+                //DrawBubble(ctx, width, height, 3);
+                //// 绘制干扰线
+                //DrawInterferenceLine(ctx, width, height);
                 // 绘制文字
-                DrawChinese(ctx, width, height, "我爱天口");
+                DrawChinese(ctx, width, height, "a");
             });
 
             img.Save("a.png");
@@ -52,7 +52,7 @@ namespace Lazy.Captcha.Test
         static void DrawBubble(IImageProcessingContext ctx, int width, int height)
         {
             var random = new Random();
-            var color = ColorManager.GetRandomColor();
+            var color = ColorManager.instance.GetRandomColor();
             var w = 5 + random.Next(10);
             var point = new PointF(random.Next(width - 25) + w, random.Next(height - 15) + w);
             var size = new SizeF(w, w);
@@ -63,7 +63,7 @@ namespace Lazy.Captcha.Test
         static void DrawInterferenceLine(IImageProcessingContext ctx, int width, int height)
         {
             var random = new Random();
-            var color = ColorManager.GetRandomColor();
+            var color = ColorManager.instance.GetRandomColor();
             int x1 = 5, y1 = random.Next(5, height / 2);
             int x2 = width - 5, y2 = random.Next(height / 2, height - 5);
             int ctrlx1 = random.Next(width / 4, width / 4 * 3), ctrly1 = random.Next(5, height - 5);
@@ -73,7 +73,7 @@ namespace Lazy.Captcha.Test
 
         static void DrawChinese(IImageProcessingContext ctx, int width, int height, string text)
         {
-            Font font = new Font(SystemFonts.Families.Last(), 28);
+            Font font = new Font(SystemFonts.Families.Last(), 38, FontStyle.Bold);
 
             int fW = width / text.Count(); // 每一个字符宽度
             int fSp = (int)(fW - TextMeasurer.Measure("王", new RendererOptions(font)).Width) / 2;
@@ -81,7 +81,8 @@ namespace Lazy.Captcha.Test
             {
                 var fontHeight = (int)TextMeasurer.Measure(text[i].ToString(), new RendererOptions(font)).Height;
                 int fY = (height - fontHeight) / 2;  // 文字的纵坐标
-                var color = ColorManager.GetRandomColor();
+                var color = ColorManager.instance.GetRandomColor();
+
                 ctx.DrawText(text[i].ToString(), font, color, new PointF(i * fW + fSp + 3, fY + 3));
             }
         }
