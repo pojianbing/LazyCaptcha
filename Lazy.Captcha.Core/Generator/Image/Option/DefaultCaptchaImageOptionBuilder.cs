@@ -1,4 +1,5 @@
 ﻿using Lazy.Captcha.Core.Generator;
+using Lazy.Captcha.Core.Generator.Code;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using System;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lazy.Captcha.Core.Generator
+namespace Lazy.Captcha.Core.Generator.Image.Option
 {
     public class DefaultCaptchaImageOptionBuilder : ICaptchaImageOptionBuilder
     {
@@ -25,7 +26,7 @@ namespace Lazy.Captcha.Core.Generator
         /// <returns></returns>
         public DefaultCaptchaImageOptionBuilder CaptchaType(CaptchaType captchaType)
         { 
-            this._option.CaptchaType = captchaType;
+            //this._option.CaptchaType = captchaType;
             return this;
         }
 
@@ -159,7 +160,7 @@ namespace Lazy.Captcha.Core.Generator
         /// <returns></returns>
         public DefaultCaptchaImageOptionBuilder ChineseTexts(List<char> chineseTexts)
         {
-            this._option.ChineseTexts = chineseTexts;
+            //this._option.ChineseTexts = chineseTexts;
             return this;
         }
 

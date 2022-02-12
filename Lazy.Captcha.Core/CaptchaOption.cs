@@ -1,4 +1,7 @@
 ﻿using Lazy.Captcha.Core.Generator;
+using Lazy.Captcha.Core.Generator.Code;
+using Lazy.Captcha.Core.Generator.Image;
+using Lazy.Captcha.Core.Generator.Image.Option;
 using System;
 using System.Collections.Generic;
 using System.Linq;

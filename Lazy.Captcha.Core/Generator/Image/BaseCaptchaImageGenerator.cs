@@ -1,4 +1,5 @@
-﻿using SixLabors.Fonts;
+﻿using Lazy.Captcha.Core.Generator.Image.Option;
+using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Drawing;
 using SixLabors.ImageSharp.Drawing.Processing;
@@ -11,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lazy.Captcha.Core.Generator
+namespace Lazy.Captcha.Core.Generator.Image
 {
     /// <summary>
     /// 验证码生成器基类
@@ -215,64 +216,5 @@ namespace Lazy.Captcha.Core.Generator
 
             return result.ToString();
         }
-
-        /// <summary>
-        /// 生成字符列表
-        /// </summary>
-        /// <returns></returns>
-        private List<char> GenerateLetters()
-        {
-            var letters = new List<char>();
-
-            switch (this.Option.CaptchaType)
-            {
-                case CaptchaType.CHINESE:
-                    letters.AddRange(this.Option.ChineseTexts);
-                    break;
-                case CaptchaType.NUMBER:
-                    letters.AddRange(NUMBER_LETTERS);
-                    break;
-                case CaptchaType.NUMBER_ZH_CN:
-                    letters.AddRange(NUMBER_ZH_CN_LETTERS);
-                    break;
-                case CaptchaType.NUMBER_ZH_HK:
-                    letters.AddRange(NUMBER_ZH_HK_LETTERS);
-                    break;
-                case CaptchaType.DEFAULT:
-                    letters.AddRange(NUMBER_LETTERS);
-                    letters.AddRange(EN_LOWER_LETTERS);
-                    letters.AddRange(EN_UPPER_LETTERS);
-                    break;
-                case CaptchaType.WORD:
-                    letters.AddRange(EN_LOWER_LETTERS);
-                    letters.AddRange(EN_UPPER_LETTERS);
-                    break;
-                case CaptchaType.WORD_LOWER:
-                    letters.AddRange(EN_LOWER_LETTERS);
-                    break;
-                case CaptchaType.WORD_UPPER:
-                    letters.AddRange(EN_UPPER_LETTERS);
-                    break;
-                case CaptchaType.WORD_NUMBER_LOWER:
-                    letters.AddRange(NUMBER_LETTERS);
-                    letters.AddRange(EN_LOWER_LETTERS);
-                    break;
-                case CaptchaType.WORD_NUMBER_UPPER:
-                    letters.AddRange(NUMBER_LETTERS);
-                    letters.AddRange(EN_UPPER_LETTERS);
-                    break;
-            }
-
-            return letters;
-        }
-
-        ///// <summary>
-        ///// 生成验证码文本
-        ///// </summary>
-        ///// <returns></returns>
-        //public virtual string GenerateText()
-        //{
-        //    return Pick(GenerateLetters(), this.Option.Length);
-        //}
     }
 }

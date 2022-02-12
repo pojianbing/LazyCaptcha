@@ -1,10 +1,11 @@
 using Lazy.Captcha.Core;
+using Lazy.Captcha.Core.Generator.Code;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDistributedMemoryCache().AddCaptcha(option =>
 {
-
+    option.CodeGenerator = new DefaultCaptchaCodeGenerator(CaptchaType.ARITHMETIC_ZH);
 });
 
 // Add services to the container.

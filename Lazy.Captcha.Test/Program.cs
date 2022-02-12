@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Lazy.Captcha.Core;
 using Lazy.Captcha.Core.Generator;
+using Lazy.Captcha.Core.Generator.Code;
 using Lazy.Captcha.Test;
 using SixLabors.ImageSharp;
 using System.Diagnostics;
@@ -8,20 +9,7 @@ using System.Diagnostics;
 Console.WriteLine("Hello, World!");
 
 
-for (var i = 0; i < 100; i++)
-{
+var evaluator = new ExpressionEvaluator();
+var r = evaluator.Evaluate("2*2");
 
-    //Stopwatch st = new Stopwatch();
-    //st.Start();
-
-    //var generator = DefaultCaptchaImageOptionBuilder
-    //.Create()
-    //.DrawBubble(false)
-    //.Build();
-
-    //generator.Generate("abc");
-    //st.Stop();
-
-    //Console.WriteLine(st.ElapsedMilliseconds);
-}
-
+Console.WriteLine(r.GetType());

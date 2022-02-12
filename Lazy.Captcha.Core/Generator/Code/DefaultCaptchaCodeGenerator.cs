@@ -1,0 +1,155 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lazy.Captcha.Core.Generator.Code
+{
+    public class DefaultCaptchaCodeGenerator : ICaptchaCodeGenerator
+    {
+        private CaptchaType _captchaType = CaptchaType.DEFAULT;
+
+        private static readonly Dictionary<CaptchaType, List<char>> TypeCharactersMap = new Dictionary<CaptchaType, List<char>>
+        {
+            { CaptchaType.CHINESE , Characters.CHINESE },
+            { CaptchaType.NUMBER , Characters.NUMBER },
+            { CaptchaType.WORD_UPPER , Characters.WORD_UPPER },
+            { CaptchaType.WORD , Characters.WORD },
+            { CaptchaType.DEFAULT , Characters.DEFAULT },
+            { CaptchaType.WORD_UPPER , Characters.WORD_UPPER },
+            { CaptchaType.NUMBER_ZH_CN , Characters.NUMBER_ZH_CN },
+            { CaptchaType.NUMBER_ZH_HK , Characters.NUMBER_ZH_HK },
+            { CaptchaType.WORD_NUMBER_LOWER , Characters.WORD_NUMBER_LOWER },
+            { CaptchaType.WORD_NUMBER_UPPER , Characters.WORD_NUMBER_UPPER },
+        };
+
+        public DefaultCaptchaCodeGenerator() : this(CaptchaType.DEFAULT)
+        {
+
+        }
+
+        public DefaultCaptchaCodeGenerator(CaptchaType captchaType)
+        {
+            this._captchaType = captchaType;
+        }
+
+        /// <summary>
+        /// 生成
+        /// </summary>
+        /// <param name="length">长度（ARITHMETIC, ARITHMETIC_ZH 长度无效）</param>
+        /// <returns>（渲染文本，code）</returns>
+        public (string renderText, string code) Generate(int length)
+        {
+            if (this._captchaType == CaptchaType.ARITHMETIC)
+            {
+                return GenerateaArithmetic(length);
+            }
+            else if (this._captchaType == CaptchaType.ARITHMETIC_ZH)
+            {
+                return GenerateaArithmeticZh(length);
+            }
+            else
+            {
+                var code = Pick(TypeCharactersMap[this._captchaType], length);
+                return (code, code);
+            }
+
+            return ("", "");
+        }
+
+        private (string renderText, string code) GenerateaArithmetic(int length)
+        {
+            if (length < 5 || length % 2 == 0) throw new Exception("算术验证码长度必须大于5且为奇数");
+
+            var random = new Random();
+            var sb = new StringBuilder();
+
+            for (var i = 0; i < length - 2; i++)
+            {
+                sb.Append(random.Next(10));
+                if (i < length - 3)
+                {
+                    int type = random.Next(1, 4);
+                    if (type == 1)
+                    {
+                        sb.Append("+");
+                    }
+                    else if (type == 2)
+                    {
+                        sb.Append("-");
+                    }
+                    else if (type == 3)
+                    {
+                        sb.Append("x");
+                    }
+                }
+            }
+
+            var evaluator = new ExpressionEvaluator();
+            var result = evaluator.Evaluate(sb.ToString().Replace("x", "*")).ToString();
+
+            return (sb.ToString(), result);
+        }
+
+        private (string renderText, string code) GenerateaArithmeticZh(int length)
+        {
+            if (length < 5 || length % 2 == 0) throw new Exception("算术验证码长度必须大于5且为奇数");
+
+            var random = new Random();
+            var sb1 = new StringBuilder();
+            var sb2 = new StringBuilder();
+
+            for (var i = 0; i < length - 2; i++)
+            {
+                var operand = random.Next(10);
+                sb1.Append(operand);
+                sb2.Append(Characters.NUMBER_ZH_CN[operand]);
+
+                if (i < length - 3)
+                {
+                    int type = random.Next(1, 4);
+                    if (type == 1)
+                    {
+                        sb1.Append("+");
+                        sb2.Append("加");
+                    }
+                    else if (type == 2)
+                    {
+                        sb1.Append("-");
+                        sb2.Append("减");
+                    }
+                    else if (type == 3)
+                    {
+                        sb1.Append("x");
+                        sb2.Append("乘");
+                    }
+                }
+            }
+
+            var evaluator = new ExpressionEvaluator();
+            var result = evaluator.Evaluate(sb1.ToString().Replace("x", "*")).ToString();
+
+            return (sb2.ToString(), result);
+        }
+
+        /// <summary>
+        /// 随机挑选字符
+        /// </summary>
+        /// <param name="characters">字符列表</param>
+        /// <param name="count">数量</param>
+        /// <returns></returns>
+        private string Pick(List<char> characters, int count)
+        {
+            var random = new Random();
+            var result = new StringBuilder();
+
+            for (int i = 0; i < count; i++)
+            {
+                result.Append(characters[random.Next(characters.Count)]);
+            }
+
+            return result.ToString();
+        }
+    }
+}

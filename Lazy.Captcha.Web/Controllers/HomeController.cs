@@ -1,4 +1,5 @@
-﻿using Lazy.Captcha.Web.Models;
+﻿using Lazy.Captcha.Core;
+using Lazy.Captcha.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,10 +8,20 @@ namespace Lazy.Captcha.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ICaptcha _captcha;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ICaptcha captcha)
         {
             _logger = logger;
+            _captcha = captcha;
+        }
+
+        [HttpGet]
+        public IActionResult Captcha(string id)
+        {
+            var info = _captcha.Generate(id);
+            var stream = new MemoryStream(info.Bytes);
+            return File(stream, "image/png");
         }
 
         public IActionResult Index()
