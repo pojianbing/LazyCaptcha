@@ -10,3 +10,6 @@
 /Lazy.Captcha.Web/bin/Debug/net6.0
 /Lazy.Captcha.Web/obj
 *.nupkg
+/Lazy.Captcha.Core/bin/Release
+/Lazy.Captcha.Test/bin/Release/net6.0
+/Lazy.Captcha.Web/bin/Release/net6.0

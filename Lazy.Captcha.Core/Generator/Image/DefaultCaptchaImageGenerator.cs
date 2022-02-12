@@ -8,6 +8,7 @@ using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -139,29 +140,31 @@ namespace Lazy.Captcha.Core.Generator.Image
 
         public virtual byte[] Generate(string text, CaptchaImageGeneratorOption option)
         {
-            using Image<Rgba32> img = new(option.Width, option.Height, option.BackgroundColor);
-            img.Mutate(ctx =>
+            using (Image<Rgba32> img = new Image<Rgba32>(option.Width, option.Height, option.BackgroundColor))
             {
-                // 绘制气泡
-                if (option.DrawBubble)
+                img.Mutate(ctx =>
                 {
-                    DrawBubble(ctx, option.Width, option.Height, option.BubbleCount, option.BubbleMinRadius, option.BubbleMaxRadius, option.BubbleThickness);
-                }
+                    // 绘制气泡
+                    if (option.DrawBubble)
+                    {
+                        DrawBubble(ctx, option.Width, option.Height, option.BubbleCount, option.BubbleMinRadius, option.BubbleMaxRadius, option.BubbleThickness);
+                    }
 
-                // 绘制干扰线
-                if (option.DrawInterferenceLine)
+                    // 绘制干扰线
+                    if (option.DrawInterferenceLine)
+                    {
+                        DrawInterferenceLine(ctx, option.Width, option.Height, option.InterferenceLineCount);
+                    }
+
+                    // 绘制文字
+                    DrawText(ctx, option.Width, option.Height, text, option.Font);
+                });
+
+                using (var ms = new MemoryStream())
                 {
-                    DrawInterferenceLine(ctx, option.Width, option.Height, option.InterferenceLineCount);
+                    img.Save(ms, PngFormat.Instance);
+                    return ms.ToArray();
                 }
-
-                // 绘制文字
-                DrawText(ctx, option.Width, option.Height, text, option.Font);
-            });
-
-            using (var ms = new MemoryStream())
-            {
-                img.Save(ms, PngFormat.Instance);
-                return ms.ToArray();
             }
         }
     }

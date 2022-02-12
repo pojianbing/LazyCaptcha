@@ -9,7 +9,3 @@ using System.Diagnostics;
 Console.WriteLine("Hello, World!");
 
 
-var evaluator = new ExpressionEvaluator();
-var r = evaluator.Evaluate("2*2");
-
-Console.WriteLine(r.GetType());

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MathExpressions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -107,8 +108,8 @@ namespace Lazy.Captcha.Core.Generator.Code
                 }
             }
 
-            var evaluator = new ExpressionEvaluator();
-            var result = evaluator.Evaluate(sb.ToString().Replace("x", "*")).ToString();
+            var engine = new EvaluationEngine();
+            var result = ((int)engine.Evaluate(sb.ToString().Replace("x", "*"))).ToString();
 
             sb.Append("=?");
 
@@ -148,8 +149,8 @@ namespace Lazy.Captcha.Core.Generator.Code
                 }
             }
 
-            var evaluator = new ExpressionEvaluator();
-            var result = evaluator.Evaluate(sb1.ToString().Replace("x", "*")).ToString();
+            var engine = new EvaluationEngine();
+            var result = ((int)engine.Evaluate(sb1.ToString().Replace("x", "*"))).ToString();
 
             sb2.Append("=?");
 

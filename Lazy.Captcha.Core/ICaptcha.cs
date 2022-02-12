@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Lazy.Captcha.Core
-{
+{   
     public interface ICaptcha
     {
         CaptchaData Generate(string captchaId);
