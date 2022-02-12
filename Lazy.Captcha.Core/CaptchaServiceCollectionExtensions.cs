@@ -1,4 +1,5 @@
-﻿using Lazy.Captcha.Core.Storeage;
+﻿using Lazy.Captcha.Core;
+using Lazy.Captcha.Core.Storeage;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lazy.Captcha.Core
+namespace Microsoft.Extensions.DependencyInjection
 {
     public static class CaptchaServiceCollectionExtensions
     {

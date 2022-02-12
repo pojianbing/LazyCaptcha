@@ -9,3 +9,4 @@
 /.vs/LazyCaptcha
 /Lazy.Captcha.Web/bin/Debug/net6.0
 /Lazy.Captcha.Web/obj
+*.nupkg
