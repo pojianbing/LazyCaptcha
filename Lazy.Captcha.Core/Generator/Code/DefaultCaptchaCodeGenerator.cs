@@ -12,16 +12,16 @@ namespace Lazy.Captcha.Core.Generator.Code
 
         private static readonly Dictionary<CaptchaType, List<char>> TypeCharactersMap = new Dictionary<CaptchaType, List<char>>
         {
+            { CaptchaType.DEFAULT , Characters.DEFAULT },
             { CaptchaType.CHINESE , Characters.CHINESE },
             { CaptchaType.NUMBER , Characters.NUMBER },
-            { CaptchaType.WORD_UPPER , Characters.WORD_UPPER },
-            { CaptchaType.WORD , Characters.WORD },
-            { CaptchaType.DEFAULT , Characters.DEFAULT },
-            { CaptchaType.WORD_UPPER , Characters.WORD_UPPER },
             { CaptchaType.NUMBER_ZH_CN , Characters.NUMBER_ZH_CN },
             { CaptchaType.NUMBER_ZH_HK , Characters.NUMBER_ZH_HK },
             { CaptchaType.WORD_NUMBER_LOWER , Characters.WORD_NUMBER_LOWER },
             { CaptchaType.WORD_NUMBER_UPPER , Characters.WORD_NUMBER_UPPER },
+            { CaptchaType.WORD , Characters.WORD },
+            { CaptchaType.WORD_LOWER , Characters.WORD_LOWER },
+            { CaptchaType.WORD_UPPER , Characters.WORD_UPPER },
         };
 
         public DefaultCaptchaCodeGenerator() : this(CaptchaType.DEFAULT)
@@ -37,7 +37,7 @@ namespace Lazy.Captcha.Core.Generator.Code
         /// <summary>
         /// 生成
         /// </summary>
-        /// <param name="length">长度（ARITHMETIC, ARITHMETIC_ZH 长度无效）</param>
+        /// <param name="length">长度（ARITHMETIC, ARITHMETIC_ZH 长度代表乘数个数）</param>
         /// <returns>（渲染文本，code）</returns>
         public (string renderText, string code) Generate(int length)
         {
@@ -49,26 +49,47 @@ namespace Lazy.Captcha.Core.Generator.Code
             {
                 return GenerateaArithmeticZh(length);
             }
+            else if (this._captchaType == CaptchaType.NUMBER_ZH_CN)
+            {
+                return GenerateaNumberZH(length, false);
+            }
+            else if (this._captchaType == CaptchaType.NUMBER_ZH_HK)
+            {
+                return GenerateaNumberZH(length, true);
+            }
             else
             {
                 var code = Pick(TypeCharactersMap[this._captchaType], length);
                 return (code, code);
             }
+        }
 
-            return ("", "");
+        private (string renderText, string code) GenerateaNumberZH(int length, bool isHk)
+        {
+            var random = new Random();
+            var sb1 = new StringBuilder();
+            var sb2 = new StringBuilder();
+            var characters = isHk? Characters.NUMBER_ZH_HK : Characters.NUMBER_ZH_CN;
+
+            for (int i = 0; i < length; i++)
+            {
+                var num = random.Next(characters.Count);
+                sb1.Append(characters[num]);
+                sb2.Append(Characters.NUMBER[num]);
+            }
+
+            return (sb1.ToString(), sb2.ToString());
         }
 
         private (string renderText, string code) GenerateaArithmetic(int length)
         {
-            if (length < 5 || length % 2 == 0) throw new Exception("算术验证码长度必须大于5且为奇数");
-
             var random = new Random();
             var sb = new StringBuilder();
 
-            for (var i = 0; i < length - 2; i++)
+            for (var i = 0; i < length; i++)
             {
                 sb.Append(random.Next(10));
-                if (i < length - 3)
+                if (i < length - 1)
                 {
                     int type = random.Next(1, 4);
                     if (type == 1)
@@ -89,24 +110,24 @@ namespace Lazy.Captcha.Core.Generator.Code
             var evaluator = new ExpressionEvaluator();
             var result = evaluator.Evaluate(sb.ToString().Replace("x", "*")).ToString();
 
+            sb.Append("=?");
+
             return (sb.ToString(), result);
         }
 
         private (string renderText, string code) GenerateaArithmeticZh(int length)
         {
-            if (length < 5 || length % 2 == 0) throw new Exception("算术验证码长度必须大于5且为奇数");
-
             var random = new Random();
             var sb1 = new StringBuilder();
             var sb2 = new StringBuilder();
 
-            for (var i = 0; i < length - 2; i++)
+            for (var i = 0; i < length; i++)
             {
                 var operand = random.Next(10);
                 sb1.Append(operand);
                 sb2.Append(Characters.NUMBER_ZH_CN[operand]);
 
-                if (i < length - 3)
+                if (i < length - 1)
                 {
                     int type = random.Next(1, 4);
                     if (type == 1)
@@ -129,6 +150,8 @@ namespace Lazy.Captcha.Core.Generator.Code
 
             var evaluator = new ExpressionEvaluator();
             var result = evaluator.Evaluate(sb1.ToString().Replace("x", "*")).ToString();
+
+            sb2.Append("=?");
 
             return (sb2.ToString(), result);
         }

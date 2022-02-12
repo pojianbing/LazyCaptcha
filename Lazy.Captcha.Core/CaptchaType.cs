@@ -4,10 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lazy.Captcha.Core.Generator.Code
+namespace Lazy.Captcha.Core.Generator
 {
     public enum CaptchaType
     {
+        /// <summary>
+        /// 默认(英文字符大小写，数字混合)
+        /// </summary>
+        DEFAULT,
         /// <summary>
         /// 中文
         /// </summary>
@@ -24,10 +28,6 @@ namespace Lazy.Captcha.Core.Generator.Code
         /// 中文数字大写
         /// </summary>
         NUMBER_ZH_HK,
-        /// <summary>
-        /// 默认(英文字符大小写，数字混合)
-        /// </summary>
-        DEFAULT,
         /// <summary>
         /// 英文字符大小写混合
         /// </summary>

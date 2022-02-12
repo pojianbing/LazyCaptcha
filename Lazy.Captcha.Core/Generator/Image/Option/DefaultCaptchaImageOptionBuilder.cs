@@ -20,17 +20,6 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
         }
 
         /// <summary>
-        /// 验证码类型
-        /// </summary>
-        /// <param name="captchaType"></param>
-        /// <returns></returns>
-        public DefaultCaptchaImageOptionBuilder CaptchaType(CaptchaType captchaType)
-        { 
-            //this._option.CaptchaType = captchaType;
-            return this;
-        }
-
-        /// <summary>
         /// 背景色
         /// </summary>
         /// <param name="backgroundColor"></param>
@@ -150,17 +139,6 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
         public DefaultCaptchaImageOptionBuilder InterferenceLineCount(int interferenceLineCount)
         {
             this._option.InterferenceLineCount = interferenceLineCount;
-            return this;
-        }
-
-        /// <summary>
-        /// 干扰线数量
-        /// </summary>
-        /// <param name="drawInterferenceLine"></param>
-        /// <returns></returns>
-        public DefaultCaptchaImageOptionBuilder ChineseTexts(List<char> chineseTexts)
-        {
-            //this._option.ChineseTexts = chineseTexts;
             return this;
         }
 

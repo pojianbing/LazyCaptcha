@@ -1,4 +1,6 @@
-﻿using Lazy.Captcha.Core.Storeage;
+﻿using Lazy.Captcha.Core.Generator.Code;
+using Lazy.Captcha.Core.Generator.Image;
+using Lazy.Captcha.Core.Storeage;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -12,17 +14,21 @@ namespace Lazy.Captcha.Core
     {
         private readonly IOptionsMonitor<CaptchaOption> _options;
         private readonly IStorage _storage;
+        private readonly ICaptchaCodeGenerator _captchaCodeGenerator;
+        private readonly ICaptchaImageGenerator _captchaImageGenerator;
 
         public DefaultCaptcha(IOptionsMonitor<CaptchaOption> options, IStorage storage)
         {
             _options = options;
             _storage = storage;
+            _captchaCodeGenerator = new DefaultCaptchaCodeGenerator(options.CurrentValue.CaptchaType);
+            _captchaImageGenerator = new DefaultCaptchaImageGenerator();
         }
 
         public CaptchaData Generate(string captchaId)
         {
-            var (renderText, code) = _options.CurrentValue.CodeGenerator.Generate(_options.CurrentValue.CodeLength);
-            var image = _options.CurrentValue.ImageGenerator.Generate(renderText, _options.CurrentValue.ImageGeneratorOption);
+            var (renderText, code) = _captchaCodeGenerator.Generate(_options.CurrentValue.CodeLength);
+            var image = _captchaImageGenerator.Generate(renderText, _options.CurrentValue.ImageOption);
             _storage.Set(captchaId, code, DateTimeOffset.UtcNow.Add(_options.CurrentValue.ExpiryTime));
 
             return new CaptchaData(captchaId, code, image);

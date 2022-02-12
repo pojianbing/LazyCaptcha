@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lazy.Captcha.Core.Generator.Image
+namespace Lazy.Captcha.Core
 {
     public static class ByteExtensions
     {

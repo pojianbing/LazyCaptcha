@@ -44,6 +44,14 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
         /// </summary>
         public bool DrawBubble { get; set; } = true;
         /// <summary>
+        /// 气泡最小半径
+        /// </summary>
+        public int BubbleMinRadius { get; set; } = 5;
+        /// <summary>
+        /// 气泡最小半径
+        /// </summary>
+        public int BubbleMaxRadius { get; set; } = 15;
+        /// <summary>
         /// 气泡数量
         /// </summary>
         public int BubbleCount { get; set; } = 3;
@@ -69,12 +77,12 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
             {
                 if (this.FontFamily == null)
                 {
-                    var fontFamily = this.IsChineseIn() ? DefaultFonts.instance.Kaiti : DefaultFonts.instance.Epilog;
+                    var fontFamily = this.IsChineseIn() ? DefaultFontFamilys.instance.Kaiti : DefaultFontFamilys.instance.Epilog;
                     return new Font(fontFamily, this.FontSize, this.FontStyle);
                 }
                 else
                 {
-                    var fontFamily = this.IsChineseIn() ? DefaultFonts.instance.Kaiti : DefaultFonts.instance.Epilog;
+                    var fontFamily = this.IsChineseIn() ? DefaultFontFamilys.instance.Kaiti : DefaultFontFamilys.instance.Epilog;
                     return new Font(this.FontFamily, this.FontSize, this.FontStyle);
                 }
             }

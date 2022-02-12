@@ -6,14 +6,14 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lazy.Captcha.Core.Generator
+namespace Lazy.Captcha.Core
 {
-    public class DefaultFonts
+    public class DefaultFontFamilys
     {
-        public static DefaultFonts instance = new DefaultFonts();
+        public static DefaultFontFamilys instance = new DefaultFontFamilys();
         private static List<FontFamily> _fontFamilies = null;
 
-        static DefaultFonts()
+        static DefaultFontFamilys()
         {
             if (_fontFamilies == null)
             {
