@@ -8,7 +8,7 @@ namespace Lazy.Captcha.Core
 {
     public interface ICaptcha
     {
-        void Generate(string captchaId);
+        CaptchaData Generate(string captchaId);
 
         bool Validate(string captchaId, string code);
     }

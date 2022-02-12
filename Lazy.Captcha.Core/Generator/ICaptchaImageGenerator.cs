@@ -11,6 +11,6 @@ namespace Lazy.Captcha.Core.Generator
     /// </summary>
     public interface ICaptchaImageGenerator
     {
-        byte[] Generate();
+        byte[] Generate(string text, CaptchaImageGeneratorOption option);
     }
 }

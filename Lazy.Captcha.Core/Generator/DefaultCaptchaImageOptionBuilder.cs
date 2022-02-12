@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace Lazy.Captcha.Core.Generator
 {
-    public class DefaultCaptchaImageBuilder : ICaptchaImageGeneratorBuilder
+    public class DefaultCaptchaImageOptionBuilder : ICaptchaImageOptionBuilder
     {
         private CaptchaImageGeneratorOption _option = new CaptchaImageGeneratorOption();
 
-        public static DefaultCaptchaImageBuilder Create()
+        public static DefaultCaptchaImageOptionBuilder Create()
         { 
-            return new DefaultCaptchaImageBuilder();
+            return new DefaultCaptchaImageOptionBuilder();
         }
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace Lazy.Captcha.Core.Generator
         /// </summary>
         /// <param name="captchaType"></param>
         /// <returns></returns>
-        public DefaultCaptchaImageBuilder CaptchaType(CaptchaType captchaType)
+        public DefaultCaptchaImageOptionBuilder CaptchaType(CaptchaType captchaType)
         { 
             this._option.CaptchaType = captchaType;
             return this;
@@ -34,7 +34,7 @@ namespace Lazy.Captcha.Core.Generator
         /// </summary>
         /// <param name="backgroundColor"></param>
         /// <returns></returns>
-        public DefaultCaptchaImageBuilder CaptchaType(Color backgroundColor)
+        public DefaultCaptchaImageOptionBuilder CaptchaType(Color backgroundColor)
         {
             this._option.BackgroundColor = backgroundColor;
             return this;
@@ -45,7 +45,7 @@ namespace Lazy.Captcha.Core.Generator
         /// </summary>
         /// <param name="fontFamily"></param>
         /// <returns></returns>
-        public DefaultCaptchaImageBuilder FontFamily(FontFamily fontFamily)
+        public DefaultCaptchaImageOptionBuilder FontFamily(FontFamily fontFamily)
         {
             this._option.FontFamily = fontFamily;
             return this;
@@ -56,7 +56,7 @@ namespace Lazy.Captcha.Core.Generator
         /// </summary>
         /// <param name="fontSize"></param>
         /// <returns></returns>
-        public DefaultCaptchaImageBuilder FontFamily(float fontSize)
+        public DefaultCaptchaImageOptionBuilder FontFamily(float fontSize)
         {
             this._option.FontSize = fontSize;
             return this;
@@ -67,7 +67,7 @@ namespace Lazy.Captcha.Core.Generator
         /// </summary>
         /// <param name="fontStyle"></param>
         /// <returns></returns>
-        public DefaultCaptchaImageBuilder FontFamily(FontStyle fontStyle)
+        public DefaultCaptchaImageOptionBuilder FontFamily(FontStyle fontStyle)
         {
             this._option.FontStyle = fontStyle;
             return this;
@@ -79,7 +79,7 @@ namespace Lazy.Captcha.Core.Generator
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        public DefaultCaptchaImageBuilder Size(int width, int height)
+        public DefaultCaptchaImageOptionBuilder Size(int width, int height)
         {
             this._option.Width = width;
             this._option.Height = height;
@@ -91,7 +91,7 @@ namespace Lazy.Captcha.Core.Generator
         /// </summary>
         /// <param name="length"></param>
         /// <returns></returns>
-        public DefaultCaptchaImageBuilder Length(int length)
+        public DefaultCaptchaImageOptionBuilder Length(int length)
         {
             this._option.Length = length;
             return this;
@@ -102,7 +102,7 @@ namespace Lazy.Captcha.Core.Generator
         /// </summary>
         /// <param name="drawBubble"></param>
         /// <returns></returns>
-        public DefaultCaptchaImageBuilder DrawBubble(bool drawBubble)
+        public DefaultCaptchaImageOptionBuilder DrawBubble(bool drawBubble)
         {
             this._option.DrawBubble = drawBubble;
             return this;
@@ -113,7 +113,7 @@ namespace Lazy.Captcha.Core.Generator
         /// </summary>
         /// <param name="bubbleCount"></param>
         /// <returns></returns>
-        public DefaultCaptchaImageBuilder BubbleCount(int bubbleCount)
+        public DefaultCaptchaImageOptionBuilder BubbleCount(int bubbleCount)
         {
             this._option.BubbleCount = bubbleCount;
             return this;
@@ -124,7 +124,7 @@ namespace Lazy.Captcha.Core.Generator
         /// </summary>
         /// <param name="bubbleThickness"></param>
         /// <returns></returns>
-        public DefaultCaptchaImageBuilder BubbleCount(float bubbleThickness)
+        public DefaultCaptchaImageOptionBuilder BubbleCount(float bubbleThickness)
         {
             this._option.BubbleThickness = bubbleThickness;
             return this;
@@ -135,7 +135,7 @@ namespace Lazy.Captcha.Core.Generator
         /// </summary>
         /// <param name="drawInterferenceLine"></param>
         /// <returns></returns>
-        public DefaultCaptchaImageBuilder DrawInterferenceLine(bool drawInterferenceLine)
+        public DefaultCaptchaImageOptionBuilder DrawInterferenceLine(bool drawInterferenceLine)
         {
             this._option.DrawInterferenceLine = drawInterferenceLine;
             return this;
@@ -146,7 +146,7 @@ namespace Lazy.Captcha.Core.Generator
         /// </summary>
         /// <param name="drawInterferenceLine"></param>
         /// <returns></returns>
-        public DefaultCaptchaImageBuilder InterferenceLineCount(int interferenceLineCount)
+        public DefaultCaptchaImageOptionBuilder InterferenceLineCount(int interferenceLineCount)
         {
             this._option.InterferenceLineCount = interferenceLineCount;
             return this;
@@ -157,16 +157,16 @@ namespace Lazy.Captcha.Core.Generator
         /// </summary>
         /// <param name="drawInterferenceLine"></param>
         /// <returns></returns>
-        public DefaultCaptchaImageBuilder ChineseTexts(List<char> chineseTexts)
+        public DefaultCaptchaImageOptionBuilder ChineseTexts(List<char> chineseTexts)
         {
             this._option.ChineseTexts = chineseTexts;
             return this;
         }
 
 
-        public ICaptchaImageGenerator Build()
+        public CaptchaImageGeneratorOption Build()
         {
-            return new DefaultImageCaptchaGenerator(this._option);
+            return this._option;
         }
     }
 }

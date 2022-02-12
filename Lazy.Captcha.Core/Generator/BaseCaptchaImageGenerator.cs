@@ -166,7 +166,8 @@ namespace Lazy.Captcha.Core.Generator
             return result;
         }
 
-        public virtual byte[] Generate()
+
+        public virtual byte[] Generate(string text, CaptchaImageGeneratorOption option)
         {
             using Image<Rgba32> img = new(Option.Width, Option.Height, this.Option.BackgroundColor);
             img.Mutate(ctx =>
@@ -184,7 +185,7 @@ namespace Lazy.Captcha.Core.Generator
                 }
 
                 // 绘制文字
-                DrawText(ctx, Option.Width, Option.Height, this.GenerateText());
+                DrawText(ctx, Option.Width, Option.Height, text);
             });
 
             img.Save("b.png");
@@ -265,13 +266,13 @@ namespace Lazy.Captcha.Core.Generator
             return letters;
         }
 
-        /// <summary>
-        /// 生成验证码文本
-        /// </summary>
-        /// <returns></returns>
-        public virtual string GenerateText()
-        {
-            return Pick(GenerateLetters(), this.Option.Length);
-        }
+        ///// <summary>
+        ///// 生成验证码文本
+        ///// </summary>
+        ///// <returns></returns>
+        //public virtual string GenerateText()
+        //{
+        //    return Pick(GenerateLetters(), this.Option.Length);
+        //}
     }
 }

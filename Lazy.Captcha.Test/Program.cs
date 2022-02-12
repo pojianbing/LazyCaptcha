@@ -11,17 +11,17 @@ Console.WriteLine("Hello, World!");
 for (var i = 0; i < 100; i++)
 {
 
-    Stopwatch st = new Stopwatch();
-    st.Start();
+    //Stopwatch st = new Stopwatch();
+    //st.Start();
 
-    var generator = DefaultCaptchaImageBuilder
-    .Create()
-    .DrawBubble(false)
-    .Build();
+    //var generator = DefaultCaptchaImageOptionBuilder
+    //.Create()
+    //.DrawBubble(false)
+    //.Build();
 
-    generator.Generate();
-    st.Stop();
+    //generator.Generate("abc");
+    //st.Stop();
 
-    Console.WriteLine(st.ElapsedMilliseconds);
+    //Console.WriteLine(st.ElapsedMilliseconds);
 }
 

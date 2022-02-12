@@ -7,3 +7,5 @@
 /Lazy.Captcha.Core/bin/Debug/net6.0
 /Lazy.Captcha.Test/bin/Debug/net6.0
 /.vs/LazyCaptcha
+/Lazy.Captcha.Web/bin/Debug/net6.0
+/Lazy.Captcha.Web/obj

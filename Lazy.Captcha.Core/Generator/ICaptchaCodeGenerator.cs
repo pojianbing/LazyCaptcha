@@ -1,5 +1,4 @@
-﻿using Lazy.Captcha.Core.Generator;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Lazy.Captcha.Core.Generator
 {
-    public interface ICaptchaImageOptionBuilder
+    public interface ICaptchaCodeGenerator
     {
-        CaptchaImageGeneratorOption Build();
+        (string renderText, string code) Generate(int length);
     }
 }
