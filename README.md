@@ -3,12 +3,19 @@
 #### 介绍
 仿[EasyCaptcha](https://gitee.com/ele-admin/EasyCaptcha)和[SimpleCaptcha](https://github.com/1992w/SimpleCaptcha),基于.Net Standard 2.0的图形验证码模块。
 
+#### 效果展示
+
+|  CaptchaType |  静态图 |  动图|
+|---|---|---|
+|  DEFAULT | ![输入图片说明](Images/DEFAULT_N.gif)  | ![输入图片说明](Images/DEFAULT_G.gif) |
+
+
+
+
 #### 安装教程
 Install-Package Lazy.Captcha.Core
 
 #### 使用说明
-
-##### 默认使用
 
 1. 注册服务
 
@@ -85,7 +92,7 @@ public class CaptchaController : Controller
 }
 ```
     
-    
+
     
     
     
