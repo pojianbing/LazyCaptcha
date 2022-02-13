@@ -11,6 +11,10 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
     public class CaptchaImageGeneratorOption
     {
         /// <summary>
+        /// 是否启用动画
+        /// </summary>
+        public bool Animation = true;
+        /// <summary>
         /// 背景色
         /// </summary>
         public Color BackgroundColor { get; set; } = Color.White;

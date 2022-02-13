@@ -7,12 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDistributedMemoryCache().AddCaptcha(option =>
 {
-    option.CaptchaType = CaptchaType.DEFAULT;
+    option.CaptchaType = CaptchaType.ARITHMETIC_ZH;
     option.ImageOption.Width = 300;
     option.ImageOption.Height = 150;
     option.ImageOption.FontStyle = SixLabors.Fonts.FontStyle.Regular;
     option.ImageOption.FontSize = 80;
-    option.ImageOption.FontFamily = DefaultFontFamilys.instance.Fresnel;
+    //option.ImageOption.FontFamily = DefaultFontFamilys.instance.Actionj;
     option.ImageOption.BubbleCount = 10;
     option.ImageOption.BubbleMinRadius = 10;
     option.ImageOption.BubbleMaxRadius = 20;

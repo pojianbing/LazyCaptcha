@@ -21,7 +21,7 @@ namespace Lazy.Captcha.Web.Controllers
         {
             var info = _captcha.Generate(id);
             var stream = new MemoryStream(info.Bytes);
-            return File(stream, "image/png");
+            return File(stream, "image/gif");
         }
 
         public IActionResult Index()
