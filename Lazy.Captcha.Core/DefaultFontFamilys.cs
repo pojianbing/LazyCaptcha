@@ -10,7 +10,7 @@ namespace Lazy.Captcha.Core
 {
     public class DefaultFontFamilys
     {
-        public static DefaultFontFamilys instance = new DefaultFontFamilys();
+        public static DefaultFontFamilys Instance = new DefaultFontFamilys();
         private static List<FontFamily> _fontFamilies = null;
 
         static DefaultFontFamilys()

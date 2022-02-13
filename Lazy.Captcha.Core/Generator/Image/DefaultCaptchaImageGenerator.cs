@@ -22,7 +22,6 @@ namespace Lazy.Captcha.Core.Generator.Image
     /// </summary>
     public class DefaultCaptchaImageGenerator : ICaptchaImageGenerator
     {
-
         /// <summary>
         /// 生成气泡图形描述
         /// </summary>
@@ -40,15 +39,14 @@ namespace Lazy.Captcha.Core.Generator.Image
 
             for (var i = 0; i < count; i++)
             {
-                var color = DefaultColors.instance.GetRandomColor();
-                var w = minRadius + random.Next(maxRadius - 10);
-                var point = new PointF(random.Next(width - 25) + w, random.Next(height - 15) + w);
-                var size = new SizeF(w, w);
+                var radius = random.Next(minRadius, maxRadius + 1);
+                var point = new PointF(random.Next(width - 25) + radius, random.Next(height - 15) + radius);
+                var size = new SizeF(radius, radius);
                 var circle = new EllipsePolygon(point, size);
                 result.Add(new BubbleGraphicDescription
                 {
-                    Color = color,
-                    Path = circle.Clip(),
+                    Color = DefaultColors.Instance.RandomColor(),
+                    Path = circle,
                     Thickness = thickness
                 });
             }
@@ -83,7 +81,7 @@ namespace Lazy.Captcha.Core.Generator.Image
         /// <param name="option">选项</param>
         protected virtual void DrawBubbles(IImageProcessingContext ctx, CaptchaImageGeneratorOption option)
         {
-            var graphicDescriptions = GenerateBubbleGraphicDescriptions(option.Width, option.Height, option.Length, option.BubbleMinRadius, option.BubbleMaxRadius, option.BubbleThickness);
+            var graphicDescriptions = GenerateBubbleGraphicDescriptions(option.Width, option.Height, option.BubbleCount, option.BubbleMinRadius, option.BubbleMaxRadius, option.BubbleThickness);
             DrawBubbles(ctx, graphicDescriptions);
         }
 
@@ -101,14 +99,13 @@ namespace Lazy.Captcha.Core.Generator.Image
 
             for (var i = 0; i < count; i++)
             {
-                var color = DefaultColors.instance.GetRandomColor();
                 int x1 = 5, y1 = random.Next(height / 2, height - 5);
                 int x2 = width - 5, y2 = random.Next(5, height / 2);
                 int ctrlx1 = random.Next(width / 4, width / 4 * 3), ctrly1 = random.Next(5, height - 5);
                 int ctrlx2 = random.Next(width / 4, width / 4 * 3), ctrly2 = random.Next(5, height - 5);
                 result.Add(new InterferenceLineGraphicDescription
                 {
-                    Color = color,
+                    Color = DefaultColors.Instance.RandomColor(),
                     Start = new PointF(x1, y1),
                     Ctrl1 = new PointF(ctrlx1, ctrly1),
                     Ctrl2 = new PointF(ctrlx2, ctrly2),
@@ -144,11 +141,10 @@ namespace Lazy.Captcha.Core.Generator.Image
         /// 绘制干扰线
         /// </summary>
         /// <param name="ctx">上下文</param>
-        /// <param name="width">验证码的宽</param>
-        /// <param name="height">验证码的高</param>
-        protected virtual void DrawInterferenceLines(IImageProcessingContext ctx, int width, int height, int count)
+        /// <param name="width">option</param>
+        protected virtual void DrawInterferenceLines(IImageProcessingContext ctx, CaptchaImageGeneratorOption option)
         {
-            var graphicDescriptions = GenerateInterferenceLineGraphicDescriptions(width, height, count);
+            var graphicDescriptions = GenerateInterferenceLineGraphicDescriptions(option.Width, option.Height, option.InterferenceLineCount);
             DrawInterferenceLines(ctx, graphicDescriptions);
         }
 
@@ -167,7 +163,7 @@ namespace Lazy.Captcha.Core.Generator.Image
 
             for (var i = 0; i < text.Count(); i++)
             {
-                var color = DefaultColors.instance.GetRandomColor();
+                var color = DefaultColors.Instance.RandomColor();
                 result.Add(new TextGraphicDescription
                 {
                     Text = text[i].ToString(),
@@ -204,12 +200,11 @@ namespace Lazy.Captcha.Core.Generator.Image
         /// 绘制文本
         /// </summary>
         /// <param name="ctx">上下文</param>
-        /// <param name="width">验证码的宽</param>
-        /// <param name="height">验证码的高</param>
         /// <param name="text"></param>
-        protected virtual void DrawTexts(IImageProcessingContext ctx, int width, int height, string text, Font font)
+        /// <param name="option"></param>
+        protected virtual void DrawTexts(IImageProcessingContext ctx, string text, CaptchaImageGeneratorOption option)
         {
-            var graphicDescriptions = GenerateTextGraphicDescriptions(width, height, text, font);
+            var graphicDescriptions = GenerateTextGraphicDescriptions(option.Width, option.Height, text, option.Font);
             DrawTexts(ctx, graphicDescriptions);
         }
 
@@ -238,7 +233,7 @@ namespace Lazy.Captcha.Core.Generator.Image
             var currentX = 0.0f;
             var charTotalWidth = charWidths.Sum(x => x);
             var charXs = new List<float>();
-            
+
             for (var i = 0; i < text.Count(); i++)
             {
                 // 根据文字宽度比例，计算文字包含框宽度
@@ -283,19 +278,11 @@ namespace Lazy.Captcha.Core.Generator.Image
                 img.Mutate(ctx =>
                 {
                     // 绘制气泡
-                    if (option.DrawBubble)
-                    {
-                        DrawBubbles(ctx, option);
-                    }
-
+                    DrawBubbles(ctx, option);
                     // 绘制干扰线
-                    if (option.DrawInterferenceLine)
-                    {
-                        DrawInterferenceLines(ctx, option.Width, option.Height, option.InterferenceLineCount);
-                    }
-
+                    DrawInterferenceLines(ctx, option);
                     // 绘制文字
-                    DrawTexts(ctx, option.Width, option.Height, text, option.Font);
+                    DrawTexts(ctx, text, option);
                 });
 
                 using (var ms = new MemoryStream())
@@ -313,7 +300,7 @@ namespace Lazy.Captcha.Core.Generator.Image
         /// <param name="textIndex">文字索引</param>
         /// <param name="len">验证码长度</param>
         /// <returns>文字的透明度</returns>
-        private float GetBlendPercentage(int frameIndex, int textIndex, int len)
+        private float GenerateBlendPercentage(int frameIndex, int textIndex, int len)
         {
             int num = frameIndex + textIndex;
             float r = (float)1 / (len - 1);
@@ -321,14 +308,20 @@ namespace Lazy.Captcha.Core.Generator.Image
             return num >= len ? (num * r - s) : num * r;
         }
 
+        /// <summary>
+        /// 生成动图
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="option"></param>
+        /// <returns></returns>
         private byte[] GenerateAnimation(string text, CaptchaImageGeneratorOption option)
         {
             var texGraphicDescriptions = GenerateTextGraphicDescriptions(option.Width, option.Height, text, option.Font);
-            var bubbleGraphicDescriptions = option.DrawBubble ?
+            var bubbleGraphicDescriptions = option.BubbleCount != 0 ?
                 GenerateBubbleGraphicDescriptions(option.Width, option.Height, option.BubbleCount, option.BubbleMinRadius, option.BubbleMaxRadius, option.BubbleThickness)
                 :
                 new List<BubbleGraphicDescription>();
-            var interferenceLineGraphicDescriptions = option.DrawBubble ?
+            var interferenceLineGraphicDescriptions = option.BubbleCount != 0 ?
                 GenerateInterferenceLineGraphicDescriptions(option.Width, option.Height, option.InterferenceLineCount)
                 :
                 new List<InterferenceLineGraphicDescription>();
@@ -343,7 +336,7 @@ namespace Lazy.Captcha.Core.Generator.Image
                     // 调整透明度
                     for (var j = 0; j < texGraphicDescriptions.Count; j++)
                     {
-                        texGraphicDescriptions[j].BlendPercentage = GetBlendPercentage(i, j, text.Length);
+                        texGraphicDescriptions[j].BlendPercentage = GenerateBlendPercentage(i, j, text.Length);
                     }
                     for (var j = 0; j < interferenceLineGraphicDescriptions.Count; j++)
                     {
@@ -359,23 +352,15 @@ namespace Lazy.Captcha.Core.Generator.Image
                         frame.Mutate(ctx =>
                         {
                             // 绘制气泡
-                            if (option.DrawBubble)
-                            {
-                                DrawBubbles(ctx, bubbleGraphicDescriptions);
-                            }
-
+                            DrawBubbles(ctx, bubbleGraphicDescriptions);
                             // 绘制干扰线
-                            if (option.DrawInterferenceLine)
-                            {
-                                DrawInterferenceLines(ctx, interferenceLineGraphicDescriptions);
-                            }
-
+                            DrawInterferenceLines(ctx, interferenceLineGraphicDescriptions);
                             // 绘制文字
                             DrawTexts(ctx, texGraphicDescriptions);
                         });
 
                         var metadata = frame.Frames.RootFrame.Metadata.GetGifMetadata();
-                        metadata.FrameDelay = 100;
+                        metadata.FrameDelay = 30;
                         gif.Frames.AddFrame(frame.Frames.RootFrame);
                     }
                 }

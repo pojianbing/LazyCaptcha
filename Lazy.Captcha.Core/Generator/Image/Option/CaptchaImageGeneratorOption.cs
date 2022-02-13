@@ -13,7 +13,7 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
         /// <summary>
         /// 是否启用动画
         /// </summary>
-        public bool Animation = true;
+        public bool Animation = false;
         /// <summary>
         /// 背景色
         /// </summary>
@@ -40,14 +40,6 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
         /// </summary>
         public int Height { get; set; } = 48;
         /// <summary>
-        /// 验证码长度
-        /// </summary>
-        public int Length { get; set; } = 4;
-        /// <summary>
-        /// 是否绘制气泡
-        /// </summary>
-        public bool DrawBubble { get; set; } = true;
-        /// <summary>
         /// 气泡最小半径
         /// </summary>
         public int BubbleMinRadius { get; set; } = 5;
@@ -64,10 +56,6 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
         /// </summary>
         public float BubbleThickness { get; set; } = 1;
         /// <summary>
-        /// 是否绘制干扰线
-        /// </summary>
-        public bool DrawInterferenceLine { get; set; } = true;
-        /// <summary>
         /// 干扰线数量
         /// </summary>
         public int InterferenceLineCount { get; set; } = 1;
@@ -81,12 +69,12 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
             {
                 if (this.FontFamily == null)
                 {
-                    var fontFamily = this.IsChineseIn() ? DefaultFontFamilys.instance.Kaiti : DefaultFontFamilys.instance.Epilog;
+                    var fontFamily = this.IsChineseIn() ? DefaultFontFamilys.Instance.Kaiti : DefaultFontFamilys.Instance.Epilog;
                     return new Font(fontFamily, this.FontSize, this.FontStyle);
                 }
                 else
                 {
-                    var fontFamily = this.IsChineseIn() ? DefaultFontFamilys.instance.Kaiti : DefaultFontFamilys.instance.Epilog;
+                    var fontFamily = this.IsChineseIn() ? DefaultFontFamilys.Instance.Kaiti : DefaultFontFamilys.Instance.Epilog;
                     return new Font(this.FontFamily, this.FontSize, this.FontStyle);
                 }
             }

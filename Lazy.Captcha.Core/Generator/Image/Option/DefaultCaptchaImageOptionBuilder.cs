@@ -77,28 +77,6 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
         }
 
         /// <summary>
-        /// 验证码长度
-        /// </summary>
-        /// <param name="length"></param>
-        /// <returns></returns>
-        public DefaultCaptchaImageOptionBuilder Length(int length)
-        {
-            this._option.Length = length;
-            return this;
-        }
-
-        /// <summary>
-        /// 是否绘制气泡
-        /// </summary>
-        /// <param name="drawBubble"></param>
-        /// <returns></returns>
-        public DefaultCaptchaImageOptionBuilder DrawBubble(bool drawBubble)
-        {
-            this._option.DrawBubble = drawBubble;
-            return this;
-        }
-
-        /// <summary>
         /// 气泡数量
         /// </summary>
         /// <param name="bubbleCount"></param>
@@ -117,17 +95,6 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
         public DefaultCaptchaImageOptionBuilder BubbleCount(float bubbleThickness)
         {
             this._option.BubbleThickness = bubbleThickness;
-            return this;
-        }
-
-        /// <summary>
-        /// 是否绘制干扰线
-        /// </summary>
-        /// <param name="drawInterferenceLine"></param>
-        /// <returns></returns>
-        public DefaultCaptchaImageOptionBuilder DrawInterferenceLine(bool drawInterferenceLine)
-        {
-            this._option.DrawInterferenceLine = drawInterferenceLine;
             return this;
         }
 

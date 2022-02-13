@@ -35,7 +35,7 @@ namespace Lazy.Captcha.Core
 
                 if (value.ContainsChinese())
                 {
-                    this.ImageOption.FontFamily = DefaultFontFamilys.instance.Kaiti;
+                    this.ImageOption.FontFamily = DefaultFontFamilys.Instance.Kaiti;
                 }
 
                 _captchaType = value;

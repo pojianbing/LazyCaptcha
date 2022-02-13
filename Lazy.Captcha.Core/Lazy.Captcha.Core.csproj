@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Description>LazyCaptcha参照SimpleCaptcha和EasyCaptcha实现基于.Net Standard 2.0的图形验证码模块</Description>
+    <Description>仿EasyCaptcha和SimpleCaptcha,基于.Net Standard 2.0的图形验证码模块。</Description>
     <PackageProjectUrl>https://gitee.com/pojianbing/lazy-captcha</PackageProjectUrl>
     <RepositoryUrl>https://gitee.com/pojianbing/lazy-captcha</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <AssemblyVersion>1.0.4</AssemblyVersion>
-	<Version>1.0.4</Version>
+    <AssemblyVersion>1.0.5</AssemblyVersion>
+	<Version>1.0.5</Version>
   </PropertyGroup>
 
   <ItemGroup>
