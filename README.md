@@ -14,12 +14,25 @@
 |  WORD_NUMBER_LOWER|Actionj| ![输入图片说明](Images/WORD_NUMBER_LOWER_N.gif)  | ![输入图片说明](Images/WORD_NUMBER_LOWER_G.gif) |
 |  WORD_NUMBER_UPPER|Actionj| ![输入图片说明](Images/WORD_NUMBER_UPPER_N.gif)  | ![输入图片说明](Images/WORD_NUMBER_UPPER_G.gif) |
 |  NUMBER|Fresnel| ![输入图片说明](Images/NUMBER_N.gif)  | ![输入图片说明](Images/NUMBER_G.gif) |
-|  NUMBER_ZH_CN|kaiti|| ![输入图片说明](Images/NUMBER_ZH_CN.gif)  | ![输入图片说明](Images/NUMBER_ZH_CN_G.gif) |
-|  NUMBER_ZH_HK|kaiti|| ![输入图片说明](Images/NUMBER_ZH_HK_N.gif)  | ![输入图片说明](Images/NUMBER_ZH_HK_G.gif) |
+|  NUMBER_ZH_CN|kaiti| ![输入图片说明](Images/NUMBER_ZH_CN.gif)  | ![输入图片说明](Images/NUMBER_ZH_CN_G.gif) |
+|  NUMBER_ZH_HK|kaiti| ![输入图片说明](Images/NUMBER_ZH_HK_N.gif)  | ![输入图片说明](Images/NUMBER_ZH_HK_G.gif) |
 |  ARITHMETIC|Actionj| ![输入图片说明](Images/ARITHMETIC_N.gif)  | ![输入图片说明](Images/ARITHMETIC_G.gif) |
-|  DEFAULT |Actionj| ![输入图片说明](Images/WORD_N.gif)  | ![输入图片说明](Images/WORD_G.gif) |
+|  ARITHMETIC_ZH|Actionj| ![输入图片说明](Images/ARITHMETIC_ZH_N.gif)  | ![输入图片说明](Images/ARITHMETIC_ZH_G.gif) |
 
 
+|  字体 | 图片  |
+|---|---|
+|  Actionj |  ![输入图片说明](Images/Font_Actionj.gif) |
+|  Epilog|  ![输入图片说明](Images/Font_Epilog.gif) |
+|  Fresnel|  ![输入图片说明](Images/Font_Fresnel.gif) |
+|  Headache|  ![输入图片说明](Images/Font_Headache.gif) |
+|  Kaiti|  ![输入图片说明](Images/Font_Kaiti.gif) |
+|  Lexo|  ![输入图片说明](Images/Font_Lexo.gif) |
+|  Prefix|  ![输入图片说明](Images/Font_Prefix.gif) |
+|  Progbot|  ![输入图片说明](Images/Font_Progbot.gif) |
+|  Ransom|  ![输入图片说明](Images/Font_Ransom.gif) |
+|  Robot|  ![输入图片说明](Images/Font_Robot.gif) |
+|  Scandal|  ![输入图片说明](Images/Font_Scandal.gif) |
 
 #### 安装教程
 Install-Package Lazy.Captcha.Core
