@@ -8,8 +8,38 @@ Install-Package Lazy.Captcha.Core
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+#### 默认使用
+
+1. 注册服务
+```
+builder.Services.AddDistributedMemoryCache().AddCaptcha();
+```
+
+2. Controller
+
+```
+ public class CaptchaController : Controller
+{
+    private readonly ILogger<CaptchaController> _logger;
+    private readonly ICaptcha _captcha;
+
+    public CaptchaController(ILogger<CaptchaController> logger, ICaptcha captcha)
+    {
+        _logger = logger;
+        _captcha = captcha;
+    }
+
+    [HttpGet]
+    [Route("/Captcha")]
+    public IActionResult Captcha(string id)
+    {
+        var info = _captcha.Generate(id);
+        var stream = new MemoryStream(info.Bytes);
+        return File(stream, "image/gif");
+    }
+}
+```
+
+
 
 
