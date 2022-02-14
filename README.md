@@ -1,7 +1,7 @@
 # LazyCaptcha
 
 #### 介绍
-仿[EasyCaptcha](https://gitee.com/ele-admin/EasyCaptcha)和[SimpleCaptcha](https://github.com/1992w/SimpleCaptcha),基于.Net Standard 2.0的图形验证码模块。
+仿[EasyCaptcha](https://gitee.com/ele-admin/EasyCaptcha)和[SimpleCaptcha](https://github.com/1992w/SimpleCaptcha),基于.Net Standard 2.1的图形验证码模块。
 
 #### 效果展示
 
@@ -10,7 +10,7 @@
 |  DEFAULT |Actionj| ![输入图片说明](Images/DEFAULT_N.gif)  | ![输入图片说明](Images/DEFAULT_G.gif) |
 |  WORD |Actionj| ![输入图片说明](Images/WORD_N.gif)  | ![输入图片说明](Images/WORD_G.gif) |
 |  WORD_LOWER|Actionj| ![输入图片说明](Images/WORD_LOWER_N.gif)  | ![输入图片说明](Images/WORD_LOWER_G.gif) |
-|  WORD_UPPER|Actionj| ![输入图片说明](Images/WORD_UPPER_N.gif)  | ![输入图片说明](Images/WORD_UPPER_G.gif) |
+|  WORD_UPPER|Actionj| ![输入图片说明](Images/WORD_UPPER_G.gif)  | ![输入图片说明](Images/WORD_UPPER_N.gif) |
 |  WORD_NUMBER_LOWER|Actionj| ![输入图片说明](Images/WORD_NUMBER_LOWER_N.gif)  | ![输入图片说明](Images/WORD_NUMBER_LOWER_G.gif) |
 |  WORD_NUMBER_UPPER|Actionj| ![输入图片说明](Images/WORD_NUMBER_UPPER_N.gif)  | ![输入图片说明](Images/WORD_NUMBER_UPPER_G.gif) |
 |  NUMBER|Fresnel| ![输入图片说明](Images/NUMBER_N.gif)  | ![输入图片说明](Images/NUMBER_G.gif) |
