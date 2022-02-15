@@ -45,10 +45,15 @@ Install-Package Lazy.Captcha.Core
 
 ## 使用说明
 
-1. 注册服务
+1. 注册服务（选择其一即可）
 
 ```
+// 内存缓存
 builder.Services.AddMemoryCacheCaptcha(builder.Configuration); 
+
+// Redis缓存
+builder.Services.AddRedisCacheCaptcha(builder.Configuration);
+
 ```
 
 2. appsettings.json （不提供配置时，使用默认配置）
