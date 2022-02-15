@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lazy.Captcha.Core", "Lazy.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lazy.Captcha.Web", "Lazy.Captcha.Web\Lazy.Captcha.Web.csproj", "{18C83A51-3ECB-44FE-8ED4-62F59967487B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lazy.Captcha.Redis", "Lazy.Captcha.Redis\Lazy.Captcha.Redis.csproj", "{EC32628E-195E-4277-8026-EFAFA571432A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{18C83A51-3ECB-44FE-8ED4-62F59967487B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18C83A51-3ECB-44FE-8ED4-62F59967487B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18C83A51-3ECB-44FE-8ED4-62F59967487B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC32628E-195E-4277-8026-EFAFA571432A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC32628E-195E-4277-8026-EFAFA571432A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC32628E-195E-4277-8026-EFAFA571432A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC32628E-195E-4277-8026-EFAFA571432A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

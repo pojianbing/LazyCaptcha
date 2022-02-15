@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Lazy.Captcha.Core;
 using Lazy.Captcha.Core.Storage;
 using Lazy.Captcha.Core.Storeage;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -12,29 +12,29 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddCaptcha(this IServiceCollection services)
         {
-            services.AddCaptcha(e => { });
-            return services;
+            return services.AddScoped<ICaptcha, DefaultCaptcha>();
         }
 
-        public static IServiceCollection AddCaptcha(this IServiceCollection services, Action<CaptchaOption> configureOptions)
+        public static IServiceCollection AddCaptcha(this IServiceCollection services, IConfiguration configuration, Action<CaptchaOptions> optionsAction = default!)
         {
-            if (services == null)
+            var options = new CaptchaOptions();
+            optionsAction?.Invoke(options);
+            services.Configure<CaptchaOptions>(opt =>
             {
-                throw new ArgumentException(nameof(services));
-            }
-
+                opt = options;
+            });
+            services.Configure<CaptchaOptions>(configuration?.GetSection("CaptchaOptions"));
             services.TryAdd(ServiceDescriptor.Scoped<ICaptcha, DefaultCaptcha>());
-
-            services.Configure(configureOptions);
             return services;
         }
 
-        public static IServiceCollection AddMemoryCacheCaptcha(this IServiceCollection services, Action<CaptchaOption> configureOptions)
+        public static IServiceCollection AddMemoryCacheCaptcha(this IServiceCollection services, IConfiguration configuration, Action<CaptchaOptions> optionsAction = default!)
+
         {
             return services
                 .AddDistributedMemoryCache()
                 .AddScoped<IStorage, DefaultStorage>()
-                .AddCaptcha(configureOptions);
+                .AddCaptcha(configuration, optionsAction);
         }
     }
 }

@@ -37,9 +37,8 @@ namespace Lazy.Captcha.Core
         }
 
         /// <summary>
-        /// 随机获取字体
+        /// 获取字体
         /// </summary>
-        /// <returns> </returns>
         public FontFamily GetFontFamily(string name)
         {
             return _fontFamilies.First(f => f.Name == name);

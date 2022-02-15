@@ -12,12 +12,12 @@ namespace Lazy.Captcha.Core
 {
     public class DefaultCaptcha : ICaptcha
     {
-        private readonly IOptionsMonitor<CaptchaOption> _options;
+        private readonly IOptionsMonitor<CaptchaOptions> _options;
         private readonly IStorage _storage;
         private readonly ICaptchaCodeGenerator _captchaCodeGenerator;
         private readonly ICaptchaImageGenerator _captchaImageGenerator;
 
-        public DefaultCaptcha(IOptionsMonitor<CaptchaOption> options, IStorage storage)
+        public DefaultCaptcha(IOptionsMonitor<CaptchaOptions> options, IStorage storage)
         {
             _options = options;
             _storage = storage;
@@ -29,7 +29,7 @@ namespace Lazy.Captcha.Core
         {
             var (renderText, code) = _captchaCodeGenerator.Generate(_options.CurrentValue.CodeLength);
             var image = _captchaImageGenerator.Generate(renderText, _options.CurrentValue.ImageOption);
-            _storage.Set(captchaId, code, DateTimeOffset.UtcNow.Add(_options.CurrentValue.ExpiryTime));
+            _storage.Set(captchaId, code, DateTime.Now.AddSeconds(_options.CurrentValue.ExpirySeconds).ToUniversalTime());
 
             return new CaptchaData(captchaId, code, image);
         }
