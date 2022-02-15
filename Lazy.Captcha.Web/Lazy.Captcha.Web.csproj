@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Lazy.Captcha.Core\Lazy.Captcha.Core.csproj" />
+    <ProjectReference Include="..\Lazy.Captcha.Redis\Lazy.Captcha.Redis.csproj" />
   </ItemGroup>
 
 </Project>

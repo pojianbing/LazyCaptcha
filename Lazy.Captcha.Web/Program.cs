@@ -3,7 +3,7 @@ using Lazy.Captcha.Core.Generator;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddMemoryCacheCaptcha(builder.Configuration);
+builder.Services.AddRedisCacheCaptcha(builder.Configuration);
 
 /*
 
