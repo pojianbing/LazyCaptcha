@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lazy.Captcha.Test", "Lazy.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lazy.Captcha.Core", "Lazy.Captcha.Core\Lazy.Captcha.Core.csproj", "{B640C86B-87E3-4CBE-94A9-2CA3AC704A08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lazy.Captcha.Web", "Lazy.Captcha.Web\Lazy.Captcha.Web.csproj", "{18C83A51-3ECB-44FE-8ED4-62F59967487B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lazy.Captcha.Web", "Lazy.Captcha.Web\Lazy.Captcha.Web.csproj", "{18C83A51-3ECB-44FE-8ED4-62F59967487B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

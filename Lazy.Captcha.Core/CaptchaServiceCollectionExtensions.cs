@@ -1,12 +1,10 @@
-﻿using Lazy.Captcha.Core;
+﻿using System;
+using System.Collections.Generic;
+using Lazy.Captcha.Core;
+using Lazy.Captcha.Core.Storage;
 using Lazy.Captcha.Core.Storeage;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -25,11 +23,18 @@ namespace Microsoft.Extensions.DependencyInjection
                 throw new ArgumentException(nameof(services));
             }
 
-            services.TryAdd(ServiceDescriptor.Scoped<IStorage, DefaultStorage>());
             services.TryAdd(ServiceDescriptor.Scoped<ICaptcha, DefaultCaptcha>());
 
             services.Configure(configureOptions);
             return services;
+        }
+
+        public static IServiceCollection AddMemoryCacheCaptcha(this IServiceCollection services, Action<CaptchaOption> configureOptions)
+        {
+            return services
+                .AddDistributedMemoryCache()
+                .AddScoped<IStorage, DefaultStorage>()
+                .AddCaptcha(configureOptions);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Lazy.Captcha.Core.Generator.Code;
 using Lazy.Captcha.Core.Generator.Image;
-using Lazy.Captcha.Core.Storeage;
+using Lazy.Captcha.Core.Storage;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;

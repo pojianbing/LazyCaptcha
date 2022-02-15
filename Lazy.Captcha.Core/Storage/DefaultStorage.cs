@@ -1,30 +1,21 @@
-﻿using Microsoft.Extensions.Caching.Distributed;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Lazy.Captcha.Core.Storage;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace Lazy.Captcha.Core.Storeage
 {
-    public  class DefaultStorage : IStorage
+    public class DefaultStorage : IStorage
     {
         private readonly IDistributedCache _cache;
 
         public DefaultStorage(IDistributedCache cache)
-        {
-            _cache = cache;
-        }
+        { _cache = cache; }
 
         public string Get(string key)
-        {
-            return _cache.GetString(key);
-        }
+        { return _cache.GetString(key); }
 
         public void Remove(string key)
-        {
-            _cache.Remove(key);
-        }
+        { _cache.Remove(key); }
 
         public void Set(string key, string value, DateTimeOffset absoluteExpiration)
         {
