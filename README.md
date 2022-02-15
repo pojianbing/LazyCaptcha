@@ -41,26 +41,55 @@ Install-Package Lazy.Captcha.Core
 
 1. 注册服务
 
-默认设置
-```
-builder.Services.AddDistributedMemoryCache().AddCaptcha();
-```
-
-详细设置
 
 ```
-builder.Services.AddDistributedMemoryCache().AddCaptcha(option =>
+builder.Services.AddMemoryCacheCaptcha(builder.Configuration);
+```
+
+2. appsettings.json （不提供配置时，使用默认配置）
+
+``` json
 {
-    option.CaptchaType = CaptchaType.DEFAULT; // 验证码类型
-    option.CodeLength = 4; // 验证码长度, 要放在CaptchaType设置后
-    option.ExpiryTime = TimeSpan.FromSeconds(30); // 验证码过期时间
+  "CaptchaOptions": {
+    "CaptchaType": 5,  // 验证码类型
+    "CodeLength": 4, // 验证码长度, 要放在CaptchaType设置后
+    "ExpirySeconds": 60, // 验证码过期秒数
+    "IgnoreCase": true, // 比较时是否忽略大小写
+    "ImageOption": {
+      "Animation": false, // 是否启用动画
+      "FontSize": 32, // 字体大小
+      "Width": 100, // 验证码宽度
+      "Height": 40, // 验证码高度
+      "BubbleMinRadius": 5, // 气泡最小半径
+      "BubbleMaxRadius": 10, // 气泡最大半径
+      "BubbleCount": 3, // 气泡数量
+      "BubbleThickness": 1.0, // 气泡边沿厚度
+      "InterferenceLineCount": 4 // 干扰线数量
+    }
+  }
+}
+```
+
+
+
+
+
+2. 其他详细设置
+
+```csharp
+// 全部配置
+builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
+{
+    option.CaptchaType = CaptchaType.WORD; // 验证码类型
+    option.CodeLength = 6; // 验证码长度, 要放在CaptchaType设置后
+    option.ExpirySeconds = 30; // 验证码过期时间
     option.IgnoreCase = true; // 比较时是否忽略大小写
-    option.ImageOption.Animation = false; // 是否启用动画
-    
-    option.ImageOption.Width = 130; // 验证码宽度
-    option.ImageOption.Height = 48; // 验证码高度
+    option.ImageOption.Animation = true; // 是否启用动画
+
+    option.ImageOption.Width = 150; // 验证码宽度
+    option.ImageOption.Height = 50; // 验证码高度
     option.ImageOption.BackgroundColor = SixLabors.ImageSharp.Color.White; // 验证码背景色
-    
+
     option.ImageOption.BubbleCount = 2; // 气泡数量
     option.ImageOption.BubbleMinRadius = 5; // 气泡最小半径
     option.ImageOption.BubbleMaxRadius = 15; // 气泡最大半径
@@ -68,53 +97,60 @@ builder.Services.AddDistributedMemoryCache().AddCaptcha(option =>
 
     option.ImageOption.InterferenceLineCount = 2; // 干扰线数量
 
-    option.ImageOption.FontSize = 28; // 字体大小
-    option.ImageOption.FontFamily = DefaultFontFamilys.Instance.Actionj; // 字体，中文使用kaiti，其他字符可根据喜好设置（可能部分转字符会出现绘制不出的情况）。
+    option.ImageOption.FontSize = 36; // 字体大小
+    option.ImageOption.FontFamily = DefaultFontFamilys.Instance.Scandal; // 字体，中文使用kaiti，其他字符可根据喜好设置（可能部分转字符会出现绘制不出的情况）。
 });
 ```
 
 
-2. Controller
 
-```
-public class CaptchaController : Controller
-{
-    private readonly ILogger<CaptchaController> _logger;
-    private readonly ICaptcha _captcha;
-    
-    public CaptchaController(ILogger<CaptchaController> logger, ICaptcha captcha)
+3. Controller
+
+```csharp
+
+    [ApiController]
+    [Route("api/captcha")]
+    public class CaptchaController : ControllerBase
     {
-        _logger = logger;
-        _captcha = captcha;
-    }
-    
-    [HttpGet]
-    [Route("/captcha")]
-    public IActionResult Captcha(string id)
-    {
-        var info = _captcha.Generate(id);
-        var stream = new MemoryStream(info.Bytes);
-        return File(stream, "image/gif");
-    }
-    
-    [HttpGet]
-    [Route("/captcha/validate")]
-    public bool Validate(string id, string code)
-    {
-        if (!_captcha.Validate(id, code))
+        public ICaptcha Captcha { get; }
+
+        public CaptchaController(ICaptcha captcha)
         {
-            throw new Exception("无效验证码");
+            Captcha=captcha;
         }
-    
-        // 具体业务
-    
-        // 为了演示，这里仅做返回处理
-        return true;
-    }
-}
-```
-    
 
-    
-    
-    
+        /// <summary>
+        /// 生成
+        /// </summary>
+        [HttpGet]
+        public IActionResult GenerateCaptcha(string id)
+        {
+            var info = Captcha.Generate(id);
+            var stream = new MemoryStream(info.Bytes);
+            return File(stream, "image/gif");
+        }
+
+        /// <summary>
+        /// 校验
+        /// </summary>
+        [HttpPost]
+        public IActionResult Validate(string id, string code)
+        {
+            var pass = Captcha.Validate(id, code);
+            if (pass)
+            {
+                // 业务
+                return Ok("验证码校验通过");
+            }
+            else
+            {
+                return Unauthorized("验证码校验未通过");
+            }
+        }
+    }
+```
+
+
+​    
+​    
+ 
