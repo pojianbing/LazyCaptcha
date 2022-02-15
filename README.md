@@ -1,9 +1,9 @@
 # LazyCaptcha
 
-#### 介绍
+## 介绍
 仿[EasyCaptcha](https://gitee.com/ele-admin/EasyCaptcha)和[SimpleCaptcha](https://github.com/1992w/SimpleCaptcha),基于.Net Standard 2.1的图形验证码模块。
 
-#### 效果展示
+## 效果展示
 
 |  CaptchaType |  字体 |静态图 |  动图|
 |---|---|---|---|
@@ -34,43 +34,51 @@
 |  Robot|  ![输入图片说明](Images/Font_Robot.gif) |
 |  Scandal|  ![输入图片说明](Images/Font_Scandal.gif) |
 
-#### 安装教程
+## 安装教程
+``` shell
+# 这里需要调整，发布后调整为对应的具体实现
 Install-Package Lazy.Captcha.Core
 
-#### 使用说明
+```
+
+
+
+## 使用说明
 
 1. 注册服务
 
-
 ```
-builder.Services.AddMemoryCacheCaptcha(builder.Configuration);
+builder.Services.AddMemoryCacheCaptcha(builder.Configuration); 
 ```
 
 2. appsettings.json （不提供配置时，使用默认配置）
 
 ``` json
 {
-  "CaptchaOptions": {
-    "CaptchaType": 5,  // 验证码类型
-    "CodeLength": 4, // 验证码长度, 要放在CaptchaType设置后
-    "ExpirySeconds": 60, // 验证码过期秒数
-    "IgnoreCase": true, // 比较时是否忽略大小写
-    "ImageOption": {
-      "Animation": false, // 是否启用动画
-      "FontSize": 32, // 字体大小
-      "Width": 100, // 验证码宽度
-      "Height": 40, // 验证码高度
-      "BubbleMinRadius": 5, // 气泡最小半径
-      "BubbleMaxRadius": 10, // 气泡最大半径
-      "BubbleCount": 3, // 气泡数量
-      "BubbleThickness": 1.0, // 气泡边沿厚度
-      "InterferenceLineCount": 4 // 干扰线数量
+    "ConnectionStrings": {
+        // 使用Redis缓存时，需要配置此项
+        // 使用格式参考 Microsoft.Extensions.Caching.StackExchangeRedis
+        "RedisCache": "localhost,password=Aa123456." 
+    },
+    "CaptchaOptions": {
+        "CaptchaType": 5,  // 验证码类型
+        "CodeLength": 4, // 验证码长度, 要放在CaptchaType设置后
+        "ExpirySeconds": 60, // 验证码过期秒数
+        "IgnoreCase": true, // 比较时是否忽略大小写
+        "ImageOption": {
+            "Animation": false, // 是否启用动画
+            "FontSize": 32, // 字体大小
+            "Width": 100, // 验证码宽度
+            "Height": 40, // 验证码高度
+            "BubbleMinRadius": 5, // 气泡最小半径
+            "BubbleMaxRadius": 10, // 气泡最大半径
+            "BubbleCount": 3, // 气泡数量
+            "BubbleThickness": 1.0, // 气泡边沿厚度
+            "InterferenceLineCount": 4 // 干扰线数量
+        }
     }
-  }
 }
 ```
-
-
 
 
 
@@ -151,6 +159,5 @@ builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
 ```
 
 
-​    
-​    
  
+

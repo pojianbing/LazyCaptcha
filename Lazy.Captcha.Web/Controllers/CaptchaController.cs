@@ -7,12 +7,10 @@ namespace Lazy.Captcha.Web.Controllers
     [ApiController]
     public class CaptchaController : Controller
     {
-        private readonly ILogger<CaptchaController> _logger;
         private readonly ICaptcha _captcha;
 
-        public CaptchaController(ILogger<CaptchaController> logger, ICaptcha captcha)
+        public CaptchaController(ICaptcha captcha)
         {
-            _logger = logger;
             _captcha = captcha;
         }
 
