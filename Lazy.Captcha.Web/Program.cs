@@ -19,7 +19,7 @@ builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
     option.ImageOption.FontFamily = DefaultFontFamilys.Instance.Epilog;
 });
 
-/*
+
 
 // 全部配置参数，基于代码配置
 builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
@@ -28,6 +28,7 @@ builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
     option.CodeLength = 6; // 验证码长度, 要放在CaptchaType设置后.  当类型为算术表达式时，长度代表操作的个数
     option.ExpirySeconds = 30; // 验证码过期时间
     option.IgnoreCase = true; // 比较时是否忽略大小写
+    option.StoreageKeyPrefix = ""; // 存储键前缀
     option.ImageOption.Animation = true; // 是否启用动画
 
     option.ImageOption.Width = 150; // 验证码宽度
@@ -45,7 +46,7 @@ builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
     option.ImageOption.FontFamily = DefaultFontFamilys.Instance.Scandal; // 字体，中文使用kaiti，其他字符可根据喜好设置（可能部分转字符会出现绘制不出的情况）。
 });
 
-*/
+
 
 builder.Services.AddControllers();
 
