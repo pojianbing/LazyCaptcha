@@ -13,7 +13,7 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
         /// <summary>
         /// 是否启用动画
         /// </summary>
-        public bool Animation = false;
+        public bool Animation { get; set; } = false;
         /// <summary>
         /// 背景色
         /// </summary>

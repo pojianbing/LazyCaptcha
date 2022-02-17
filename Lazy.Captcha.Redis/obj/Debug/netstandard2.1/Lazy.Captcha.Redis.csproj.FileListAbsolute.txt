@@ -1,0 +1,13 @@
+C:\Users\Administrator\Desktop\lazy-captcha\Lazy.Captcha.Redis\bin\Debug\netstandard2.1\Lazy.Captcha.Redis.deps.json
+C:\Users\Administrator\Desktop\lazy-captcha\Lazy.Captcha.Redis\bin\Debug\netstandard2.1\Lazy.Captcha.Redis.dll
+C:\Users\Administrator\Desktop\lazy-captcha\Lazy.Captcha.Redis\bin\Debug\netstandard2.1\Lazy.Captcha.Redis.pdb
+C:\Users\Administrator\Desktop\lazy-captcha\Lazy.Captcha.Redis\obj\Debug\netstandard2.1\Lazy.Captcha.Redis.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\Desktop\lazy-captcha\Lazy.Captcha.Redis\obj\Debug\netstandard2.1\Lazy.Captcha.Redis.AssemblyInfoInputs.cache
+C:\Users\Administrator\Desktop\lazy-captcha\Lazy.Captcha.Redis\obj\Debug\netstandard2.1\Lazy.Captcha.Redis.AssemblyInfo.cs
+C:\Users\Administrator\Desktop\lazy-captcha\Lazy.Captcha.Redis\obj\Debug\netstandard2.1\Lazy.Captcha.Redis.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\lazy-captcha\Lazy.Captcha.Redis\obj\Debug\netstandard2.1\Lazy.Captcha.Redis.dll
+C:\Users\Administrator\Desktop\lazy-captcha\Lazy.Captcha.Redis\obj\Debug\netstandard2.1\Lazy.Captcha.Redis.pdb
+C:\Users\Administrator\Desktop\lazy-captcha\Lazy.Captcha.Redis\bin\Debug\netstandard2.1\Lazy.Captcha.Core.dll
+C:\Users\Administrator\Desktop\lazy-captcha\Lazy.Captcha.Redis\bin\Debug\netstandard2.1\Lazy.Captcha.Core.pdb
+C:\Users\Administrator\Desktop\lazy-captcha\Lazy.Captcha.Redis\obj\Debug\netstandard2.1\Lazy.Captcha.Redis.csproj.AssemblyReference.cache
+C:\Users\Administrator\Desktop\lazy-captcha\Lazy.Captcha.Redis\obj\Debug\netstandard2.1\Lazy.Captcha.Redis.csproj.CopyComplete

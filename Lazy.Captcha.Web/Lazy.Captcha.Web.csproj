@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Lazy.Captcha.Core\Lazy.Captcha.Core.csproj" />
+    <ProjectReference Include="..\Lazy.Captcha.Redis\Lazy.Captcha.Redis.csproj" />
   </ItemGroup>
 
 </Project>

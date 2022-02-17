@@ -1,23 +1,20 @@
 ﻿using Lazy.Captcha.Core;
-using Lazy.Captcha.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace Lazy.Captcha.Web.Controllers
 {
+    [Route("captcha")]
+    [ApiController]
     public class CaptchaController : Controller
     {
-        private readonly ILogger<CaptchaController> _logger;
         private readonly ICaptcha _captcha;
 
-        public CaptchaController(ILogger<CaptchaController> logger, ICaptcha captcha)
+        public CaptchaController(ICaptcha captcha)
         {
-            _logger = logger;
             _captcha = captcha;
         }
 
         [HttpGet]
-        [Route("/captcha")]
         public IActionResult Captcha(string id)
         {
             var info = _captcha.Generate(id);
@@ -25,8 +22,7 @@ namespace Lazy.Captcha.Web.Controllers
             return File(stream, "image/gif");
         }
 
-        [HttpGet]
-        [Route("/captcha/validate")]
+        [HttpGet("validate")]
         public bool Validate(string id, string code)
         {
             if (!_captcha.Validate(id, code))
