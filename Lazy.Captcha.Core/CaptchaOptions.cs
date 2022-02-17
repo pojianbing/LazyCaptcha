@@ -58,6 +58,11 @@ namespace Lazy.Captcha.Core
         public bool IgnoreCase { get; set; } = true;
 
         /// <summary>
+        /// 存储键前缀
+        /// </summary>
+        public string StoreageKeyPrefix { get; set; }
+
+        /// <summary>
         /// 图片选项
         /// </summary>
         public CaptchaImageGeneratorOption ImageOption { get; set; } = new CaptchaImageGeneratorOption();

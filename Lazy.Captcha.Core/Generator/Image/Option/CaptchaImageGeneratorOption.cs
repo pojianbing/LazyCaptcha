@@ -69,28 +69,13 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
             {
                 if (this.FontFamily == null)
                 {
-                    var fontFamily = this.IsChineseIn() ? DefaultFontFamilys.Instance.Kaiti : DefaultFontFamilys.Instance.Epilog;
-                    return new Font(fontFamily, this.FontSize, this.FontStyle);
+                    return new Font(DefaultFontFamilys.Instance.Epilog, this.FontSize, this.FontStyle);
                 }
                 else
                 {
-                    var fontFamily = this.IsChineseIn() ? DefaultFontFamilys.Instance.Kaiti : DefaultFontFamilys.Instance.Epilog;
                     return new Font(this.FontFamily, this.FontSize, this.FontStyle);
                 }
             }
-        }
-
-        /// <summary>
-        /// 是否包含中文
-        /// </summary>
-        /// <returns></returns>
-        private bool IsChineseIn()
-        {
-            //return this.CaptchaType == CaptchaType.CHINESE ||
-            //       this.CaptchaType == CaptchaType.NUMBER_ZH_CN ||
-            //       this.CaptchaType == CaptchaType.NUMBER_ZH_HK ||
-            //       this.CaptchaType == CaptchaType.NUMBER_ZH_HK;
-            return false;
         }
     }
 }

@@ -29,7 +29,6 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
         public static IServiceCollection AddMemoryCacheCaptcha(this IServiceCollection services, IConfiguration configuration, Action<CaptchaOptions> optionsAction = default!)
-
         {
             return services
                 .AddDistributedMemoryCache()

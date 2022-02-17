@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Lazy.Captcha.Redis\Lazy.Captcha.Redis.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>

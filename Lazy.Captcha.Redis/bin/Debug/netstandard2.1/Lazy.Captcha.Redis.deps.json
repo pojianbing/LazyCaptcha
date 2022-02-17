@@ -7,9 +7,9 @@
   "targets": {
     ".NETStandard,Version=v2.1": {},
     ".NETStandard,Version=v2.1/": {
-      "Lazy.Captcha.Redis/1.0.0": {
+      "Lazy.Captcha.Redis/1.0.6": {
         "dependencies": {
-          "Lazy.Captcha.Core": "1.0.5",
+          "Lazy.Captcha.Core": "1.0.6",
           "Microsoft.Extensions.Caching.StackExchangeRedis": "6.0.2"
         },
         "runtime": {
@@ -515,7 +515,7 @@
         }
       },
       "System.ValueTuple/4.5.0": {},
-      "Lazy.Captcha.Core/1.0.5": {
+      "Lazy.Captcha.Core/1.0.6": {
         "dependencies": {
           "MathExpressions": "1.1.2",
           "Microsoft.Extensions.Caching.Abstractions": "6.0.0",
@@ -533,7 +533,7 @@
     }
   },
   "libraries": {
-    "Lazy.Captcha.Redis/1.0.0": {
+    "Lazy.Captcha.Redis/1.0.6": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -888,7 +888,7 @@
       "path": "system.valuetuple/4.5.0",
       "hashPath": "system.valuetuple.4.5.0.nupkg.sha512"
     },
-    "Lazy.Captcha.Core/1.0.5": {
+    "Lazy.Captcha.Core/1.0.6": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

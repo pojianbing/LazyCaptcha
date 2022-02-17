@@ -3,15 +3,29 @@ using Lazy.Captcha.Core.Generator;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddRedisCacheCaptcha(builder.Configuration);
+//// redis存储，基于appsettings.json配置
+//builder.Services.AddRedisCacheCaptcha(builder.Configuration, option =>
+//{
+//    // 背景色，字体要在这里配置
+//    option.ImageOption.BackgroundColor = SixLabors.ImageSharp.Color.White;
+//    option.ImageOption.FontFamily = DefaultFontFamilys.Instance.Epilog;
+//});
+
+// 内存存储， 基于appsettings.json配置
+builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
+{
+    // 背景色，字体要在这里配置
+    option.ImageOption.BackgroundColor = SixLabors.ImageSharp.Color.White;
+    option.ImageOption.FontFamily = DefaultFontFamilys.Instance.Epilog;
+});
 
 /*
 
-// 全部配置
+// 全部配置参数，基于代码配置
 builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
 {
     option.CaptchaType = CaptchaType.WORD; // 验证码类型
-    option.CodeLength = 6; // 验证码长度, 要放在CaptchaType设置后
+    option.CodeLength = 6; // 验证码长度, 要放在CaptchaType设置后.  当类型为算术表达式时，长度代表操作的个数
     option.ExpirySeconds = 30; // 验证码过期时间
     option.IgnoreCase = true; // 比较时是否忽略大小写
     option.ImageOption.Animation = true; // 是否启用动画
