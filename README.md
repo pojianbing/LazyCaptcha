@@ -40,8 +40,12 @@
 ## 安装教程
 ``` shell
 # 这里需要调整，发布后调整为对应的具体实现
-Install-Package Lazy.Captcha.Core
+Install-Package Lazy.Captcha.Core -Version 1.0.6   
+dotnet add package Lazy.Captcha.Core --version 1.0.6
 
+# 如果使用redis存储需要安装
+Install-Package Lazy.Captcha.Redis -Version 1.0.6
+dotnet add package Lazy.Captcha.Redis --version 1.0.6
 ```
 
 
