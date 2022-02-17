@@ -73,6 +73,7 @@ builder.Services.AddRedisCacheCaptcha(builder.Configuration);
         "CodeLength": 4, // 验证码长度, 要放在CaptchaType设置后
         "ExpirySeconds": 60, // 验证码过期秒数
         "IgnoreCase": true, // 比较时是否忽略大小写
+        "StoreageKeyPrefix": "", // 存储键前缀
         "ImageOption": {
             "Animation": false, // 是否启用动画
             "FontSize": 32, // 字体大小
@@ -100,6 +101,8 @@ builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
     option.CodeLength = 6; // 验证码长度, 要放在CaptchaType设置后
     option.ExpirySeconds = 30; // 验证码过期时间
     option.IgnoreCase = true; // 比较时是否忽略大小写
+    option.StoreageKeyPrefix= ""; // 存储键前缀
+
     option.ImageOption.Animation = true; // 是否启用动画
 
     option.ImageOption.Width = 150; // 验证码宽度
