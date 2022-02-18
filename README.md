@@ -37,7 +37,23 @@
 |  Robot|  ![输入图片说明](Images/Font_Robot.gif) |
 |  Scandal|  ![输入图片说明](Images/Font_Scandal.gif) |
 
+
+
+## 在线试用（仅学习和试用，随时可能关掉服务）
+
+``` shell
+# 此次返回的是 uyfx
+http://wosperry.com.cn:8006/captcha?id=999
+
+# 更改参数为对应的ID和图形上的验证码uyfx，通过则返回true
+http://wosperry.com.cn:8006/captcha/validate?id=999&code=uyfx
+
+```
+
+
+
 ## 安装教程
+
 ``` shell
 # 这里需要调整，发布后调整为对应的具体实现
 Install-Package Lazy.Captcha.Core -Version 1.0.6   
@@ -174,5 +190,4 @@ builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
 ```
 
 
- 
 
