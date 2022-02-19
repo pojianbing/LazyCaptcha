@@ -141,7 +141,7 @@ builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
 });
 ```
 
-
+> appsettings.json配置和手动代码配置两者选其一, 同时配置时代码配置是无法覆盖appsettings.json配置。另外，appsettings.json配置无法设置所有配置项(例如FontFamily )。
 
 3. Controller
 
