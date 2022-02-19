@@ -4,22 +4,10 @@ using Lazy.Captcha.Core.Generator;
 var builder = WebApplication.CreateBuilder(args);
 
 //// redis存储，基于appsettings.json配置
-//builder.Services.AddRedisCacheCaptcha(builder.Configuration, option =>
-//{
-//    // 背景色，字体要在这里配置
-//    option.ImageOption.BackgroundColor = SixLabors.ImageSharp.Color.White;
-//    option.ImageOption.FontFamily = DefaultFontFamilys.Instance.Epilog;
-//});
+//builder.Services.AddRedisCacheCaptcha(builder.Configuration);
 
 // 内存存储， 基于appsettings.json配置
-builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
-{
-    // 背景色，字体要在这里配置
-    option.ImageOption.BackgroundColor = SixLabors.ImageSharp.Color.White;
-    option.ImageOption.FontFamily = DefaultFontFamilys.Instance.Epilog;
-});
-
-
+builder.Services.AddMemoryCacheCaptcha(builder.Configuration);
 
 //// 全部配置参数，基于代码配置
 //builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
@@ -46,7 +34,7 @@ builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
 //    option.ImageOption.FontFamily = DefaultFontFamilys.Instance.Scandal; // 字体，中文使用kaiti，其他字符可根据喜好设置（可能部分转字符会出现绘制不出的情况）。
 //});
 
-
+// 注意： appsettings.json配置和手动代码配置两者选其一, 同时配置时代码配置是无法覆盖appsettings.json配置。另外，appsettings.json配置无法设置所有配置项(例如FontFamily )。
 
 builder.Services.AddControllers();
 
