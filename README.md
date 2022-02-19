@@ -106,7 +106,7 @@ appsettings.json （不提供配置时，使用默认配置）
             "BubbleCount": 3, // 气泡数量
             "BubbleThickness": 1.0, // 气泡边沿厚度
             "InterferenceLineCount": 4, // 干扰线数量
-            "FontFamily": "kaiti" // 包含actionj,epilog,fresnel,headache,lexo,prefix,progbot,ransom,robot,scandal,kaiti
+            "FontFamily": "kaiti" // 包含中文时请使用kaiti。可设置字体：actionj,epilog,fresnel,headache,lexo,prefix,progbot,ransom,robot,scandal,kaiti
         }
     }
 }
