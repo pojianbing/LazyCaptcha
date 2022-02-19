@@ -79,7 +79,9 @@ builder.Services.AddRedisCacheCaptcha(builder.Configuration);
 
 ```
 
-2. appsettings.json （不提供配置时，使用默认配置）
+2. 配置   
+    
+appsettings.json （不提供配置时，使用默认配置）
 
 ``` json
 {
@@ -90,7 +92,7 @@ builder.Services.AddRedisCacheCaptcha(builder.Configuration);
     },
     "CaptchaOptions": {
         "CaptchaType": 5,  // 验证码类型
-        "CodeLength": 4, // 验证码长度, 要放在CaptchaType设置后
+        "CodeLength": 4, // 验证码长度, 要放在CaptchaType设置后  当类型为算术表达式时，长度代表操作的个数
         "ExpirySeconds": 60, // 验证码过期秒数
         "IgnoreCase": true, // 比较时是否忽略大小写
         "StoreageKeyPrefix": "", // 存储键前缀
@@ -103,22 +105,21 @@ builder.Services.AddRedisCacheCaptcha(builder.Configuration);
             "BubbleMaxRadius": 10, // 气泡最大半径
             "BubbleCount": 3, // 气泡数量
             "BubbleThickness": 1.0, // 气泡边沿厚度
-            "InterferenceLineCount": 4 // 干扰线数量
+            "InterferenceLineCount": 4, // 干扰线数量
+            "FontFamily": "kaiti" // 包含中文时请使用kaiti。可设置字体：actionj,epilog,fresnel,headache,lexo,prefix,progbot,ransom,robot,scandal,kaiti
         }
     }
 }
 ```
 
-
-
-2. 其他详细设置
+代码配置
 
 ```csharp
 // 全部配置
 builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
 {
     option.CaptchaType = CaptchaType.WORD; // 验证码类型
-    option.CodeLength = 6; // 验证码长度, 要放在CaptchaType设置后
+    option.CodeLength = 4; // 验证码长度, 要放在CaptchaType设置后  当类型为算术表达式时，长度代表操作的个数
     option.ExpirySeconds = 30; // 验证码过期时间
     option.IgnoreCase = true; // 比较时是否忽略大小写
     option.StoreageKeyPrefix= ""; // 存储键前缀
@@ -141,7 +142,7 @@ builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
 });
 ```
 
-> appsettings.json配置和手动代码配置两者选其一, 同时配置时代码配置是无法覆盖appsettings.json配置。另外，appsettings.json配置无法设置所有配置项(例如FontFamily )。
+> appsettings.json配置和代码配置同时这设置时，代码配置会覆盖appsettings.json配置。
 
 3. Controller
 
