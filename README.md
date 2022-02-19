@@ -142,7 +142,7 @@ builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
 });
 ```
 
-> appsettings.json配置和代码配置可同时设置，同时这设置时，代码配置会覆盖appsettings.json配置。
+> appsettings.json配置和代码配置同时这设置时，代码配置会覆盖appsettings.json配置。
 
 3. Controller
 
