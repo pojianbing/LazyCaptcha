@@ -79,7 +79,9 @@ builder.Services.AddRedisCacheCaptcha(builder.Configuration);
 
 ```
 
-2. appsettings.json （不提供配置时，使用默认配置）
+2. 配置   
+    
+appsettings.json （不提供配置时，使用默认配置）
 
 ``` json
 {
@@ -103,15 +105,14 @@ builder.Services.AddRedisCacheCaptcha(builder.Configuration);
             "BubbleMaxRadius": 10, // 气泡最大半径
             "BubbleCount": 3, // 气泡数量
             "BubbleThickness": 1.0, // 气泡边沿厚度
-            "InterferenceLineCount": 4 // 干扰线数量
+            "InterferenceLineCount": 4, // 干扰线数量
+            "FontFamily": "kaiti" // 包含actionj,epilog,fresnel,headache,lexo,prefix,progbot,ransom,robot,scandal,kaiti
         }
     }
 }
 ```
 
-
-
-2. 其他详细设置
+代码配置
 
 ```csharp
 // 全部配置
@@ -141,7 +142,7 @@ builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
 });
 ```
 
-> appsettings.json配置和手动代码配置两者选其一, 同时配置时代码配置是无法覆盖appsettings.json配置。另外，appsettings.json配置无法设置所有配置项(例如FontFamily )。
+> appsettings.json配置和代码配置可同时设置，同时这设置时，代码配置会覆盖appsettings.json配置。
 
 3. Controller
 
