@@ -17,13 +17,17 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static IServiceCollection AddCaptcha(this IServiceCollection services, IConfiguration configuration, Action<CaptchaOptions> optionsAction = default!)
         {
-            var options = new CaptchaOptions();
-            optionsAction?.Invoke(options);
-            services.Configure<CaptchaOptions>(opt =>
-            {
-                opt = options;
-            });
             services.Configure<CaptchaOptions>(configuration?.GetSection("CaptchaOptions"));
+            services.PostConfigure<CaptchaOptions>(options =>
+            {
+                var fontFamily = configuration?.GetSection("CaptchaOptions:ImageOption:FontFamily")?.Value;
+                if (!string.IsNullOrWhiteSpace(fontFamily))
+                {
+                    options.ImageOption.FontFamily = DefaultFontFamilys.Instance.GetFontFamily(fontFamily);
+                }
+            });
+            if (optionsAction != null) services.PostConfigure<CaptchaOptions>(optionsAction);
+
             services.TryAdd(ServiceDescriptor.Scoped<ICaptcha, DefaultCaptcha>());
             return services;
         }

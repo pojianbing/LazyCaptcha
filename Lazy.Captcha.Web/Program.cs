@@ -7,9 +7,17 @@ var builder = WebApplication.CreateBuilder(args);
 //builder.Services.AddRedisCacheCaptcha(builder.Configuration);
 
 // 内存存储， 基于appsettings.json配置
-builder.Services.AddMemoryCacheCaptcha(builder.Configuration);
+builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
+{
+    // 代码配置可以覆盖appsettings.json配置
 
-//// 全部配置参数，基于代码配置
+    //option.ImageOption.Animation = false;
+    //option.CaptchaType = CaptchaType.WORD_UPPER;
+    //option.ImageOption.FontFamily = DefaultFontFamilys.Instance.Robot;
+    //option.ImageOption.BubbleCount = 0;
+});
+
+// 全部配置参数，基于代码配置
 //builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
 //{
 //    option.CaptchaType = CaptchaType.WORD; // 验证码类型
@@ -31,7 +39,7 @@ builder.Services.AddMemoryCacheCaptcha(builder.Configuration);
 //    option.ImageOption.InterferenceLineCount = 2; // 干扰线数量
 
 //    option.ImageOption.FontSize = 36; // 字体大小
-//    option.ImageOption.FontFamily = DefaultFontFamilys.Instance.Scandal; // 字体，中文使用kaiti，其他字符可根据喜好设置（可能部分转字符会出现绘制不出的情况）。
+//    option.ImageOption.FontFamily = DefaultFontFamilys.Instance.Actionj; // 字体，中文使用kaiti，其他字符可根据喜好设置（可能部分转字符会出现绘制不出的情况）。
 //});
 
 // 注意： appsettings.json配置和手动代码配置两者选其一, 同时配置时代码配置是无法覆盖appsettings.json配置。另外，appsettings.json配置无法设置所有配置项(例如FontFamily )。

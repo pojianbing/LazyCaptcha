@@ -10,6 +10,20 @@ namespace Lazy.Captcha.Core
     {
         public static DefaultFontFamilys Instance = new DefaultFontFamilys();
         private static List<FontFamily> _fontFamilies = null;
+        private static Dictionary<string, string> FamilyNameMapper = new Dictionary<string, string>
+        {
+            { "actionj", "Action Jackson" },
+            { "epilog", "Epilog" },
+            { "fresnel", "Fresnel" },
+            { "headache", "Tom's Headache" },
+            { "lexo", "Lexographer" },
+            { "prefix", "Prefix" },
+            { "progbot", "PROG.BOT" },
+            { "ransom", "Ransom" },
+            { "robot", "Robot Teacher" },
+            { "scandal", "Potassium Scandal" },
+            { "kaiti", "FZKai-Z03" }
+        };
 
         static DefaultFontFamilys()
         {
@@ -41,7 +55,14 @@ namespace Lazy.Captcha.Core
         /// </summary>
         public FontFamily GetFontFamily(string name)
         {
-            return _fontFamilies.First(f => f.Name == name);
+            var realName = "Epilog";
+            var normalizeName = name.ToLowerInvariant();
+            if (FamilyNameMapper.ContainsKey(normalizeName))
+            {
+                // 默认字体
+                realName = FamilyNameMapper[normalizeName];
+            }
+            return _fontFamilies.First(f => f.Name == realName);
         }
 
         /// <summary>
@@ -51,7 +72,7 @@ namespace Lazy.Captcha.Core
         {
             get
             {
-                return GetFontFamily("Action Jackson");
+                return GetFontFamily("Actionj");
             }
         }
 
@@ -84,7 +105,7 @@ namespace Lazy.Captcha.Core
         {
             get
             {
-                return GetFontFamily("Tom's Headache");
+                return GetFontFamily("Headache");
             }
         }
 
@@ -95,7 +116,7 @@ namespace Lazy.Captcha.Core
         {
             get
             {
-                return GetFontFamily("Lexographer");
+                return GetFontFamily("Lexo");
             }
         }
 
@@ -117,7 +138,7 @@ namespace Lazy.Captcha.Core
         {
             get
             {
-                return GetFontFamily("PROG.BOT");
+                return GetFontFamily("Progbot");
             }
         }
 
@@ -139,7 +160,7 @@ namespace Lazy.Captcha.Core
         {
             get
             {
-                return GetFontFamily("Robot Teacher");
+                return GetFontFamily("Robot");
             }
         }
 
@@ -150,7 +171,7 @@ namespace Lazy.Captcha.Core
         {
             get
             {
-                return GetFontFamily("Potassium Scandal");
+                return GetFontFamily("Scandal");
             }
         }
 
@@ -161,7 +182,7 @@ namespace Lazy.Captcha.Core
         {
             get
             {
-                return GetFontFamily("FZKai-Z03");
+                return GetFontFamily("Kaiti");
             }
         }
     }
