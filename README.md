@@ -80,7 +80,8 @@ builder.Services.AddRedisCacheCaptcha(builder.Configuration);
 ```
 
 2. 配置   
-    
+   
+
 appsettings.json （不提供配置时，使用默认配置）
 
 ``` json
@@ -176,16 +177,7 @@ builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
         [HttpPost]
         public IActionResult Validate(string id, string code)
         {
-            var pass = Captcha.Validate(id, code);
-            if (pass)
-            {
-                // 业务
-                return Ok("验证码校验通过");
-            }
-            else
-            {
-                return Unauthorized("验证码校验未通过");
-            }
+            return Captcha.Validate(id, code);
         }
     }
 ```
