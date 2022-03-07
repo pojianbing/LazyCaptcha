@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 //builder.Services.AddRedisCacheCaptcha(builder.Configuration);
 
 // 内存存储， 基于appsettings.json配置
-builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
+builder.Services.AddRedisCacheCaptcha(builder.Configuration, option =>
 {
     // 代码配置可以覆盖appsettings.json配置
 
@@ -16,6 +16,12 @@ builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
     //option.ImageOption.FontFamily = DefaultFontFamilys.Instance.Robot;
     //option.ImageOption.BubbleCount = 0;
 });
+
+//builder.Services.AddStackExchangeRedisCache(options =>
+//{
+//    options.Configuration = builder.Configuration.GetConnectionString("RedisCache");
+//    options.InstanceName = "captcha:";
+//});
 
 // 全部配置参数，基于代码配置
 //builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
