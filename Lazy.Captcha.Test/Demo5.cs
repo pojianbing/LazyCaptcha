@@ -84,6 +84,7 @@ namespace Lazy.Captcha.Test
                 for (int y = yQr * pixelSize; y < (yQr + 1) * pixelSize; y++)
                 {
                     // Get a Span<L8> of pixels for the current image row:
+                    //Span<L8> pixelRow = image.GetPixelRowSpan(y);
                     Span<L8> pixelRow = image.GetPixelRowSpan(y);
 
                     // Loop through the values for the current QR pattern row:
