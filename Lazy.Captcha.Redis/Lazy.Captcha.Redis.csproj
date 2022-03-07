@@ -6,8 +6,8 @@
 		<PackageProjectUrl>https://gitee.com/pojianbing/lazy-captcha</PackageProjectUrl>
 		<RepositoryUrl>https://gitee.com/pojianbing/lazy-captcha</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<AssemblyVersion>1.0.7</AssemblyVersion>
-		<Version>1.0.7</Version>
+		<AssemblyVersion>1.0.8</AssemblyVersion>
+		<Version>1.0.8</Version>
 	</PropertyGroup>
 
   <ItemGroup>
