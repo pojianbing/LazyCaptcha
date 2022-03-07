@@ -40,7 +40,7 @@ namespace Lazy.Captcha.Core
 
                     foreach (var name in names)
                     {
-                        _fontFamilies.Add(fontCollection.Install(assembly.GetManifestResourceStream(name)));
+                        _fontFamilies.Add(fontCollection.Add(assembly.GetManifestResourceStream(name)));
                     }
                 }
                 else

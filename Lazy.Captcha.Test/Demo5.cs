@@ -85,7 +85,8 @@ namespace Lazy.Captcha.Test
                 {
                     // Get a Span<L8> of pixels for the current image row:
                     //Span<L8> pixelRow = image.GetPixelRowSpan(y);
-                    Span<L8> pixelRow = image.GetPixelRowSpan(y);
+                    image.DangerousTryGetSinglePixelMemory(out Memory<L8> memoryL8);
+                    Span<L8> pixelRow = memoryL8.Span;
 
                     // Loop through the values for the current QR pattern row:
                     for (int xQr = 0; xQr < QrCodeSize; xQr++)

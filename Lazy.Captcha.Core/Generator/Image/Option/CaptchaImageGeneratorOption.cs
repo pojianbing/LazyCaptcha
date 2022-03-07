@@ -21,7 +21,7 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
         /// <summary>
         /// FontFamily
         /// </summary>
-        public FontFamily FontFamily { get; set;}
+        public FontFamily FontFamily { get; set;}= DefaultFontFamilys.Instance.Kaiti;
         /// <summary>
         /// FontStyle
         /// </summary>
