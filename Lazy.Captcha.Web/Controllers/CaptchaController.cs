@@ -24,16 +24,9 @@ namespace Lazy.Captcha.Web.Controllers
 
         [HttpGet("validate")]
         public bool Validate(string id, string code)
-        {
-            if (!_captcha.Validate(id, code))
-            {
-                throw new Exception("无效验证码");
-            }
-
-            // 具体业务
-
+        { 
             // 为了演示，这里仅做返回处理
-            return true;
+            return _captcha.Validate(id, code);
         }
     }
 }
