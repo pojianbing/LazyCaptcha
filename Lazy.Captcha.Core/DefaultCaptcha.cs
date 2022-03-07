@@ -1,4 +1,4 @@
-﻿using Lazy.Captcha.Core.Generator.Code;
+using Lazy.Captcha.Core.Generator.Code;
 using Lazy.Captcha.Core.Generator.Image;
 using Lazy.Captcha.Core.Storage;
 using Microsoft.Extensions.Options;
@@ -39,10 +39,7 @@ namespace Lazy.Captcha.Core
             var val = _storage.Get(captchaId);
             var comparisonType = _options.CurrentValue.IgnoreCase ? StringComparison.CurrentCultureIgnoreCase : StringComparison.CurrentCulture;
             var result = string.Equals(val, code, comparisonType);
-            if (result)
-            {
-                _storage.Remove(captchaId);
-            }
+            _storage.Remove(captchaId);
 
             return result;
         }
