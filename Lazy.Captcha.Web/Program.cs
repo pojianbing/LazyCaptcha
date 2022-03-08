@@ -3,20 +3,20 @@ using Lazy.Captcha.Core.Generator;
 
 var builder = WebApplication.CreateBuilder(args);
 
- 
+
 //builder.Services.AddRedisCacheCaptcha(builder.Configuration);
+
 
 // 内存存储， 基于appsettings.json配置
 builder.Services.AddCaptcha(builder.Configuration);
 
-// 如果使用redis缓存，替换为
+
+// 如果使用redis缓存，则添加这个
 //builder.Services.AddStackExchangeRedisCache(options =>
 //{
 //    options.Configuration = builder.Configuration.GetConnectionString("RedisCache");
 //    options.InstanceName = "captcha:";
 //});
-
-
 
 
 // -----------------------------------------------------------------------------
