@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // 内存存储， 基于appsettings.json配置
 builder.Services.AddCaptcha(builder.Configuration);
 
-// 如果使用redis缓存 
+// 如果使用redis缓存，替换为
 //builder.Services.AddStackExchangeRedisCache(options =>
 //{
 //    options.Configuration = builder.Configuration.GetConnectionString("RedisCache");

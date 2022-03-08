@@ -26,11 +26,9 @@ namespace Microsoft.Extensions.DependencyInjection
                     options.ImageOption.FontFamily = DefaultFontFamilys.Instance.GetFontFamily(fontFamily);
                 }
             });
-            if (optionsAction != null) services.PostConfigure<CaptchaOptions>(optionsAction);
+            if (optionsAction != null) services.PostConfigure(optionsAction);
 
-            services.TryAdd(ServiceDescriptor.Scoped<ICaptcha, DefaultCaptcha>());
-
-            services.TryAdd(ServiceDescriptor.Scoped<ICaptcha, DefaultCaptcha>());
+            services.TryAdd(ServiceDescriptor.Scoped<ICaptcha, DefaultCaptcha>()); 
             services.AddScoped<IStorage, DefaultStorage>();
             services.AddDistributedMemoryCache();
 
