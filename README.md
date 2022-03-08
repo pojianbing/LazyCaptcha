@@ -67,10 +67,10 @@ dotnet add package Lazy.Captcha.Core
 #### 1. 注册服务（选择其一即可）
 
 ```csharp
-// 默认使用DistributedMemoryCache存储
+// 默认使用内存存储（AddDistributedMemoryCache）
 builder.Services.AddCaptcha(builder.Configuration);
 
-// 如果使用redis存储，  
+// 如果使用redis存储
 //builder.Services.AddStackExchangeRedisCache(options =>  
 //{
 //    options.Configuration = builder.Configuration.GetConnectionString("RedisCache");
@@ -79,11 +79,8 @@ builder.Services.AddCaptcha(builder.Configuration);
 
 ```
 
-#### 2. 配置   
-   
-
+#### 2. 配置     
 - #####  appsettings.json （不提供配置时，使用默认配置）
-
 ``` json
 {
     "ConnectionStrings": {
@@ -113,10 +110,9 @@ builder.Services.AddCaptcha(builder.Configuration);
 }
 ```
 - #####  代码配置
-
 ```csharp
 // 全部配置
-builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
+builder.Services.AddCaptcha(builder.Configuration, option =>
 {
     option.CaptchaType = CaptchaType.WORD; // 验证码类型
     option.CodeLength = 4; // 验证码长度, 要放在CaptchaType设置后  当类型为算术表达式时，长度代表操作的个数
@@ -141,9 +137,8 @@ builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
     option.ImageOption.FontFamily = DefaultFontFamilys.Instance.Scandal; // 字体，中文使用kaiti，其他字符可根据喜好设置（可能部分转字符会出现绘制不出的情况）。
 });
 ```
-
-> appsettings.json配置和代码配置同时设置时，代码配置会覆盖appsettings.json配置。
-
+>  **appsettings.json配置和代码配置同时设置时，代码配置会覆盖appsettings.json配置。** 
+  
 #### 3. Controller
 
 ```csharp
