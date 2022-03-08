@@ -22,12 +22,14 @@
 |  ARITHMETIC_ZH|Actionj| ![输入图片说明](Images/ARITHMETIC_ZH_N.gif)  | ![输入图片说明](Images/ARITHMETIC_ZH_G.gif) |
 
 
-|  字体 | 图片  |  字体 | 图片  |  字体 | 图片  |
-|---|---|---|---|---|---|
-|  Actionj |  ![输入图片说明](Images/Font_Actionj.gif) |  Epilog|  ![输入图片说明](Images/Font_Epilog.gif) |  Fresnel|  ![输入图片说明](Images/Font_Fresnel.gif) |
-|  Headache|  ![输入图片说明](Images/Font_Headache.gif) |  Kaiti|  ![输入图片说明](Images/Font_Kaiti.gif) |  Lexo|  ![输入图片说明](Images/Font_Lexo.gif) |
-|  Prefix|  ![输入图片说明](Images/Font_Prefix.gif) |  Progbot|  ![输入图片说明](Images/Font_Progbot.gif) |  Ransom|  ![输入图片说明](Images/Font_Ransom.gif) |  
-|Robot|  ![输入图片说明](Images/Font_Robot.gif) |  Scandal|  ![输入图片说明](Images/Font_Scandal.gif) |
+|  字体 | 图片  |  字体 | 图片  |
+|---|---|---|---|
+|  Actionj |  ![输入图片说明](Images/Font_Actionj.gif) |  Epilog|  ![输入图片说明](Images/Font_Epilog.gif) |
+|  Fresnel|  ![输入图片说明](Images/Font_Fresnel.gif) |  Headache|  ![输入图片说明](Images/Font_Headache.gif) | 
+| Kaiti|  ![输入图片说明](Images/Font_Kaiti.gif) |  Lexo|  ![输入图片说明](Images/Font_Lexo.gif) |
+|  Prefix|  ![输入图片说明](Images/Font_Prefix.gif) |  Progbot|  ![输入图片说明](Images/Font_Progbot.gif) |  
+|Ransom|  ![输入图片说明](Images/Font_Ransom.gif) |Robot|  ![输入图片说明](Images/Font_Robot.gif) | 
+| Scandal|  ![输入图片说明](Images/Font_Scandal.gif) |
 
 
 
