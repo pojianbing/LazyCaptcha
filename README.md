@@ -1,8 +1,9 @@
 # LazyCaptcha
 
-## 介绍
-仿[EasyCaptcha](https://gitee.com/ele-admin/EasyCaptcha)和[SimpleCaptcha](https://github.com/1992w/SimpleCaptcha),基于.Net Standard 2.1的图形验证码模块。
+---
 
+## 介绍  
+仿[EasyCaptcha](https://gitee.com/ele-admin/EasyCaptcha)和[SimpleCaptcha](https://github.com/1992w/SimpleCaptcha),基于.Net Standard 2.1的图形验证码模块。  
 [ **码云地址** ](https://gitee.com/pojianbing/lazy-captcha)
 [ **Github地址** ](https://github.com/pojianbing/LazyCaptcha)
 
@@ -23,19 +24,12 @@
 |  ARITHMETIC_ZH|Actionj| ![输入图片说明](Images/ARITHMETIC_ZH_N.gif)  | ![输入图片说明](Images/ARITHMETIC_ZH_G.gif) |
 
 
-|  字体 | 图片  |
-|---|---|
-|  Actionj |  ![输入图片说明](Images/Font_Actionj.gif) |
-|  Epilog|  ![输入图片说明](Images/Font_Epilog.gif) |
-|  Fresnel|  ![输入图片说明](Images/Font_Fresnel.gif) |
-|  Headache|  ![输入图片说明](Images/Font_Headache.gif) |
-|  Kaiti|  ![输入图片说明](Images/Font_Kaiti.gif) |
-|  Lexo|  ![输入图片说明](Images/Font_Lexo.gif) |
-|  Prefix|  ![输入图片说明](Images/Font_Prefix.gif) |
-|  Progbot|  ![输入图片说明](Images/Font_Progbot.gif) |
-|  Ransom|  ![输入图片说明](Images/Font_Ransom.gif) |
-|  Robot|  ![输入图片说明](Images/Font_Robot.gif) |
-|  Scandal|  ![输入图片说明](Images/Font_Scandal.gif) |
+|  字体 | 图片  |  字体 | 图片  |  字体 | 图片  |
+|---|---|---|---|---|---|
+|  Actionj |  ![输入图片说明](Images/Font_Actionj.gif) |  Epilog|  ![输入图片说明](Images/Font_Epilog.gif) |  Fresnel|  ![输入图片说明](Images/Font_Fresnel.gif) |
+|  Headache|  ![输入图片说明](Images/Font_Headache.gif) |  Kaiti|  ![输入图片说明](Images/Font_Kaiti.gif) |  Lexo|  ![输入图片说明](Images/Font_Lexo.gif) |
+|  Prefix|  ![输入图片说明](Images/Font_Prefix.gif) |  Progbot|  ![输入图片说明](Images/Font_Progbot.gif) |  Ransom|  ![输入图片说明](Images/Font_Ransom.gif) |  
+|Robot|  ![输入图片说明](Images/Font_Robot.gif) |  Scandal|  ![输入图片说明](Images/Font_Scandal.gif) |
 
 
 
@@ -52,37 +46,43 @@ http://wosperry.com.cn:8006/captcha/validate?id=999&code=uyfx
 
 
 
-## 安装教程
+## 安装
 
-``` shell
-# 这里需要调整，发布后调整为对应的具体实现
-Install-Package Lazy.Captcha.Core -Version 1.0.8  
-dotnet add package Lazy.Captcha.Core --version 1.0.8
+- [Package Manager](https://www.nuget.org/packages/Lazy.Captcha.Core)
 
-# 如果使用redis存储需要安装
-Install-Package Lazy.Captcha.Redis -Version 1.0.8
-dotnet add package Lazy.Captcha.Redis --version 1.0.8
+```powershell
+Install-Package Lazy.Captcha.Core
+```
+
+- [.NET CLI](https://www.nuget.org/packages/Lazy.Captcha.Core)
+
+```powershell
+dotnet add package Lazy.Captcha.Core
 ```
 
 
 
 ## 使用说明
 
-1. 注册服务（选择其一即可）
+#### 1. 注册服务（选择其一即可）
+
+```csharp
+// 默认使用DistributedMemoryCache存储
+builder.Services.AddCaptcha(builder.Configuration);
+
+// 如果使用redis存储，  
+//builder.Services.AddStackExchangeRedisCache(options =>  
+//{
+//    options.Configuration = builder.Configuration.GetConnectionString("RedisCache");
+//    options.InstanceName = "captcha:";
+//});
 
 ```
-// 内存缓存
-builder.Services.AddMemoryCacheCaptcha(builder.Configuration); 
 
-// Redis缓存
-builder.Services.AddRedisCacheCaptcha(builder.Configuration);
-
-```
-
-2. 配置   
+#### 2. 配置   
    
 
-appsettings.json （不提供配置时，使用默认配置）
+- #####  appsettings.json （不提供配置时，使用默认配置）
 
 ``` json
 {
@@ -112,8 +112,7 @@ appsettings.json （不提供配置时，使用默认配置）
     }
 }
 ```
-
-代码配置
+- #####  代码配置
 
 ```csharp
 // 全部配置
@@ -145,7 +144,7 @@ builder.Services.AddMemoryCacheCaptcha(builder.Configuration, option =>
 
 > appsettings.json配置和代码配置同时设置时，代码配置会覆盖appsettings.json配置。
 
-3. Controller
+#### 3. Controller
 
 ```csharp
 
