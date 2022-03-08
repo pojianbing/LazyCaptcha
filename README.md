@@ -18,8 +18,8 @@
 |  NUMBER|Fresnel| ![输入图片说明](Images/NUMBER_N.gif)  | ![输入图片说明](Images/NUMBER_G.gif) |
 |  NUMBER_ZH_CN|kaiti| ![输入图片说明](Images/NUMBER_ZH_CN.gif)  | ![输入图片说明](Images/NUMBER_ZH_CN_G.gif) |
 |  NUMBER_ZH_HK|kaiti| ![输入图片说明](Images/NUMBER_ZH_HK_N.gif)  | ![输入图片说明](Images/NUMBER_ZH_HK_G.gif) |
-|  ARITHMETIC|Actionj| ![输入图片说明](Images/ARITHMETIC_N.gif)  | ![输入图片说明](Images/ARITHMETIC_G.gif) |
-|  ARITHMETIC_ZH|Actionj| ![输入图片说明](Images/ARITHMETIC_ZH_N.gif)  | ![输入图片说明](Images/ARITHMETIC_ZH_G.gif) |
+|  ARITHMETIC|Epilog| ![输入图片说明](Images/ARITHMETIC_N.gif)  | ![输入图片说明](Images/ARITHMETIC_G.gif) |
+|  ARITHMETIC_ZH|Epilog| ![输入图片说明](Images/ARITHMETIC_ZH_N.gif)  | ![输入图片说明](Images/ARITHMETIC_ZH_G.gif) |
 
 
 |  字体 | 图片  |  字体 | 图片  |
