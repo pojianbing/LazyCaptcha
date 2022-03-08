@@ -1,13 +1,11 @@
-# LazyCaptcha
+## LazyCaptcha
 
----
-
-## 介绍  
+### 介绍  
 仿[EasyCaptcha](https://gitee.com/ele-admin/EasyCaptcha)和[SimpleCaptcha](https://github.com/1992w/SimpleCaptcha),基于.Net Standard 2.1的图形验证码模块。  
 [ **码云地址** ](https://gitee.com/pojianbing/lazy-captcha)
 [ **Github地址** ](https://github.com/pojianbing/LazyCaptcha)
 
-## 效果展示
+### 效果展示
 
 |  CaptchaType |  字体 |静态图 |  动图|
 |---|---|---|---|
@@ -33,7 +31,7 @@
 
 
 
-## 在线演示（仅学习和试用，随时可能关掉服务）
+### 在线演示（仅学习和试用，随时可能关掉服务）
 
 ``` shell
 # 此次返回的是 uyfx
@@ -46,7 +44,7 @@ http://wosperry.com.cn:8006/captcha/validate?id=999&code=uyfx
 
 
 
-## 安装
+### 安装
 
 - [Package Manager](https://www.nuget.org/packages/Lazy.Captcha.Core)
 
@@ -62,7 +60,7 @@ dotnet add package Lazy.Captcha.Core
 
 
 
-## 使用说明
+### 使用说明
 
 #### 1. 注册服务（选择其一即可）
 
