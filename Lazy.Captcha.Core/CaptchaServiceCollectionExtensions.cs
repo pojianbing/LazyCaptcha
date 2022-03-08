@@ -26,18 +26,19 @@ namespace Microsoft.Extensions.DependencyInjection
                     options.ImageOption.FontFamily = DefaultFontFamilys.Instance.GetFontFamily(fontFamily);
                 }
             });
-            if (optionsAction != null) services.PostConfigure<CaptchaOptions>(optionsAction);
+            if (optionsAction != null) services.PostConfigure(optionsAction);
 
-            services.TryAdd(ServiceDescriptor.Scoped<ICaptcha, DefaultCaptcha>());
+            services.TryAdd(ServiceDescriptor.Scoped<ICaptcha, DefaultCaptcha>()); 
+            services.AddScoped<IStorage, DefaultStorage>();
+            services.AddDistributedMemoryCache();
+
             return services;
         }
 
+        [Obsolete("请直接使用 AddCaptcha 方法，已更改为默认注册内存缓存", false)]
         public static IServiceCollection AddMemoryCacheCaptcha(this IServiceCollection services, IConfiguration configuration, Action<CaptchaOptions> optionsAction = default!)
         {
-            return services
-                .AddDistributedMemoryCache()
-                .AddScoped<IStorage, DefaultStorage>()
-                .AddCaptcha(configuration, optionsAction);
+            return services.AddCaptcha(configuration, optionsAction);
         }
     }
 }
