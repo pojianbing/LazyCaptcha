@@ -64,7 +64,7 @@ dotnet add package Lazy.Captcha.Core
 
 ### 使用说明
 
-#### 1. 注册服务（选择其一即可）
+#### 1. 注册服务
 
 ```csharp
 // 默认使用内存存储（AddDistributedMemoryCache）
