@@ -1,37 +1,36 @@
-## LazyCaptcha
+# LazyCaptcha
 
-### 介绍  
+## 介绍
+
 仿[EasyCaptcha](https://gitee.com/ele-admin/EasyCaptcha)和[SimpleCaptcha](https://github.com/1992w/SimpleCaptcha),基于.Net Standard 2.1的图形验证码模块。  
-[ **码云地址** ](https://gitee.com/pojianbing/lazy-captcha)
-[ **Github地址** ](https://github.com/pojianbing/LazyCaptcha)
+[码云地址](https://gitee.com/pojianbing/lazy-captcha)
+[Github地址](https://github.com/pojianbing/LazyCaptcha)
 
 ### 效果展示
 
-|  CaptchaType |  字体 |静态图 |  动图|
-|---|---|---|---|
-|  DEFAULT |Actionj| ![输入图片说明](Images/DEFAULT_N.gif)  | ![输入图片说明](Images/DEFAULT_G.gif) |
-|  WORD |Epilog| ![输入图片说明](Images/WORD_N.gif)  | ![输入图片说明](Images/WORD_G.gif) |
-|  WORD_LOWER|Epilog| ![输入图片说明](Images/WORD_LOWER_N.gif)  | ![输入图片说明](Images/WORD_LOWER_G.gif) |
-|  WORD_UPPER|Epilog| ![输入图片说明](Images/WORD_UPPER_G.gif)  | ![输入图片说明](Images/WORD_UPPER_N.gif) |
-|  WORD_NUMBER_LOWER|Epilog| ![输入图片说明](Images/WORD_NUMBER_LOWER_N.gif)  | ![输入图片说明](Images/WORD_NUMBER_LOWER_G.gif) |
-|  WORD_NUMBER_UPPER|Epilog| ![输入图片说明](Images/WORD_NUMBER_UPPER_N.gif)  | ![输入图片说明](Images/WORD_NUMBER_UPPER_G.gif) |
-|  NUMBER|Fresnel| ![输入图片说明](Images/NUMBER_N.gif)  | ![输入图片说明](Images/NUMBER_G.gif) |
-|  NUMBER_ZH_CN|kaiti| ![输入图片说明](Images/NUMBER_ZH_CN.gif)  | ![输入图片说明](Images/NUMBER_ZH_CN_G.gif) |
-|  NUMBER_ZH_HK|kaiti| ![输入图片说明](Images/NUMBER_ZH_HK_N.gif)  | ![输入图片说明](Images/NUMBER_ZH_HK_G.gif) |
-|  ARITHMETIC|Epilog| ![输入图片说明](Images/ARITHMETIC_N.gif)  | ![输入图片说明](Images/ARITHMETIC_G.gif) |
-|  ARITHMETIC_ZH|kaiti| ![输入图片说明](Images/ARITHMETIC_ZH_N.gif)  | ![输入图片说明](Images/ARITHMETIC_ZH_G.gif) |
+| CaptchaType           | 字体    | 静态图                                          | 动图                                            |
+| --------------------- | ------- | ----------------------------------------------- | ----------------------------------------------- |
+| DEFAULT (0)           | Actionj | ![输入图片说明](Images/DEFAULT_N.gif)           | ![输入图片说明](Images/DEFAULT_G.gif)           |
+| CHINESE (1)           | kaiti   | ![输入图片说明](Images/CHINESE_N.gif)           | ![输入图片说明](Images/CHINESE_G.gif)           |
+| NUMBER (2)            | Fresnel | ![输入图片说明](Images/NUMBER_N.gif)            | ![输入图片说明](Images/NUMBER_G.gif)            |
+| NUMBER_ZH_CN (3)      | kaiti   | ![输入图片说明](Images/NUMBER_ZH_CN.gif)        | ![输入图片说明](Images/NUMBER_ZH_CN_G.gif)      |
+| NUMBER_ZH_HK (4)      | kaiti   | ![输入图片说明](Images/NUMBER_ZH_HK_N.gif)      | ![输入图片说明](Images/NUMBER_ZH_HK_G.gif)      |
+| WORD (5)              | Epilog  | ![输入图片说明](Images/WORD_N.gif)              | ![输入图片说明](Images/WORD_G.gif)              |
+| WORD_LOWER (6)        | Epilog  | ![输入图片说明](Images/WORD_LOWER_N.gif)        | ![输入图片说明](Images/WORD_LOWER_G.gif)        |
+| WORD_UPPER (7)        | Epilog  | ![输入图片说明](Images/WORD_UPPER_G.gif)        | ![输入图片说明](Images/WORD_UPPER_N.gif)        |
+| WORD_NUMBER_LOWER (8) | Epilog  | ![输入图片说明](Images/WORD_NUMBER_LOWER_N.gif) | ![输入图片说明](Images/WORD_NUMBER_LOWER_G.gif) |
+| WORD_NUMBER_UPPER (9) | Epilog  | ![输入图片说明](Images/WORD_NUMBER_UPPER_N.gif) | ![输入图片说明](Images/WORD_NUMBER_UPPER_G.gif) |
+| ARITHMETIC (10)       | Epilog  | ![输入图片说明](Images/ARITHMETIC_N.gif)        | ![输入图片说明](Images/ARITHMETIC_G.gif)        |
+| ARITHMETIC_ZH (11)    | kaiti   | ![输入图片说明](Images/ARITHMETIC_ZH_N.gif)     | ![输入图片说明](Images/ARITHMETIC_ZH_G.gif)     |
 
-
-|  字体 | 图片  |  字体 | 图片  |
-|---|---|---|---|
-|  Actionj |  ![输入图片说明](Images/Font_Actionj.gif) |  Epilog|  ![输入图片说明](Images/Font_Epilog.gif) |
-|  Fresnel|  ![输入图片说明](Images/Font_Fresnel.gif) |  Headache|  ![输入图片说明](Images/Font_Headache.gif) | 
-| Kaiti|  ![输入图片说明](Images/Font_Kaiti.gif) |  Lexo|  ![输入图片说明](Images/Font_Lexo.gif) |
-|  Prefix|  ![输入图片说明](Images/Font_Prefix.gif) |  Progbot|  ![输入图片说明](Images/Font_Progbot.gif) |  
-|Ransom|  ![输入图片说明](Images/Font_Ransom.gif) |Robot|  ![输入图片说明](Images/Font_Robot.gif) | 
-| Scandal|  ![输入图片说明](Images/Font_Scandal.gif) |
-
-
+| 字体    | 图片                                     | 字体     | 图片                                      |
+| ------- | ---------------------------------------- | -------- | ----------------------------------------- |
+| Actionj | ![输入图片说明](Images/Font_Actionj.gif) | Epilog   | ![输入图片说明](Images/Font_Epilog.gif)   |
+| Fresnel | ![输入图片说明](Images/Font_Fresnel.gif) | Headache | ![输入图片说明](Images/Font_Headache.gif) |
+| Kaiti   | ![输入图片说明](Images/Font_Kaiti.gif)   | Lexo     | ![输入图片说明](Images/Font_Lexo.gif)     |
+| Prefix  | ![输入图片说明](Images/Font_Prefix.gif)  | Progbot  | ![输入图片说明](Images/Font_Progbot.gif)  |
+| Ransom  | ![输入图片说明](Images/Font_Ransom.gif)  | Robot    | ![输入图片说明](Images/Font_Robot.gif)    |
+| Scandal | ![输入图片说明](Images/Font_Scandal.gif) |
 
 ### 在线演示（仅学习和试用，随时可能关掉服务）
 
@@ -43,8 +42,6 @@ http://wosperry.com.cn:8006/captcha?id=999
 http://wosperry.com.cn:8006/captcha/validate?id=999&code=uyfx
 
 ```
-
-
 
 ### 安装
 
@@ -60,17 +57,15 @@ Install-Package Lazy.Captcha.Core
 dotnet add package Lazy.Captcha.Core
 ```
 
-
-
 ### 使用说明
 
 #### 1. 注册服务
 
-```csharp
+``` csharp
 // 默认使用内存存储（AddDistributedMemoryCache）
 builder.Services.AddCaptcha(builder.Configuration);
 
-// 如果使用redis存储
+// 如果使用redis分布式缓存
 //builder.Services.AddStackExchangeRedisCache(options =>  
 //{
 //    options.Configuration = builder.Configuration.GetConnectionString("RedisCache");
@@ -79,8 +74,10 @@ builder.Services.AddCaptcha(builder.Configuration);
 
 ```
 
-#### 2. 配置     
-- #####  appsettings.json （不提供配置时，使用默认配置）
+## 2. 配置
+
+#### appsettings.json （不提供配置时，使用默认配置）
+
 ``` json
 {
     "ConnectionStrings": {
@@ -109,8 +106,10 @@ builder.Services.AddCaptcha(builder.Configuration);
     }
 }
 ```
-- #####  代码配置
-```csharp
+
+#### 代码配置
+
+``` csharp
 // 全部配置
 builder.Services.AddCaptcha(builder.Configuration, option =>
 {
@@ -137,11 +136,10 @@ builder.Services.AddCaptcha(builder.Configuration, option =>
     option.ImageOption.FontFamily = DefaultFontFamilys.Instance.Scandal; // 字体，中文使用kaiti，其他字符可根据喜好设置（可能部分转字符会出现绘制不出的情况）。
 });
 ```
->  **appsettings.json配置和代码配置同时设置时，代码配置会覆盖appsettings.json配置。** 
-  
+
 #### 3. Controller
 
-```csharp
+``` csharp
 
     [ApiController]
     [Route("api/captcha")]
@@ -175,6 +173,3 @@ builder.Services.AddCaptcha(builder.Configuration, option =>
         }
     }
 ```
-
-
-
