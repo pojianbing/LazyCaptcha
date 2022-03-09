@@ -74,9 +74,9 @@ builder.Services.AddCaptcha(builder.Configuration);
 
 ```
 
-## 2. 配置
+#### 2. 配置
 
-#### appsettings.json （不提供配置时，使用默认配置）
+##### appsettings.json （不提供配置时，使用默认配置）
 
 ``` json
 {
@@ -107,7 +107,7 @@ builder.Services.AddCaptcha(builder.Configuration);
 }
 ```
 
-#### 代码配置
+##### 代码配置
 
 ``` csharp
 // 全部配置
