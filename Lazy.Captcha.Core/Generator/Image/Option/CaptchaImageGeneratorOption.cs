@@ -59,6 +59,10 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
         /// 干扰线数量
         /// </summary>
         public int InterferenceLineCount { get; set; } = 1;
+        /// <summary>
+        /// 每帧延迟,Animation=true时有效
+        /// </summary>
+        public int FrameDelay { get; set; } = 30;
 
         /// <summary>
         /// 字体

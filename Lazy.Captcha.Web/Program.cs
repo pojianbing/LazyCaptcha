@@ -25,7 +25,9 @@ builder.Services.AddCaptcha(builder.Configuration);
 //    option.ExpirySeconds = 30; // 验证码过期时间
 //    option.IgnoreCase = true; // 比较时是否忽略大小写
 //    option.StoreageKeyPrefix = ""; // 存储键前缀
+
 //    option.ImageOption.Animation = true; // 是否启用动画
+//    option.ImageOption.FrameDelay = 30; // 每帧延迟,Animation=true时有效, 默认30
 
 //    option.ImageOption.Width = 150; // 验证码宽度
 //    option.ImageOption.Height = 50; // 验证码高度

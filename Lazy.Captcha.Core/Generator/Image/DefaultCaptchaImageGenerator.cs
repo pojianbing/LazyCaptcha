@@ -360,7 +360,7 @@ namespace Lazy.Captcha.Core.Generator.Image
                         });
 
                         var metadata = frame.Frames.RootFrame.Metadata.GetGifMetadata();
-                        metadata.FrameDelay = 30;
+                        metadata.FrameDelay = option.FrameDelay;
                         gif.Frames.AddFrame(frame.Frames.RootFrame);
                     }
                 }

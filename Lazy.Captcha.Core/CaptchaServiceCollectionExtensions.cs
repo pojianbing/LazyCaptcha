@@ -25,6 +25,15 @@ namespace Microsoft.Extensions.DependencyInjection
                 {
                     options.ImageOption.FontFamily = DefaultFontFamilys.Instance.GetFontFamily(fontFamily);
                 }
+
+                var backgroundColor = configuration?.GetSection("CaptchaOptions:ImageOption:BackgroundColor")?.Value;
+                if (!string.IsNullOrWhiteSpace(backgroundColor))
+                {
+                    if (SixLabors.ImageSharp.Color.TryParse(backgroundColor, out var color))
+                    {
+                        options.ImageOption.BackgroundColor = color;
+                    }
+                }
             });
             if (optionsAction != null) services.PostConfigure(optionsAction);
 
