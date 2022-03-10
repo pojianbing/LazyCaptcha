@@ -101,7 +101,9 @@ builder.Services.AddCaptcha(builder.Configuration);
             "BubbleCount": 3, // 气泡数量
             "BubbleThickness": 1.0, // 气泡边沿厚度
             "InterferenceLineCount": 4, // 干扰线数量
-            "FontFamily": "kaiti" // 包含中文时请使用kaiti。可设置字体：actionj,epilog,fresnel,headache,lexo,prefix,progbot,ransom,robot,scandal,kaiti
+            "FontFamily": "kaiti", // 包含actionj,epilog,fresnel,headache,lexo,prefix,progbot,ransom,robot,scandal,kaiti
+            "FrameDelay": 15, // 每帧延迟,Animation=true时有效, 默认30
+            "BackgroundColor": "#ffff00" //  格式: rgb, rgba, rrggbb, or rrggbbaa format to match web syntax, 默认#fff
         }
     }
 }
@@ -114,12 +116,13 @@ builder.Services.AddCaptcha(builder.Configuration);
 builder.Services.AddCaptcha(builder.Configuration, option =>
 {
     option.CaptchaType = CaptchaType.WORD; // 验证码类型
-    option.CodeLength = 4; // 验证码长度, 要放在CaptchaType设置后  当类型为算术表达式时，长度代表操作的个数
+    option.CodeLength = 6; // 验证码长度, 要放在CaptchaType设置后.  当类型为算术表达式时，长度代表操作的个数
     option.ExpirySeconds = 30; // 验证码过期时间
     option.IgnoreCase = true; // 比较时是否忽略大小写
-    option.StoreageKeyPrefix= ""; // 存储键前缀
+    option.StoreageKeyPrefix = ""; // 存储键前缀
 
     option.ImageOption.Animation = true; // 是否启用动画
+    option.ImageOption.FrameDelay = 30; // 每帧延迟,Animation=true时有效, 默认30
 
     option.ImageOption.Width = 150; // 验证码宽度
     option.ImageOption.Height = 50; // 验证码高度
@@ -133,7 +136,7 @@ builder.Services.AddCaptcha(builder.Configuration, option =>
     option.ImageOption.InterferenceLineCount = 2; // 干扰线数量
 
     option.ImageOption.FontSize = 36; // 字体大小
-    option.ImageOption.FontFamily = DefaultFontFamilys.Instance.Scandal; // 字体，中文使用kaiti，其他字符可根据喜好设置（可能部分转字符会出现绘制不出的情况）。
+    option.ImageOption.FontFamily = DefaultFontFamilys.Instance.Actionj; // 字体，中文使用kaiti，其他字符可根据喜好设置（可能部分转字符会出现绘制不出的情况）。
 });
 ```
 
