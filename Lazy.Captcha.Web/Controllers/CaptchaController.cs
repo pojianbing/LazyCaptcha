@@ -23,10 +23,18 @@ namespace Lazy.Captcha.Web.Controllers
         }
 
         [HttpGet("validate")]
-        public bool Validate(string id, string code)
-        { 
+        public Task<bool> Validate(string id, string code)
+        {
             // 为了演示，这里仅做返回处理
-            return _captcha.Validate(id, code);
+            return _captcha.ValidateAsync(id, code);
+        }
+         
+        [HttpGet("validate_remove_later")]
+        public Task<bool> ValidateAndRemoveLater(string id, string code)
+        {
+            // 为了演示，这里仅做返回处理
+            // 与上面方法一样，但是这里校验时，讲过期时间设置为10秒后，多查了一次，性能不如直接删除
+            return _captcha.ValidateAsync(id, code, TimeSpan.FromSeconds(10));
         }
     }
 }
