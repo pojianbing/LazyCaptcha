@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Lazy.Captcha.Core.Storage;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Options;
@@ -26,9 +28,19 @@ namespace Lazy.Captcha.Core.Storeage
             return _cache.GetString(WrapKey(key));
         }
 
+        public Task<string> GetAsync(string key, CancellationToken token = default)
+        {
+            return _cache.GetStringAsync(WrapKey(key), token);
+        }
+
         public void Remove(string key)
         {
             _cache.Remove(WrapKey(key));
+        }
+
+        public Task RemoveAsync(string key, CancellationToken token = default(CancellationToken))
+        {
+            return _cache.RemoveAsync(key, token);
         }
 
         public void Set(string key, string value, DateTimeOffset absoluteExpiration)
@@ -37,6 +49,14 @@ namespace Lazy.Captcha.Core.Storeage
             {
                 AbsoluteExpiration = absoluteExpiration
             });
+        }
+
+        public Task SetAsync(string key, string value, DateTimeOffset absoluteExpiration, CancellationToken token = default(CancellationToken))
+        {
+            return _cache.SetStringAsync(WrapKey(key), value, new DistributedCacheEntryOptions
+            {
+                AbsoluteExpiration = absoluteExpiration
+            }, token);
         }
     }
 }

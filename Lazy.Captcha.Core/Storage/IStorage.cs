@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Lazy.Captcha.Core.Storage
 {
@@ -9,5 +11,8 @@ namespace Lazy.Captcha.Core.Storage
         string Get(string key);
 
         void Remove(string key);
+        Task<string> GetAsync(string key, CancellationToken token = default);
+        Task RemoveAsync(string key, CancellationToken token = default);
+        Task SetAsync(string key, string value, DateTimeOffset absoluteExpiration, CancellationToken token = default);
     }
 }
