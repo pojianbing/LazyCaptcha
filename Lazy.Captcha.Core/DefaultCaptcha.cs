@@ -36,7 +36,7 @@ namespace Lazy.Captcha.Core
         {
             var (renderText, code) = _captchaCodeGenerator.Generate(_options.CodeLength);
             var image = _captchaImageGenerator.Generate(renderText, _options.ImageOption);
-            _storage.Set(captchaId, code, DateTime.Now.AddSeconds(_options.ExpirySeconds).ToUniversalTime());
+            _storage.Set(captchaId, code, TimeSpan.FromSeconds(_options.ExpirySeconds));
 
             return new CaptchaData(captchaId, code, image);
         }
