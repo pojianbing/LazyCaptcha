@@ -2,9 +2,9 @@
 
 ## 介绍
 
-仿[EasyCaptcha](https://gitee.com/ele-admin/EasyCaptcha)和[SimpleCaptcha](https://github.com/1992w/SimpleCaptcha),基于.Net Standard 2.1的图形验证码模块。  
+仿[EasyCaptcha](https://gitee.com/ele-admin/EasyCaptcha)和[SimpleCaptcha](https://github.com/1992w/SimpleCaptcha),基于.Net Standard 2.1 的图形验证码模块。  
 [码云地址](https://gitee.com/pojianbing/lazy-captcha)
-[Github地址](https://github.com/pojianbing/LazyCaptcha)
+[Github 地址](https://github.com/pojianbing/LazyCaptcha)
 
 ### 效果展示
 
@@ -34,7 +34,7 @@
 
 ### 在线演示（仅学习和试用，随时可能关掉服务）
 
-``` shell
+```shell
 # 此次返回的是 uyfx
 http://wosperry.com.cn:8006/captcha?id=999
 
@@ -61,12 +61,12 @@ dotnet add package Lazy.Captcha.Core
 
 #### 1. 注册服务
 
-``` csharp
+```csharp
 // 默认使用内存存储（AddDistributedMemoryCache）
 builder.Services.AddCaptcha(builder.Configuration);
 
 // 如果使用redis分布式缓存
-//builder.Services.AddStackExchangeRedisCache(options =>  
+//builder.Services.AddStackExchangeRedisCache(options =>
 //{
 //    options.Configuration = builder.Configuration.GetConnectionString("RedisCache");
 //    options.InstanceName = "captcha:";
@@ -78,40 +78,40 @@ builder.Services.AddCaptcha(builder.Configuration);
 
 ##### appsettings.json （不提供配置时，使用默认配置）
 
-``` json
+```json
 {
-    "ConnectionStrings": {
-        // 使用Redis缓存时，需要配置此项
-        // 使用格式参考 Microsoft.Extensions.Caching.StackExchangeRedis
-        "RedisCache": "localhost,password=Aa123456." 
-    },
-    "CaptchaOptions": {
-        "CaptchaType": 5,  // 验证码类型
-        "CodeLength": 4, // 验证码长度, 要放在CaptchaType设置后  当类型为算术表达式时，长度代表操作的个数
-        "ExpirySeconds": 60, // 验证码过期秒数
-        "IgnoreCase": true, // 比较时是否忽略大小写
-        "StoreageKeyPrefix": "", // 存储键前缀
-        "ImageOption": {
-            "Animation": false, // 是否启用动画
-            "FontSize": 32, // 字体大小
-            "Width": 100, // 验证码宽度
-            "Height": 40, // 验证码高度
-            "BubbleMinRadius": 5, // 气泡最小半径
-            "BubbleMaxRadius": 10, // 气泡最大半径
-            "BubbleCount": 3, // 气泡数量
-            "BubbleThickness": 1.0, // 气泡边沿厚度
-            "InterferenceLineCount": 4, // 干扰线数量
-            "FontFamily": "kaiti", // 包含actionj,epilog,fresnel,headache,lexo,prefix,progbot,ransom,robot,scandal,kaiti
-            "FrameDelay": 15, // 每帧延迟,Animation=true时有效, 默认30
-            "BackgroundColor": "#ffff00" //  格式: rgb, rgba, rrggbb, or rrggbbaa format to match web syntax, 默认#fff
-        }
+  "ConnectionStrings": {
+    // 使用Redis缓存时，需要配置此项
+    // 使用格式参考 Microsoft.Extensions.Caching.StackExchangeRedis
+    "RedisCache": "localhost,password=Aa123456."
+  },
+  "CaptchaOptions": {
+    "CaptchaType": 5, // 验证码类型
+    "CodeLength": 4, // 验证码长度, 要放在CaptchaType设置后  当类型为算术表达式时，长度代表操作的个数
+    "ExpirySeconds": 60, // 验证码过期秒数
+    "IgnoreCase": true, // 比较时是否忽略大小写
+    "StoreageKeyPrefix": "", // 存储键前缀
+    "ImageOption": {
+      "Animation": false, // 是否启用动画
+      "FontSize": 32, // 字体大小
+      "Width": 100, // 验证码宽度
+      "Height": 40, // 验证码高度
+      "BubbleMinRadius": 5, // 气泡最小半径
+      "BubbleMaxRadius": 10, // 气泡最大半径
+      "BubbleCount": 3, // 气泡数量
+      "BubbleThickness": 1.0, // 气泡边沿厚度
+      "InterferenceLineCount": 4, // 干扰线数量
+      "FontFamily": "kaiti", // 包含actionj,epilog,fresnel,headache,lexo,prefix,progbot,ransom,robot,scandal,kaiti
+      "FrameDelay": 15, // 每帧延迟,Animation=true时有效, 默认30
+      "BackgroundColor": "#ffff00" //  格式: rgb, rgba, rrggbb, or rrggbbaa format to match web syntax, 默认#fff
     }
+  }
 }
 ```
 
 ##### 代码配置
 
-``` csharp
+```csharp
 // 全部配置
 builder.Services.AddCaptcha(builder.Configuration, option =>
 {
@@ -142,7 +142,7 @@ builder.Services.AddCaptcha(builder.Configuration, option =>
 
 #### 3. Controller
 
-``` csharp
+```csharp
 
     [ApiController]
     [Route("api/captcha")]
@@ -167,16 +167,29 @@ builder.Services.AddCaptcha(builder.Configuration, option =>
         }
 
         /// <summary>
-        /// 校验
+        /// 校验：演示时使用HttpGet传参方便，这里仅做返回处理
         /// </summary>
-        [HttpPost]
-        public IActionResult Validate(string id, string code)
+        [HttpGet("validate")]
+        public Task<bool> Validate(string id, string code)
         {
-            return Captcha.Validate(id, code);
+            return _captcha.ValidateAsync(id, code);
+        }
+
+        /// <summary>
+        /// 校验-延迟10秒移除缓存：演示时使用HttpGet传参方便，这里仅做返回处理
+        /// </summary>
+        [HttpGet("validate_remove_later")]
+        public Task<bool> ValidateAndRemoveLater(string id, string code)
+        {
+            // 为了演示，这里仅做返回处理 与上面方法一样，但是这里校验时，讲过期时间设置为10秒后，多查了一次，性能不如直接删除
+            return _captcha.ValidateAsync(id, code, TimeSpan.FromSeconds(10));
         }
     }
 ```
+
 ### 版本历史
+
 #### v1.1.0（当前版本）
--  新增FrameDelay参数，控制每帧延迟，Animation = true时有效。
--  BackgroundColor参数支持配置文件设置。
+
+- 新增 FrameDelay 参数，控制每帧延迟，Animation = true 时有效。
+- BackgroundColor 参数支持配置文件设置。

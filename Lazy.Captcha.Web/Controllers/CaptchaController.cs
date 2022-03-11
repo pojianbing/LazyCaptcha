@@ -22,18 +22,22 @@ namespace Lazy.Captcha.Web.Controllers
             return File(stream, "image/gif");
         }
 
+        /// <summary>
+        /// 演示时使用HttpGet传参方便，这里仅做返回处理
+        /// </summary>
         [HttpGet("validate")]
         public Task<bool> Validate(string id, string code)
         {
-            // 为了演示，这里仅做返回处理
             return _captcha.ValidateAsync(id, code);
         }
-         
+
+        /// <summary>
+        /// 演示时使用HttpGet传参方便，这里仅做返回处理
+        /// </summary>
         [HttpGet("validate_remove_later")]
         public Task<bool> ValidateAndRemoveLater(string id, string code)
         {
-            // 为了演示，这里仅做返回处理
-            // 与上面方法一样，但是这里校验时，讲过期时间设置为10秒后，多查了一次，性能不如直接删除
+            // 为了演示，这里仅做返回处理 与上面方法一样，但是这里校验时，讲过期时间设置为10秒后，多查了一次，性能不如直接删除
             return _captcha.ValidateAsync(id, code, TimeSpan.FromSeconds(10));
         }
     }
