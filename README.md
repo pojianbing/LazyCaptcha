@@ -144,52 +144,55 @@ builder.Services.AddCaptcha(builder.Configuration, option =>
 
 ```csharp
 
-    [ApiController]
-    [Route("api/captcha")]
-    public class CaptchaController : ControllerBase
+[Route("captcha")]
+[ApiController]
+public class CaptchaController : Controller
+{
+    private readonly ICaptcha _captcha;
+
+    public CaptchaController(ICaptcha captcha)
     {
-        public ICaptcha Captcha { get; }
-
-        public CaptchaController(ICaptcha captcha)
-        {
-            Captcha=captcha;
-        }
-
-        /// <summary>
-        /// 生成
-        /// </summary>
-        [HttpGet]
-        public IActionResult GenerateCaptcha(string id)
-        {
-            var info = Captcha.Generate(id);
-            var stream = new MemoryStream(info.Bytes);
-            return File(stream, "image/gif");
-        }
-
-        /// <summary>
-        /// 校验：演示时使用HttpGet传参方便，这里仅做返回处理
-        /// </summary>
-        [HttpGet("validate")]
-        public Task<bool> Validate(string id, string code)
-        {
-            return _captcha.ValidateAsync(id, code);
-        }
-
-        /// <summary>
-        /// 校验-延迟10秒移除缓存：演示时使用HttpGet传参方便，这里仅做返回处理
-        /// </summary>
-        [HttpGet("validate_remove_later")]
-        public Task<bool> ValidateAndRemoveLater(string id, string code)
-        {
-            // 为了演示，这里仅做返回处理 与上面方法一样，但是这里校验时，讲过期时间设置为10秒后，多查了一次，性能不如直接删除
-            return _captcha.ValidateAsync(id, code, TimeSpan.FromSeconds(10));
-        }
+        _captcha = captcha;
     }
+
+    [HttpGet]
+    public IActionResult Captcha(string id)
+    {
+        var info = _captcha.Generate(id);
+        // 有多处验证码且过期时间不一样，可传第二个参数覆盖默认配置。
+        //var info = _captcha.Generate(id,120);
+        var stream = new MemoryStream(info.Bytes);
+        return File(stream, "image/gif");
+    }
+
+    /// <summary>
+    /// 演示时使用HttpGet传参方便，这里仅做返回处理
+    /// </summary>
+    [HttpGet("validate")]
+    public bool Validate(string id, string code)
+    {
+        return _captcha.Validate(id, code);
+    }
+
+    /// <summary>
+    /// 多次校验（https://gitee.com/pojianbing/lazy-captcha/issues/I4XHGM）
+    /// 演示时使用HttpGet传参方便，这里仅做返回处理
+    /// </summary>
+    [HttpGet("validate2")]
+    public bool Validate2(string id, string code)
+    {
+        return _captcha.Validate(id, code, false);
+    }
+}
 ```
 
 ### 版本历史
 
-#### v1.1.0（当前版本）
+#### v1.1.1（当前版本）
+
+- 多次验证实现
+
+#### v1.1.0
 
 - 新增 FrameDelay 参数，控制每帧延迟，Animation = true 时有效。
 - BackgroundColor 参数支持配置文件设置。
