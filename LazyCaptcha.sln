@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lazy.Captcha.Test", "Lazy.Captcha.Test\Lazy.Captcha.Test.csproj", "{78B1B0D1-0ED3-465E-BAC9-A663AE5A3D4E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lazy.Captcha.Core", "Lazy.Captcha.Core\Lazy.Captcha.Core.csproj", "{B640C86B-87E3-4CBE-94A9-2CA3AC704A08}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lazy.Captcha.Web", "Lazy.Captcha.Web\Lazy.Captcha.Web.csproj", "{18C83A51-3ECB-44FE-8ED4-62F59967487B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lazy.Captcha.Redis", "Lazy.Captcha.Redis\Lazy.Captcha.Redis.csproj", "{EC32628E-195E-4277-8026-EFAFA571432A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lazy.Captcha.xUnit", "Lazy.Captcha.xUnit\Lazy.Captcha.xUnit.csproj", "{4E63EE78-CE03-4D89-BF86-7AF2247082F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lazy.Captcha.xUnit", "Lazy.Captcha.xUnit\Lazy.Captcha.xUnit.csproj", "{4E63EE78-CE03-4D89-BF86-7AF2247082F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{78B1B0D1-0ED3-465E-BAC9-A663AE5A3D4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78B1B0D1-0ED3-465E-BAC9-A663AE5A3D4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78B1B0D1-0ED3-465E-BAC9-A663AE5A3D4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78B1B0D1-0ED3-465E-BAC9-A663AE5A3D4E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B640C86B-87E3-4CBE-94A9-2CA3AC704A08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B640C86B-87E3-4CBE-94A9-2CA3AC704A08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B640C86B-87E3-4CBE-94A9-2CA3AC704A08}.Release|Any CPU.ActiveCfg = Release|Any CPU

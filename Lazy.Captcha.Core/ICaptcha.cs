@@ -2,19 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Lazy.Captcha.Core
-{
+{   
     public interface ICaptcha
     {
-        CaptchaData Generate(string captchaId);
+        /// <summary>
+        /// 生成验证码
+        /// </summary>
+        /// <param name="captchaId">验证码id</param>
+        /// <param name="expirySeconds">缓存时间，未设定则使用配置时间</param>
+        /// <returns></returns>
+        CaptchaData Generate(string captchaId, int? expirySeconds = null);
 
-        Task<CaptchaData> GenerateAsync(string captchaId, CancellationToken token = default);
-
-        bool Validate(string captchaId, string code, TimeSpan? delay = null);
-
-        Task<bool> ValidateAsync(string captchaId, string code, TimeSpan? delay = null, CancellationToken token = default);
+        /// <summary>
+        /// 校验
+        /// </summary>
+        /// <param name="captchaId">验证码id</param>
+        /// <param name="code">用户输入的验证码</param>
+        /// <param name="removeIfSuccess">校验成功时是否移除缓存(用于多次验证)</param>
+        /// <returns></returns>
+        bool Validate(string captchaId, string code, bool removeIfSuccess = true);
     }
 }

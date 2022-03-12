@@ -18,6 +18,8 @@ namespace Lazy.Captcha.Web.Controllers
         public IActionResult Captcha(string id)
         {
             var info = _captcha.Generate(id);
+            // 可能会有多处验证码且过期时间不一样，可传第二个参数覆盖默认配置。（https://gitee.com/pojianbing/lazy-captcha/issues/I4XHGM）
+            //var info = _captcha.Generate(id,120);
             var stream = new MemoryStream(info.Bytes);
             return File(stream, "image/gif");
         }
@@ -26,19 +28,19 @@ namespace Lazy.Captcha.Web.Controllers
         /// 演示时使用HttpGet传参方便，这里仅做返回处理
         /// </summary>
         [HttpGet("validate")]
-        public Task<bool> Validate(string id, string code)
+        public bool Validate(string id, string code)
         {
-            return _captcha.ValidateAsync(id, code);
+            return _captcha.Validate(id, code);
         }
 
         /// <summary>
+        /// 一个验证码多次校验（https://gitee.com/pojianbing/lazy-captcha/issues/I4XHGM）
         /// 演示时使用HttpGet传参方便，这里仅做返回处理
         /// </summary>
-        [HttpGet("validate_remove_later")]
-        public Task<bool> ValidateAndRemoveLater(string id, string code)
+        [HttpGet("validate2")]
+        public bool Validate2(string id, string code)
         {
-            // 为了演示，这里仅做返回处理 与上面方法一样，但是这里校验时，讲过期时间设置为10秒后，多查了一次，性能不如直接删除
-            return _captcha.ValidateAsync(id, code, TimeSpan.FromSeconds(10));
+            return _captcha.Validate(id, code, false);
         }
     }
 }
