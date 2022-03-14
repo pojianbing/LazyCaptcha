@@ -187,6 +187,7 @@ public class CaptchaController : Controller
 ```
 
 ### 自定义随机验证码（需要版本1.1.2）
+动图和静态图随机出现， CaptchaType随机。
 #### 1. 自定义RandomCaptcha
 ``` c#
 /// <summary>
