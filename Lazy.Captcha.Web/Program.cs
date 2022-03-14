@@ -1,12 +1,15 @@
 using Lazy.Captcha.Core;
 using Lazy.Captcha.Core.Generator;
+using Lazy.Captcha.Web;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 // 内存存储， 基于appsettings.json配置
 builder.Services.AddCaptcha(builder.Configuration);
-
+// 如果开启随机验码，请打开注释即可。
+builder.Services.Add(ServiceDescriptor.Scoped<ICaptcha, RandomCaptcha>());
 
 // 如果使用redis缓存，则添加这个
 //builder.Services.AddStackExchangeRedisCache(options =>
