@@ -248,8 +248,11 @@ builder.Services.Add(ServiceDescriptor.Scoped<ICaptcha, RandomCaptcha>());
 ```
 
 ### 版本历史
+#### v1.1.2（当前版本）
 
-#### v1.1.1（当前版本）
+- 改进DefaultCaptcha以方便自定义验证码。
+
+#### v1.1.1
 
 - 多次验证实现
 
