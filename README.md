@@ -230,6 +230,7 @@ public class RandomCaptcha : DefaultCaptcha
         if (options.CaptchaType.ContainsChinese())
         {
             options.ImageOption.FontFamily = DefaultFontFamilys.Instance.Kaiti;
+            options.ImageOption.FontSize = 24;
         }
         else
         {
@@ -238,6 +239,12 @@ public class RandomCaptcha : DefaultCaptcha
 
         // 动静随机
         options.ImageOption.Animation = random.Next(2) == 0;
+
+        // 干扰线随机
+        options.ImageOption.InterferenceLineCount = random.Next(1, 4);
+
+        // 气泡随机
+        options.ImageOption.BubbleCount = random.Next(1, 4);
 
         // 其他选项...
     }
@@ -248,7 +255,7 @@ public class RandomCaptcha : DefaultCaptcha
 ``` c#
 // 内存存储， 基于appsettings.json配置
 builder.Services.AddCaptcha(builder.Configuration);
-// 如果开启随机验码，请打开下面的注释即可。
+// 如果开启随机验证码，请打开下面的注释即可。
 // builder.Services.Add(ServiceDescriptor.Scoped<ICaptcha, RandomCaptcha>());
 ```
 

@@ -25,6 +25,8 @@ namespace Lazy.Captcha.Core.Generator.Code
             { CaptchaType.WORD_UPPER , Characters.WORD_UPPER },
         };
 
+        private static readonly Random random = new Random();
+
         public DefaultCaptchaCodeGenerator() : this(CaptchaType.DEFAULT)
         {
 
@@ -67,7 +69,6 @@ namespace Lazy.Captcha.Core.Generator.Code
 
         private (string renderText, string code) GenerateaNumberZH(int length, bool isHk)
         {
-            var random = new Random();
             var sb1 = new StringBuilder();
             var sb2 = new StringBuilder();
             var characters = isHk? Characters.NUMBER_ZH_HK : Characters.NUMBER_ZH_CN;
@@ -84,7 +85,6 @@ namespace Lazy.Captcha.Core.Generator.Code
 
         private (string renderText, string code) GenerateaArithmetic(int length)
         {
-            var random = new Random();
             var sb = new StringBuilder();
 
             for (var i = 0; i < length; i++)
@@ -118,7 +118,6 @@ namespace Lazy.Captcha.Core.Generator.Code
 
         private (string renderText, string code) GenerateaArithmeticZh(int length)
         {
-            var random = new Random();
             var sb1 = new StringBuilder();
             var sb2 = new StringBuilder();
 
@@ -165,7 +164,6 @@ namespace Lazy.Captcha.Core.Generator.Code
         /// <returns></returns>
         private string Pick(List<char> characters, int count)
         {
-            var random = new Random();
             var result = new StringBuilder();
 
             for (int i = 0; i < count; i++)

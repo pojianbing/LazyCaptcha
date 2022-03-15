@@ -12,9 +12,11 @@ namespace Lazy.Captcha.Web
     /// </summary>
     public class RandomCaptcha : DefaultCaptcha
     {
+        private static readonly Random random = new();
+        private static readonly CaptchaType[] captchaTypes = Enum.GetValues<CaptchaType>();
+
         public RandomCaptcha(IOptionsSnapshot<CaptchaOptions> options, IStorage storage) : base(options, storage)
         {
-
         }
 
         /// <summary>
@@ -23,10 +25,7 @@ namespace Lazy.Captcha.Web
         /// <param name="options"></param>
         protected override void ChangeOptions(CaptchaOptions options)
         {
-            var random = new Random();
-
             // 随机验证码类型
-            var captchaTypes = new CaptchaType[] { CaptchaType.ARITHMETIC, CaptchaType.NUMBER, CaptchaType.WORD_LOWER, CaptchaType.ARITHMETIC_ZH, };
             options.CaptchaType = captchaTypes[random.Next(0, captchaTypes.Length)];
 
             // 当是算数运算时，CodeLength是指运算数个数
@@ -43,6 +42,7 @@ namespace Lazy.Captcha.Web
             if (options.CaptchaType.ContainsChinese())
             {
                 options.ImageOption.FontFamily = DefaultFontFamilys.Instance.Kaiti;
+                options.ImageOption.FontSize = 24;
             }
             else
             {
@@ -51,6 +51,12 @@ namespace Lazy.Captcha.Web
 
             // 动静随机
             options.ImageOption.Animation = random.Next(2) == 0;
+
+            // 干扰线随机
+            options.ImageOption.InterferenceLineCount = random.Next(1, 4);
+
+            // 气泡随机
+            options.ImageOption.BubbleCount = random.Next(1, 4);
 
             // 其他选项...
         }
