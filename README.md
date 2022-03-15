@@ -258,6 +258,7 @@ builder.Services.AddCaptcha(builder.Configuration);
 // 如果开启随机验证码，请打开下面的注释即可。
 // builder.Services.Add(ServiceDescriptor.Scoped<ICaptcha, RandomCaptcha>());
 ```
+> RandomCaptcha不包含在类库内部，仅做自定义演示，您可以根据自己的喜好，随机所有的CaptchaOptions值。
 
 ### 版本历史
 #### v1.1.2（当前版本）
