@@ -136,7 +136,12 @@ builder.Services.AddCaptcha(builder.Configuration, option =>
     option.ImageOption.InterferenceLineCount = 2; // 干扰线数量
 
     option.ImageOption.FontSize = 36; // 字体大小
-    option.ImageOption.FontFamily = DefaultFontFamilys.Instance.Actionj; // 字体，中文使用kaiti，其他字符可根据喜好设置（可能部分转字符会出现绘制不出的情况）。
+    option.ImageOption.FontFamily = DefaultFontFamilys.Instance.Actionj; // 字体
+    
+    /* 
+     * 中文使用kaiti，其他字符可根据喜好设置（可能部分转字符会出现绘制不出的情况）。
+     * 当验证码类型为“ARITHMETIC”时，不要使用“Ransom”字体。（运算符和等号绘制不出来）
+     */
 });
 ```
 
@@ -195,9 +200,11 @@ public class CaptchaController : Controller
 /// </summary>
 public class RandomCaptcha : DefaultCaptcha
 {
+    private static readonly Random random = new();
+    private static readonly CaptchaType[] captchaTypes = Enum.GetValues<CaptchaType>();
+
     public RandomCaptcha(IOptionsSnapshot<CaptchaOptions> options, IStorage storage) : base(options, storage)
     {
-
     }
 
     /// <summary>
@@ -206,10 +213,7 @@ public class RandomCaptcha : DefaultCaptcha
     /// <param name="options"></param>
     protected override void ChangeOptions(CaptchaOptions options)
     {
-        var random = new Random();
-
         // 随机验证码类型
-        var captchaTypes = new CaptchaType[] { CaptchaType.ARITHMETIC, CaptchaType.NUMBER, CaptchaType.WORD_LOWER, CaptchaType.ARITHMETIC_ZH, };
         options.CaptchaType = captchaTypes[random.Next(0, captchaTypes.Length)];
 
         // 当是算数运算时，CodeLength是指运算数个数
@@ -244,8 +248,8 @@ public class RandomCaptcha : DefaultCaptcha
 ``` c#
 // 内存存储， 基于appsettings.json配置
 builder.Services.AddCaptcha(builder.Configuration);
-// 如果开启随机验码，请打开注释即可。
-builder.Services.Add(ServiceDescriptor.Scoped<ICaptcha, RandomCaptcha>());
+// 如果开启随机验码，请打开下面的注释即可。
+// builder.Services.Add(ServiceDescriptor.Scoped<ICaptcha, RandomCaptcha>());
 ```
 
 ### 版本历史
