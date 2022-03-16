@@ -266,6 +266,8 @@ builder.Services.AddCaptcha(builder.Configuration);
 你可以通过[fontspace](https://www.fontspace.com/new/fonts)找到自己喜爱的字体。
 
 #### 2. 将字体放入项目，并设置为嵌入资源。
+> 当然也可以不作为嵌入资源，放到特定目录也是可以的，只要对下边ResourceFontFamilysFinder稍作修改即可。  
+
 ![输入图片说明](Images/font_demo.png)
 
 #### 3. 定义查找字体帮助类，示例使用ResourceFontFamilysFinder
@@ -309,7 +311,6 @@ builder.Services.AddCaptcha(builder.Configuration, options =>
     options.ImageOption.FontFamily = ResourceFontFamilysFinder.Find("KG HAPPY"); // 字体的名字在打开ttf文件时会显示
 });
 ```
-
 
 ### 版本历史
 #### v1.1.2（当前版本）
