@@ -7,9 +7,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 // 内存存储， 基于appsettings.json配置
-builder.Services.AddCaptcha(builder.Configuration);
+builder.Services.AddCaptcha(builder.Configuration, options =>
+{
+    // 自定义字体
+    options.ImageOption.FontSize = 28;
+    options.ImageOption.FontFamily = ResourceFontFamilysFinder.Find("KG HAPPY");
+});
 // 如果开启随机验码，请打开注释即可。
-builder.Services.Add(ServiceDescriptor.Scoped<ICaptcha, RandomCaptcha>());
+//builder.Services.Add(ServiceDescriptor.Scoped<ICaptcha, RandomCaptcha>());
 
 // 如果使用redis缓存，则添加这个
 //builder.Services.AddStackExchangeRedisCache(options =>

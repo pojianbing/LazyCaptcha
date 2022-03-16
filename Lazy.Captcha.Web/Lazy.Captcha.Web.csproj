@@ -6,7 +6,19 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>6a8992f9-35eb-4ab1-ab8b-a952fd7f6e31</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-  </PropertyGroup> 
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="CustomFonts\BunnyeggsRegular-8M5aZ.ttf" />
+    <None Remove="CustomFonts\KgHappy-wWZZ.ttf" />
+    <None Remove="CustomFonts\WhoaSaucePersonalUseBold-mLmV5.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="CustomFonts\BunnyeggsRegular-8M5aZ.ttf" />
+    <EmbeddedResource Include="CustomFonts\KgHappy-wWZZ.ttf" />
+    <EmbeddedResource Include="CustomFonts\WhoaSaucePersonalUseBold-mLmV5.ttf" />
+  </ItemGroup> 
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
