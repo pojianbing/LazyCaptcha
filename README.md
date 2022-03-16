@@ -260,6 +260,57 @@ builder.Services.AddCaptcha(builder.Configuration);
 ```
 > RandomCaptcha不包含在类库内部，仅做自定义演示，您可以根据自己的喜好，随机所有的CaptchaOptions值。
 
+### 自定义字体
+
+#### 1. 寻找字体
+你可以通过[fontspace](https://www.fontspace.com/new/fonts)找到自己喜爱的字体。
+
+#### 2. 将字体放入项目，并设置为嵌入资源。
+![输入图片说明](Images/font_demo.png)
+
+#### 3. 定义查找字体帮助类，示例使用ResourceFontFamilysFinder
+``` c#
+public class ResourceFontFamilysFinder
+{
+    private static Lazy<List<FontFamily>> _fontFamilies = new Lazy<List<FontFamily>>(() =>
+    {
+        var fontFamilies = new List<FontFamily>();
+        var assembly = Assembly.GetExecutingAssembly();
+        var names = assembly.GetManifestResourceNames();
+
+        if (names?.Length > 0 == true)
+        {
+            var fontCollection = new FontCollection();
+            foreach (var name in names)
+            {
+                if (!name.EndsWith("ttf")) continue;
+                fontFamilies.Add(fontCollection.Add(assembly.GetManifestResourceStream(name)));
+            }
+        }
+
+        return fontFamilies;
+    });
+
+
+    public static FontFamily Find(string name)
+    {
+        return _fontFamilies.Value.First(e => e.Name == name);
+    }
+}
+```
+
+#### 4. 设置option
+``` c#
+// 内存存储， 基于appsettings.json配置
+builder.Services.AddCaptcha(builder.Configuration, options =>
+{
+    // 自定义字体
+    options.ImageOption.FontSize = 28;
+    options.ImageOption.FontFamily = ResourceFontFamilysFinder.Find("KG HAPPY"); // 字体的名字在打开ttf文件时会显示
+});
+```
+
+
 ### 版本历史
 #### v1.1.2（当前版本）
 
