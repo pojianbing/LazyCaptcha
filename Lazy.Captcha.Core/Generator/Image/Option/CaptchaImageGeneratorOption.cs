@@ -19,6 +19,10 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
         /// </summary>
         public Color BackgroundColor { get; set; } = Color.White;
         /// <summary>
+        /// 前景色
+        /// </summary>
+        public List<Color> ForegroundColors { get; set; }
+        /// <summary>
         /// FontFamily
         /// </summary>
         public FontFamily FontFamily { get; set;}= DefaultFontFamilys.Instance.Kaiti;
@@ -71,14 +75,7 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
         {
             get
             {
-                if (this.FontFamily == null)
-                {
-                    return new Font(DefaultFontFamilys.Instance.Epilog, this.FontSize, this.FontStyle);
-                }
-                else
-                {
-                    return new Font(this.FontFamily, this.FontSize, this.FontStyle);
-                }
+                return this.FontFamily.CreateFont(this.FontSize, this.FontStyle);
             }
         }
     }

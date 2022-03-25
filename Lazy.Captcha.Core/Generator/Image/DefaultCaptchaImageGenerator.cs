@@ -22,6 +22,14 @@ namespace Lazy.Captcha.Core.Generator.Image
     /// </summary>
     public class DefaultCaptchaImageGenerator : ICaptchaImageGenerator
     {
+        private static Random Random = new Random();
+
+        private Color RandomColor(IEnumerable<Color> foregroundColors)
+        {
+            var index = Random.Next(foregroundColors.Count());
+            return foregroundColors.ElementAt(index);
+        }
+
         /// <summary>
         /// 生成气泡图形描述
         /// </summary>
@@ -32,20 +40,19 @@ namespace Lazy.Captcha.Core.Generator.Image
         /// <param name="maxRadius"></param>
         /// <param name="thickness"></param>
         /// <returns></returns>
-        protected virtual List<BubbleGraphicDescription> GenerateBubbleGraphicDescriptions(int width, int height, int count, int minRadius, int maxRadius, float thickness)
+        protected virtual List<BubbleGraphicDescription> GenerateBubbleGraphicDescriptions(int width, int height, int count, int minRadius, int maxRadius, float thickness, IEnumerable<Color> foregroundColors)
         {
             var result = new List<BubbleGraphicDescription>();
-            var random = new Random();
 
             for (var i = 0; i < count; i++)
             {
-                var radius = random.Next(minRadius, maxRadius + 1);
-                var point = new PointF(random.Next(width - 25) + radius, random.Next(height - 15) + radius);
+                var radius = Random.Next(minRadius, maxRadius + 1);
+                var point = new PointF(Random.Next(width - 25) + radius, Random.Next(height - 15) + radius);
                 var size = new SizeF(radius, radius);
                 var circle = new EllipsePolygon(point, size);
                 result.Add(new BubbleGraphicDescription
                 {
-                    Color = DefaultColors.Instance.RandomColor(),
+                    Color = RandomColor(foregroundColors),
                     Path = circle,
                     Thickness = thickness
                 });
@@ -81,7 +88,7 @@ namespace Lazy.Captcha.Core.Generator.Image
         /// <param name="option">选项</param>
         protected virtual void DrawBubbles(IImageProcessingContext ctx, CaptchaImageGeneratorOption option)
         {
-            var graphicDescriptions = GenerateBubbleGraphicDescriptions(option.Width, option.Height, option.BubbleCount, option.BubbleMinRadius, option.BubbleMaxRadius, option.BubbleThickness);
+            var graphicDescriptions = GenerateBubbleGraphicDescriptions(option.Width, option.Height, option.BubbleCount, option.BubbleMinRadius, option.BubbleMaxRadius, option.BubbleThickness, option.ForegroundColors);
             DrawBubbles(ctx, graphicDescriptions);
         }
 
@@ -92,20 +99,20 @@ namespace Lazy.Captcha.Core.Generator.Image
         /// <param name="height">高</param>
         /// <param name="count">数量</param>
         /// <returns>干扰线图形描述</returns>
-        protected virtual List<InterferenceLineGraphicDescription> GenerateInterferenceLineGraphicDescriptions(int width, int height, int count)
+        protected virtual List<InterferenceLineGraphicDescription> GenerateInterferenceLineGraphicDescriptions(int width, int height, int count, IEnumerable<Color> foregroundColors)
         {
             var result = new List<InterferenceLineGraphicDescription>();
-            var random = new Random();
 
             for (var i = 0; i < count; i++)
             {
-                int x1 = 5, y1 = random.Next(height / 2, height - 5);
-                int x2 = width - 5, y2 = random.Next(5, height / 2);
-                int ctrlx1 = random.Next(width / 4, width / 4 * 3), ctrly1 = random.Next(5, height - 5);
-                int ctrlx2 = random.Next(width / 4, width / 4 * 3), ctrly2 = random.Next(5, height - 5);
+                bool leftInBottom = Random.Next(2) == 0;
+                int x1 = 5, y1 = leftInBottom ?  Random.Next(height / 2, height - 5) : Random.Next(5, height / 2);
+                int x2 = width - 5, y2 = leftInBottom ? Random.Next(5, height / 2) : Random.Next(height / 2, height - 5);
+                int ctrlx1 = Random.Next(width / 4, width / 4 * 3), ctrly1 = Random.Next(5, height - 5);
+                int ctrlx2 = Random.Next(width / 4, width / 4 * 3), ctrly2 = Random.Next(5, height - 5);
                 result.Add(new InterferenceLineGraphicDescription
                 {
-                    Color = DefaultColors.Instance.RandomColor(),
+                    Color = RandomColor(foregroundColors),
                     Start = new PointF(x1, y1),
                     Ctrl1 = new PointF(ctrlx1, ctrly1),
                     Ctrl2 = new PointF(ctrlx2, ctrly2),
@@ -144,7 +151,7 @@ namespace Lazy.Captcha.Core.Generator.Image
         /// <param name="width">option</param>
         protected virtual void DrawInterferenceLines(IImageProcessingContext ctx, CaptchaImageGeneratorOption option)
         {
-            var graphicDescriptions = GenerateInterferenceLineGraphicDescriptions(option.Width, option.Height, option.InterferenceLineCount);
+            var graphicDescriptions = GenerateInterferenceLineGraphicDescriptions(option.Width, option.Height, option.InterferenceLineCount, option.ForegroundColors);
             DrawInterferenceLines(ctx, graphicDescriptions);
         }
 
@@ -156,14 +163,14 @@ namespace Lazy.Captcha.Core.Generator.Image
         /// <param name="text">文本</param>
         /// <param name="font">字体</param>
         /// <returns>文本图形描述</returns>
-        protected virtual List<TextGraphicDescription> GenerateTextGraphicDescriptions(int width, int height, string text, Font font)
+        protected virtual List<TextGraphicDescription> GenerateTextGraphicDescriptions(int width, int height, string text, Font font, IEnumerable<Color> foregroundColors)
         {
             var result = new List<TextGraphicDescription>();
             var textPositions = MeasureTextPositions(width, height, text, font);
 
             for (var i = 0; i < text.Count(); i++)
             {
-                var color = DefaultColors.Instance.RandomColor();
+                var color = RandomColor(foregroundColors);
                 result.Add(new TextGraphicDescription
                 {
                     Text = text[i].ToString(),
@@ -204,7 +211,7 @@ namespace Lazy.Captcha.Core.Generator.Image
         /// <param name="option"></param>
         protected virtual void DrawTexts(IImageProcessingContext ctx, string text, CaptchaImageGeneratorOption option)
         {
-            var graphicDescriptions = GenerateTextGraphicDescriptions(option.Width, option.Height, text, option.Font);
+            var graphicDescriptions = GenerateTextGraphicDescriptions(option.Width, option.Height, text, option.Font, option.ForegroundColors);
             DrawTexts(ctx, graphicDescriptions);
         }
 
@@ -316,13 +323,13 @@ namespace Lazy.Captcha.Core.Generator.Image
         /// <returns></returns>
         private byte[] GenerateAnimation(string text, CaptchaImageGeneratorOption option)
         {
-            var texGraphicDescriptions = GenerateTextGraphicDescriptions(option.Width, option.Height, text, option.Font);
+            var texGraphicDescriptions = GenerateTextGraphicDescriptions(option.Width, option.Height, text, option.Font, option.ForegroundColors);
             var bubbleGraphicDescriptions = option.BubbleCount != 0 ?
-                GenerateBubbleGraphicDescriptions(option.Width, option.Height, option.BubbleCount, option.BubbleMinRadius, option.BubbleMaxRadius, option.BubbleThickness)
+                GenerateBubbleGraphicDescriptions(option.Width, option.Height, option.BubbleCount, option.BubbleMinRadius, option.BubbleMaxRadius, option.BubbleThickness, option.ForegroundColors)
                 :
                 new List<BubbleGraphicDescription>();
             var interferenceLineGraphicDescriptions = option.BubbleCount != 0 ?
-                GenerateInterferenceLineGraphicDescriptions(option.Width, option.Height, option.InterferenceLineCount)
+                GenerateInterferenceLineGraphicDescriptions(option.Width, option.Height, option.InterferenceLineCount, option.ForegroundColors)
                 :
                 new List<InterferenceLineGraphicDescription>();
 
@@ -344,7 +351,7 @@ namespace Lazy.Captcha.Core.Generator.Image
                     }
                     for (var j = 0; j < bubbleGraphicDescriptions.Count; j++)
                     {
-                        bubbleGraphicDescriptions[j].BlendPercentage = new Random().Next(10) * 0.1f;
+                        bubbleGraphicDescriptions[j].BlendPercentage = Random.Next(10) * 0.1f;
                     }
 
                     using (Image<Rgba32> frame = new Image<Rgba32>(option.Width, option.Height, option.BackgroundColor))

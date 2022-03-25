@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using Lazy.Captcha.Core;
 using Lazy.Captcha.Core.Storage;
 using Lazy.Captcha.Core.Storeage;
@@ -33,6 +35,27 @@ namespace Microsoft.Extensions.DependencyInjection
                     {
                         options.ImageOption.BackgroundColor = color;
                     }
+                }
+                                                                
+                var foregroudColors = configuration?.GetSection("CaptchaOptions:ImageOption:ForegroundColors")?.Value;
+                if (!string.IsNullOrWhiteSpace(foregroudColors))
+                {
+                    var colors = foregroudColors.Split(",").ToList().Where(e => !string.IsNullOrEmpty(e));
+                    foreach (var item in colors)
+                    {
+                        if (SixLabors.ImageSharp.Color.TryParse(item, out var color))
+                        {
+                            if (options.ImageOption.ForegroundColors == null)
+                            {
+                                options.ImageOption.ForegroundColors = new List<SixLabors.ImageSharp.Color>();
+                            }
+                            options.ImageOption.ForegroundColors.Add(color);
+                        }
+                    }
+                }
+                if (options.ImageOption.ForegroundColors == null || options.ImageOption.ForegroundColors.Count() == 0)
+                {
+                    options.ImageOption.ForegroundColors = DefaultColors.Instance.Colors;
                 }
             });
             if (optionsAction != null) services.PostConfigure(optionsAction);
