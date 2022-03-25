@@ -60,7 +60,7 @@ namespace Microsoft.Extensions.DependencyInjection
             });
             if (optionsAction != null) services.PostConfigure(optionsAction);
 
-            services.TryAdd(ServiceDescriptor.Scoped<ICaptcha, DefaultCaptcha>()); 
+            services.AddScoped<ICaptcha, DefaultCaptcha>(); 
             services.AddScoped<IStorage, DefaultStorage>();
             services.AddDistributedMemoryCache();
 
