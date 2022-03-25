@@ -103,7 +103,8 @@ builder.Services.AddCaptcha(builder.Configuration);
       "InterferenceLineCount": 4, // 干扰线数量
       "FontFamily": "kaiti", // 包含actionj,epilog,fresnel,headache,lexo,prefix,progbot,ransom,robot,scandal,kaiti
       "FrameDelay": 15, // 每帧延迟,Animation=true时有效, 默认30
-      "BackgroundColor": "#ffff00" //  格式: rgb, rgba, rrggbb, or rrggbbaa format to match web syntax, 默认#fff
+      "BackgroundColor": "#ffff00", //  格式: rgb, rgba, rrggbb, or rrggbbaa format to match web syntax, 默认#fff
+      "ForegroundColors": "" //  颜色格式同BackgroundColor,多个颜色逗号分割，随机选取。不填，空值，则使用默认颜色集
     }
   }
 }
@@ -313,7 +314,16 @@ builder.Services.AddCaptcha(builder.Configuration, options =>
 ```
 
 ### 版本历史
-#### v1.1.2（当前版本）
+
+#### v1.1.4
+-  优化干扰线显示，多条时适当分散
+-  增加前景色配置ForegroundColors
+-  优化部分代码
+
+#### v1.1.3
+-  ImageSharp升级到2.1.0
+
+#### v1.1.2
 
 - 改进DefaultCaptcha以方便自定义验证码。
 
