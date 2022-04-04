@@ -3,6 +3,7 @@
 ## 介绍
 
 仿[EasyCaptcha](https://gitee.com/ele-admin/EasyCaptcha)和[SimpleCaptcha](https://github.com/1992w/SimpleCaptcha),基于.Net Standard 2.1 的图形验证码模块。  
+ **滑动验证码请移步[lazy-slide-captcha](https://gitee.com/pojianbing/lazy-slide-captcha)。**   
 [码云地址](https://gitee.com/pojianbing/lazy-captcha)
 [Github 地址](https://github.com/pojianbing/LazyCaptcha)
 
