@@ -61,7 +61,9 @@ namespace Lazy.Captcha.Core
         {
             var val = _storage.Get(captchaId);
             var comparisonType = _options.IgnoreCase ? StringComparison.CurrentCultureIgnoreCase : StringComparison.CurrentCulture;
-            var success = string.Equals(val, code, comparisonType);
+            var success = !string.IsNullOrWhiteSpace(code) && 
+                          !string.IsNullOrWhiteSpace(val) && 
+                          string.Equals(val, code, comparisonType);
 
             if (!success || (success && removeIfSuccess))
             {
