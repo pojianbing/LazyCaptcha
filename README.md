@@ -316,6 +316,9 @@ builder.Services.AddCaptcha(builder.Configuration, options =>
 
 ### 版本历史
 
+#### v1.1.5
+-  修复校验接口code传入null返回为true的bug
+
 #### v1.1.4
 -  优化干扰线显示，多条时适当分散
 -  增加前景色配置ForegroundColors
