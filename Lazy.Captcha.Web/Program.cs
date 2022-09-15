@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 // 内存存储， 基于appsettings.json配置
 builder.Services.AddCaptcha(builder.Configuration, options =>
 {
@@ -16,13 +15,24 @@ builder.Services.AddCaptcha(builder.Configuration, options =>
 // 如果开启随机验码，请打开注释即可。
 //builder.Services.Add(ServiceDescriptor.Scoped<ICaptcha, RandomCaptcha>());
 
-// 如果使用redis缓存，则添加这个
+// Core项目使用的是IDistributedCache，
+// 如果使用redis缓存，需要安装包 Microsoft.Extensions.Caching.StackExchangeRedis
+// 参考：https://docs.microsoft.com/zh-cn/aspnet/core/performance/caching/distributed
 //builder.Services.AddStackExchangeRedisCache(options =>
 //{
 //    options.Configuration = builder.Configuration.GetConnectionString("RedisCache");
 //    options.InstanceName = "captcha:";
 //});
 
+// Core项目使用的是IDistributedCache，
+// 如果使用SQLServer缓存，则安装 Microsoft.Extensions.Caching.SqlServer
+//builder.Services.AddDistributedSqlServerCache(options =>
+//{
+//    options.ConnectionString = builder.Configuration.GetConnectionString(
+//        "DistCache_ConnectionString");
+//    options.SchemaName = "dbo";
+//    options.TableName = "TestCache";
+//});
 
 // -----------------------------------------------------------------------------
 // 全部配置参数，基于代码配置
