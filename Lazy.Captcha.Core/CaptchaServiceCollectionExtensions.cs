@@ -17,7 +17,7 @@ namespace Microsoft.Extensions.DependencyInjection
             return services.AddScoped<ICaptcha, DefaultCaptcha>();
         }
 
-        public static IServiceCollection AddCaptcha(this IServiceCollection services, IConfiguration configuration, Action<CaptchaOptions> optionsAction = default!)
+        public static IServiceCollection AddCaptcha(this IServiceCollection services, IConfiguration configuration, Action<CaptchaOptions> optionsAction = null)
         {
             services.Configure<CaptchaOptions>(configuration?.GetSection("CaptchaOptions"));
             services.PostConfigure<CaptchaOptions>(options =>
@@ -40,7 +40,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 var foregroudColors = configuration?.GetSection("CaptchaOptions:ImageOption:ForegroundColors")?.Value;
                 if (!string.IsNullOrWhiteSpace(foregroudColors))
                 {
-                    var colors = foregroudColors.Split(",").ToList().Where(e => !string.IsNullOrEmpty(e));
+                    var colors = foregroudColors.Split(',').ToList().Where(e => !string.IsNullOrEmpty(e));
                     foreach (var item in colors)
                     {
                         if (SixLabors.ImageSharp.Color.TryParse(item, out var color))
@@ -68,7 +68,7 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
         [Obsolete("请直接使用 AddCaptcha 方法，已更改为默认注册内存缓存", false)]
-        public static IServiceCollection AddMemoryCacheCaptcha(this IServiceCollection services, IConfiguration configuration, Action<CaptchaOptions> optionsAction = default!)
+        public static IServiceCollection AddMemoryCacheCaptcha(this IServiceCollection services, IConfiguration configuration, Action<CaptchaOptions> optionsAction = null)
         {
             return services.AddCaptcha(configuration, optionsAction);
         }

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <Description>仿EasyCaptcha和SimpleCaptcha,基于.Net Standard 2.1的图形验证码模块。</Description>
     <PackageProjectUrl>https://gitee.com/pojianbing/lazy-captcha</PackageProjectUrl>
     <RepositoryUrl>https://gitee.com/pojianbing/lazy-captcha</RepositoryUrl>
@@ -49,7 +49,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MathExpressions" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
