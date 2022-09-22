@@ -67,7 +67,6 @@ namespace Sample.Winfrom
                 MessageBox.Show("验证失败");
             }
 
-            // 重新生成
             GenerateCaptcha();
         }
 
@@ -75,6 +74,11 @@ namespace Sample.Winfrom
         {
             var data = CaptchaService1.Generate(Guid.NewGuid().ToString(), 10);
             CaptchaPbx2.Image = Image.FromStream(new MemoryStream(data.Bytes));
+        }
+
+        private void CaptchaPbx_Click(object sender, EventArgs e)
+        {
+            GenerateCaptcha();
         }
     }
 }

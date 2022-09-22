@@ -54,6 +54,7 @@
             this.CaptchaPbx.Size = new System.Drawing.Size(98, 35);
             this.CaptchaPbx.TabIndex = 1;
             this.CaptchaPbx.TabStop = false;
+            this.CaptchaPbx.Click += new System.EventHandler(this.CaptchaPbx_Click);
             // 
             // ValidateBtn
             // 
