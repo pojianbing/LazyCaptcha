@@ -14,12 +14,12 @@ namespace Lazy.Captcha.Core
     public class CaptchaServiceBuilder
     {
         private  CaptchaOptions CaptchaOptions;
-        private  IStorage Storage;
+        private  IStorage InnerStorage;
 
         public  CaptchaServiceBuilder()
         {
             CaptchaOptions = GenerateDefaultOptions();
-            Storage = new MemeoryStorage();
+            InnerStorage = new MemeoryStorage();
         }
 
         public static CaptchaServiceBuilder New()
@@ -27,6 +27,10 @@ namespace Lazy.Captcha.Core
             return new CaptchaServiceBuilder();
         }
 
+        /// <summary>
+        /// 默认选项
+        /// </summary>
+        /// <returns></returns>
         private CaptchaOptions GenerateDefaultOptions()
         {
             var options = new CaptchaOptions();
@@ -34,6 +38,17 @@ namespace Lazy.Captcha.Core
             options.ImageOption.Height = 35;
             options.ImageOption.ForegroundColors = DefaultColors.Instance.Colors;
             return options;
+        }
+
+        /// <summary>
+        /// 设定存储
+        /// </summary>
+        /// <param name="storage"></param>
+        /// <returns></returns>
+        public CaptchaServiceBuilder Storage(IStorage storage)
+        {
+            InnerStorage = storage;
+            return this;
         }
 
         /// <summary>
@@ -251,7 +266,7 @@ namespace Lazy.Captcha.Core
         /// <returns></returns>
         public CaptchaService Build()
         {
-            return new CaptchaService(CaptchaOptions, Storage);
+            return new CaptchaService(CaptchaOptions, InnerStorage);
         }
     }
 }

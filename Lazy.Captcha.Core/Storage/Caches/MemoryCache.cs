@@ -62,7 +62,7 @@ namespace Lazy.Captcha.Core.Storage.Caches
             {
                 try
                 {
-                    foreach (string cacheKey in Cache.Keys.ToList())
+                    foreach (string cacheKey in Cache.Keys)
                     {
                         if (Cache.TryGetValue(cacheKey, out var data))
                         {

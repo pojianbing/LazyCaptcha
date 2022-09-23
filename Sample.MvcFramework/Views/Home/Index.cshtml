@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = null;
+}
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto、Jacob Thornton 以及众多 Bootstrap 贡献者">
+    <meta name="generator" content="Hugo 0.91.2">
+    <title>Signin Template · Bootstrap v4 中文文档 v4.6</title>
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/signin.css" rel="stylesheet" />
+</head>
+<body class="text-center">
+
+    <form class="form-signin">
+        <h1 class="h3 mb-3 font-weight-normal">登录</h1>
+        <label for="inputPassword" class="sr-only">验证码</label>
+        <input type="text" id="code" class="form-control" placeholder="验证码" required autocomplete="off">
+
+        <div class="right" style="float: right; margin-bottom: 10px;">
+            <img class="shadow p-3 mb-5 bg-white rounded" alt="验证码" id="img"/>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" id="submit">登录</button>
+    </form>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script>
+
+        let id = undefined
+
+        function genCaptcha() {
+            $.ajax({
+                url: "/captcha/index",
+                success: function (result) {
+                    id = result.Id
+                    $('#img').attr('src', 'data:image/gif;base64,' + result.Base64)
+                }
+            });
+        }
+
+        function validate(code) {
+            $.ajax({
+                url: `/captcha/validate?id=${id}&code=${code}`,
+                success: function (result) {
+                    alert(result);
+
+                    genCaptcha();
+                }
+            });
+        }
+
+        $(function () {
+
+            genCaptcha();
+
+            $('#img').click(function(){
+                genCaptcha();
+            })
+
+            $('#submit').click(function () {
+                validate($('#code').val())
+            })
+        })
+
+    </script>
+</body>
+</html>
+

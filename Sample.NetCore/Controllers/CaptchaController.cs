@@ -1,7 +1,7 @@
-ï»¿using Lazy.Captcha.Core;
+using Lazy.Captcha.Core;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Lazy.Captcha.Web.Controllers
+namespace Sample.NetCore.Controllers
 {
     [Route("captcha")]
     [ApiController]
@@ -18,14 +18,14 @@ namespace Lazy.Captcha.Web.Controllers
         public IActionResult Captcha(string id)
         {
             var info = _captcha.Generate(id);
-            // å¯èƒ½ä¼šæœ‰å¤šå¤„éªŒè¯ç ä¸”è¿‡æœŸæ—¶é—´ä¸ä¸€æ ·ï¼Œå¯ä¼ ç¬¬äºŒä¸ªå‚æ•°è¦†ç›–é»˜è®¤é…ç½®ã€‚ï¼ˆhttps://gitee.com/pojianbing/lazy-captcha/issues/I4XHGMï¼‰
+            // ¿ÉÄÜ»áÓĞ¶à´¦ÑéÖ¤ÂëÇÒ¹ıÆÚÊ±¼ä²»Ò»Ñù£¬¿É´«µÚ¶ş¸ö²ÎÊı¸²¸ÇÄ¬ÈÏÅäÖÃ¡££¨https://gitee.com/pojianbing/lazy-captcha/issues/I4XHGM£©
             //var info = _captcha.Generate(id,120);
             var stream = new MemoryStream(info.Bytes);
             return File(stream, "image/gif");
         }
 
         /// <summary>
-        /// æ¼”ç¤ºæ—¶ä½¿ç”¨HttpGetä¼ å‚æ–¹ä¾¿ï¼Œè¿™é‡Œä»…åšè¿”å›å¤„ç†
+        /// ÑİÊ¾Ê±Ê¹ÓÃHttpGet´«²Î·½±ã£¬ÕâÀï½ö×ö·µ»Ø´¦Àí
         /// </summary>
         [HttpGet("validate")]
         public bool Validate(string id, string code)
@@ -34,8 +34,8 @@ namespace Lazy.Captcha.Web.Controllers
         }
 
         /// <summary>
-        /// ä¸€ä¸ªéªŒè¯ç å¤šæ¬¡æ ¡éªŒï¼ˆhttps://gitee.com/pojianbing/lazy-captcha/issues/I4XHGMï¼‰
-        /// æ¼”ç¤ºæ—¶ä½¿ç”¨HttpGetä¼ å‚æ–¹ä¾¿ï¼Œè¿™é‡Œä»…åšè¿”å›å¤„ç†
+        /// Ò»¸öÑéÖ¤Âë¶à´ÎĞ£Ñé£¨https://gitee.com/pojianbing/lazy-captcha/issues/I4XHGM£©
+        /// ÑİÊ¾Ê±Ê¹ÓÃHttpGet´«²Î·½±ã£¬ÕâÀï½ö×ö·µ»Ø´¦Àí
         /// </summary>
         [HttpGet("validate2")]
         public bool Validate2(string id, string code)

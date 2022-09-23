@@ -1,7 +1,7 @@
 ﻿using SixLabors.Fonts;
 using System.Reflection;
 
-namespace Lazy.Captcha.Web
+namespace Sample.NetCore
 {
     public class ResourceFontFamilysFinder
     {

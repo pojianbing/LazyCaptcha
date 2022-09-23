@@ -1,11 +1,9 @@
-﻿using Lazy.Captcha.Core;
-using Lazy.Captcha.Core.Generator;
-using Lazy.Captcha.Core.Generator.Code;
-using Lazy.Captcha.Core.Generator.Image;
+﻿using Lazy.Captcha.Core.Generator;
 using Lazy.Captcha.Core.Storage;
+using Lazy.Captcha.Core;
 using Microsoft.Extensions.Options;
 
-namespace Lazy.Captcha.Web
+namespace Sample.NetCore
 {
     /// <summary>
     /// 随机验证码

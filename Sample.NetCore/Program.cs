@@ -1,7 +1,4 @@
-using Lazy.Captcha.Core;
-using Lazy.Captcha.Core.Generator;
-using Lazy.Captcha.Web;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+using Sample.NetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
