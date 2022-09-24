@@ -320,30 +320,11 @@ builder.Services.AddCaptcha(builder.Configuration, options =>
 ### .Net Framwork下使用 <a id="framework"></a> 
 新建mvc项目，.Net Framwork选择4.6.1。
 
-#### 1. 项目文件（项目名.csproj），PropertyGroup增加：
-``` c#
-<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
-```
-以使MSBuild 项直接在项目文件中指定 NuGet 包依赖项，而不是使用单独的 packages.config 文件。
+#### 1. Nuget安装
+先安装SixLabors.ImageSharp.Drawing  **1.0.0-beta14  ** （1.1.6使用版本，后续如有升级，请参照具体的版本）
+安装Lazy.Captcha.Core **1.1.6  **
 
-#### 2. Web.config，runtime->assemblyBinding配置节增加:
-``` c#
-<dependentAssembly>
-    <assemblyIdentity name="System.Numerics.Vectors" publicKeyToken="b03f5f7f11d50a3a" culture="neutral" />
-    <bindingRedirect oldVersion="0.0.0.0-4.1.3.0" newVersion="4.1.4.0" />
-</dependentAssembly>
-<dependentAssembly>
-    <assemblyIdentity name="System.Runtime.CompilerServices.Unsafe" publicKeyToken="b03f5f7f11d50a3a" culture="neutral" />
-    <bindingRedirect oldVersion="0.0.0.0-4.0.6.0" newVersion="6.0.0.0" />
-</dependentAssembly>
-<dependentAssembly>
-    <assemblyIdentity name="System.Buffers" publicKeyToken="cc7b13ffcd2ddd51" culture="neutral" />
-    <bindingRedirect oldVersion="0.0.0.0-4.0.2.0" newVersion="4.0.3.0" />
-</dependentAssembly>
-```
-如果不增加则会报上边三个程序集的版本错误。   
-
-#### 3. Global.asax增加
+#### 2. Global.asax增加
 ``` c#
 public class MvcApplication : System.Web.HttpApplication
 {
@@ -373,7 +354,7 @@ public class MvcApplication : System.Web.HttpApplication
 }
 ```
 
-#### 4. Controller使用
+#### 3. Controller使用
 ``` c#
 public class CaptchaController : Controller
 {
