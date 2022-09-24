@@ -344,7 +344,7 @@ builder.Services.AddCaptcha(builder.Configuration, options =>
 
 #### 3. Global.asax增加
 ``` c#
- public class MvcApplication : System.Web.HttpApplication
+public class MvcApplication : System.Web.HttpApplication
 {
     protected void Application_Start()
     {
@@ -369,6 +369,7 @@ builder.Services.AddCaptcha(builder.Configuration, options =>
             .Build();
         CaptchaHelper.Initialization(captchaService);
     }
+}
 ```
 
 #### 4. Controller使用
