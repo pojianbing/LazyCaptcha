@@ -321,8 +321,9 @@ builder.Services.AddCaptcha(builder.Configuration, options =>
 新建mvc项目，.Net Framwork选择4.6.1。
 
 #### 1. Nuget安装
-先安装SixLabors.ImageSharp.Drawing  **1.0.0-beta14  ** （1.1.6使用版本，后续如有升级，请参照具体的版本）
-安装Lazy.Captcha.Core **1.1.6  **
+先安装SixLabors.ImageSharp.Drawing  **1.0.0-beta14**
+
+再安装Lazy.Captcha.Core **1.1.6**
 
 #### 2. Global.asax增加
 ``` c#
