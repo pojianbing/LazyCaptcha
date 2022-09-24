@@ -1,4 +1,5 @@
 using Lazy.Captcha.Core;
+using Lazy.Captcha.Core.Generator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,8 +27,11 @@ namespace Sample.MvcFramework
                .New()
                .Width(98)
                .Height(35)
-               .FontFamily(DefaultFontFamilys.Instance.Actionj)
-               .Animation(true)
+               .FontSize(20)
+               .CaptchaType(CaptchaType.ARITHMETIC)
+               .FontFamily(DefaultFontFamilys.Instance.Ransom)
+               .InterferenceLineCount(3)
+               .Animation(false)
                .Build();
             CaptchaHelper.Initialization(captchaService);
         }

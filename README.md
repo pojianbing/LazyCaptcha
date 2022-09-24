@@ -316,6 +316,98 @@ builder.Services.AddCaptcha(builder.Configuration, options =>
 });
 ```
 
+### .Net Framwork下使用  
+新建mvc项目，.Net Framwork选择4.6.1。
+
+1. 项目文件（项目名.csproj），PropertyGroup增加：
+``` c#
+<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+```
+以使MSBuild 项直接在项目文件中指定 NuGet 包依赖项，而不是使用单独的 packages.config 文件。
+
+2. Web.config，runtime->assemblyBinding配置节增加:
+``` c#
+<dependentAssembly>
+    <assemblyIdentity name="System.Numerics.Vectors" publicKeyToken="b03f5f7f11d50a3a" culture="neutral" />
+    <bindingRedirect oldVersion="0.0.0.0-4.1.3.0" newVersion="4.1.4.0" />
+</dependentAssembly>
+<dependentAssembly>
+    <assemblyIdentity name="System.Runtime.CompilerServices.Unsafe" publicKeyToken="b03f5f7f11d50a3a" culture="neutral" />
+    <bindingRedirect oldVersion="0.0.0.0-4.0.6.0" newVersion="6.0.0.0" />
+</dependentAssembly>
+<dependentAssembly>
+    <assemblyIdentity name="System.Buffers" publicKeyToken="cc7b13ffcd2ddd51" culture="neutral" />
+    <bindingRedirect oldVersion="0.0.0.0-4.0.2.0" newVersion="4.0.3.0" />
+</dependentAssembly>
+```
+如果不增加则会报上边三个程序集的版本错误。   
+
+3. Global.asax增加
+``` c#
+ public class MvcApplication : System.Web.HttpApplication
+{
+    protected void Application_Start()
+    {
+        AreaRegistration.RegisterAllAreas();
+        FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+        RouteConfig.RegisterRoutes(RouteTable.Routes);
+        BundleConfig.RegisterBundles(BundleTable.Bundles);
+        CaptchaConfig();
+    }
+
+    private void CaptchaConfig()
+    {
+        var captchaService = CaptchaServiceBuilder
+            .New()
+            .Width(98)
+            .Height(35)
+            .FontSize(20)
+            .CaptchaType(CaptchaType.ARITHMETIC)
+            .FontFamily(DefaultFontFamilys.Instance.Ransom)
+            .InterferenceLineCount(3)
+            .Animation(false)
+            .Build();
+        CaptchaHelper.Initialization(captchaService);
+    }
+```
+
+4. Controller使用
+``` c#
+public class CaptchaController : Controller
+{
+    [HttpGet]
+    public ActionResult Index()
+    {
+        var id = Guid.NewGuid().ToString().Replace("_", "").Replace("-", "");
+        var captchaData = CaptchaHelper.Generate(id);
+        var output = new CaptchaResponse
+        {
+            Id = id,
+            Base64 = captchaData.Base64
+        };
+        return Json(output, JsonRequestBehavior.AllowGet);
+        
+    }
+
+    /// <summary>
+    /// 演示时使用HttpGet传参方便，这里仅做返回处理
+    /// </summary>
+    [HttpGet()]
+    public bool Validate(string id, string code)
+    {
+        return CaptchaHelper.Validate(id, code);
+    }
+}
+
+public class CaptchaResponse
+{
+    public string Id { get; set; }
+    public string Base64 { get; set; }
+}
+```
+
+具体示例请参照 [Sample.MvcFramework](Sample.MvcFramework)项目。
+
 ### 版本历史
 
 #### v1.1.5
