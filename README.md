@@ -394,6 +394,9 @@ public class CaptchaResponse
 
 ### 版本历史
 
+#### v1.1.6
+-  新增Framework支持
+
 #### v1.1.5
 -  修复校验接口code传入null返回为true的bug
 
