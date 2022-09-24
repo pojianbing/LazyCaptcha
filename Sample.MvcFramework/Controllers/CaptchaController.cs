@@ -13,7 +13,7 @@ namespace Sample.MvcFramework.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var id = Guid.NewGuid().ToString().Replace("_", "").Replace("-", "");
+            var id = Guid.NewGuid().ToString("N");
             var captchaData = CaptchaHelper.Generate(id);
             var output = new CaptchaResponse
             {

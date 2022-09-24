@@ -32,6 +32,7 @@ namespace Sample.MvcFramework
                .FontFamily(DefaultFontFamilys.Instance.Ransom)
                .InterferenceLineCount(3)
                .Animation(false)
+               //.Storage(默认使用内部自定义的MemoryCache, 分布式环境下请自定义存储)
                .Build();
             CaptchaHelper.Initialization(captchaService);
         }

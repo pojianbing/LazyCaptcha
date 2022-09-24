@@ -3,8 +3,9 @@
 ## 介绍
 
 仿[EasyCaptcha](https://gitee.com/ele-admin/EasyCaptcha)和[SimpleCaptcha](https://github.com/1992w/SimpleCaptcha),基于.Net Standard 2.0 的图形验证码模块。
-能够运行在.Net Framework >= 4.6.1，Core >= 2.0 环境下。.Net Framework下使用，[请参照](#user-content-net-framwork下使用-)
-  
+可运行在.Net Framework >= 4.6.1，Core >= 2.0 环境下。.Net Framework下使用，[请参照](#user-content-net-framwork下使用-)
+>  v1.1.6版本开始支持.Net Standard 2.0，之前为.Net Standard 2.1，如果要在 .Net Framework中使用，请使用>=1.1.6版本。
+
  **滑动验证码请移步[lazy-slide-captcha](https://gitee.com/pojianbing/lazy-slide-captcha)。**   
 [码云地址](https://gitee.com/pojianbing/lazy-captcha)
 [Github 地址](https://github.com/pojianbing/LazyCaptcha)
