@@ -3,7 +3,7 @@
 ## 介绍
 
 仿[EasyCaptcha](https://gitee.com/ele-admin/EasyCaptcha)和[SimpleCaptcha](https://github.com/1992w/SimpleCaptcha),基于.Net Standard 2.0 的图形验证码模块。
-能够运行在.Net Framework >= 4.6.1，Core >= 2.0 环境下。.Net Framework下使用，请参照相关说明部分。
+能够运行在.Net Framework >= 4.6.1，Core >= 2.0 环境下。.Net Framework下使用，[请参照](#framework)
   
  **滑动验证码请移步[lazy-slide-captcha](https://gitee.com/pojianbing/lazy-slide-captcha)。**   
 [码云地址](https://gitee.com/pojianbing/lazy-captcha)
@@ -316,7 +316,7 @@ builder.Services.AddCaptcha(builder.Configuration, options =>
 });
 ```
 
-### .Net Framwork下使用  
+### .Net Framwork下使用 <a id="framework"></a> 
 新建mvc项目，.Net Framwork选择4.6.1。
 
 #### 1. 项目文件（项目名.csproj），PropertyGroup增加：
