@@ -319,13 +319,13 @@ builder.Services.AddCaptcha(builder.Configuration, options =>
 ### .Net Framwork下使用  
 新建mvc项目，.Net Framwork选择4.6.1。
 
-1. 项目文件（项目名.csproj），PropertyGroup增加：
+#### 1. 项目文件（项目名.csproj），PropertyGroup增加：
 ``` c#
 <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
 ```
 以使MSBuild 项直接在项目文件中指定 NuGet 包依赖项，而不是使用单独的 packages.config 文件。
 
-2. Web.config，runtime->assemblyBinding配置节增加:
+#### 2. Web.config，runtime->assemblyBinding配置节增加:
 ``` c#
 <dependentAssembly>
     <assemblyIdentity name="System.Numerics.Vectors" publicKeyToken="b03f5f7f11d50a3a" culture="neutral" />
@@ -342,7 +342,7 @@ builder.Services.AddCaptcha(builder.Configuration, options =>
 ```
 如果不增加则会报上边三个程序集的版本错误。   
 
-3. Global.asax增加
+#### 3. Global.asax增加
 ``` c#
  public class MvcApplication : System.Web.HttpApplication
 {
@@ -371,7 +371,7 @@ builder.Services.AddCaptcha(builder.Configuration, options =>
     }
 ```
 
-4. Controller使用
+#### 4. Controller使用
 ``` c#
 public class CaptchaController : Controller
 {
