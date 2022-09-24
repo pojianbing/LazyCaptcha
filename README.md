@@ -2,7 +2,9 @@
 
 ## 介绍
 
-仿[EasyCaptcha](https://gitee.com/ele-admin/EasyCaptcha)和[SimpleCaptcha](https://github.com/1992w/SimpleCaptcha),基于.Net Standard 2.1 的图形验证码模块。  
+仿[EasyCaptcha](https://gitee.com/ele-admin/EasyCaptcha)和[SimpleCaptcha](https://github.com/1992w/SimpleCaptcha),基于.Net Standard 2.0 的图形验证码模块。
+能够运行在.Net Framework >= 4.6.1，Core >= 2.0 环境下。.Net Framework下使用，请参照相关说明部分。
+  
  **滑动验证码请移步[lazy-slide-captcha](https://gitee.com/pojianbing/lazy-slide-captcha)。**   
 [码云地址](https://gitee.com/pojianbing/lazy-captcha)
 [Github 地址](https://github.com/pojianbing/LazyCaptcha)
@@ -79,7 +81,7 @@ builder.Services.AddCaptcha(builder.Configuration);
 
 ##### appsettings.json （不提供配置时，使用默认配置）
 
-```json
+```csharp
 {
   "ConnectionStrings": {
     // 使用Redis缓存时，需要配置此项
@@ -113,7 +115,7 @@ builder.Services.AddCaptcha(builder.Configuration);
 
 ##### 代码配置
 
-```csharp
+``` c#
 // 全部配置
 builder.Services.AddCaptcha(builder.Configuration, option =>
 {
@@ -196,7 +198,7 @@ public class CaptchaController : Controller
 ### 自定义随机验证码（需要版本1.1.2）
 动图和静态图随机出现， CaptchaType随机。
 #### 1. 自定义RandomCaptcha
-``` c#
+```csharp
 /// <summary>
 /// 随机验证码
 /// </summary>
@@ -254,7 +256,7 @@ public class RandomCaptcha : DefaultCaptcha
 ```
 
 #### 2. 注入RandomCaptcha
-``` c#
+```csharp
 // 内存存储， 基于appsettings.json配置
 builder.Services.AddCaptcha(builder.Configuration);
 // 如果开启随机验证码，请打开下面的注释即可。
@@ -273,7 +275,7 @@ builder.Services.AddCaptcha(builder.Configuration);
 ![输入图片说明](Images/font_demo.png)
 
 #### 3. 定义查找字体帮助类，示例使用ResourceFontFamilysFinder
-``` c#
+```csharp
 public class ResourceFontFamilysFinder
 {
     private static Lazy<List<FontFamily>> _fontFamilies = new Lazy<List<FontFamily>>(() =>
