@@ -317,8 +317,8 @@ builder.Services.AddCaptcha(builder.Configuration, options =>
 });
 ```
 
-### .Net Framwork下使用 <a id="framework"></a> 
-新建mvc项目，.Net Framwork选择4.6.1。
+### .Net Framework下使用 <a id="framework"></a> 
+新建mvc项目，.Net Framework选择4.6.1。
 
 #### 1. Nuget安装
 先安装SixLabors.ImageSharp.Drawing  **1.0.0-beta14**
