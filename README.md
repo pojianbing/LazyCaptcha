@@ -36,7 +36,7 @@
 | Ransom  | ![输入图片说明](Images/Font_Ransom.gif)  | Robot    | ![输入图片说明](Images/Font_Robot.gif)    |
 | Scandal | ![输入图片说明](Images/Font_Scandal.gif) |
 
-### 在线演示（仅学习和试用，随时可能关掉服务）
+### 在线演示（已停止服务）
 
 ```shell
 # 此次返回的是 uyfx
