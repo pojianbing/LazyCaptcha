@@ -114,6 +114,8 @@ builder.Services.AddCaptcha(builder.Configuration);
   }
 }
 ```
+配置可以通过运行[Sample.Winfrom](Sample.Winfrom)生成。
+![输入图片说明](Images/Config.png)
 
 ##### 代码配置
 
@@ -197,7 +199,7 @@ public class CaptchaController : Controller
 }
 ```
 
-### 自定义随机验证码（需要版本1.1.2）
+### 自定义随机验证码
 动图和静态图随机出现， CaptchaType随机。
 #### 1. 自定义RandomCaptcha
 ```csharp
