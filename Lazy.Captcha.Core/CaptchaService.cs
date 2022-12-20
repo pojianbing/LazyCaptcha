@@ -3,7 +3,6 @@ using Lazy.Captcha.Core.Generator.Image;
 using Lazy.Captcha.Core.Storage;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
-using SixLabors.ImageSharp;
 using System;
 using System.Collections.Generic;
 using System.Text;

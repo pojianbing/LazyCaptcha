@@ -1,7 +1,6 @@
 ﻿using Lazy.Captcha.Core.Generator;
 using Lazy.Captcha.Core.Generator.Code;
-using SixLabors.Fonts;
-using SixLabors.ImageSharp;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +23,7 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
         /// </summary>
         /// <param name="backgroundColor"></param>
         /// <returns></returns>
-        public DefaultCaptchaImageOptionBuilder CaptchaType(Color backgroundColor)
+        public DefaultCaptchaImageOptionBuilder CaptchaType(SKColor backgroundColor)
         {
             this._option.BackgroundColor = backgroundColor;
             return this;
@@ -35,7 +34,7 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
         /// </summary>
         /// <param name="fontFamily"></param>
         /// <returns></returns>
-        public DefaultCaptchaImageOptionBuilder FontFamily(FontFamily fontFamily)
+        public DefaultCaptchaImageOptionBuilder FontFamily(SKTypeface fontFamily)
         {
             this._option.FontFamily = fontFamily;
             return this;
@@ -49,17 +48,6 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
         public DefaultCaptchaImageOptionBuilder FontFamily(float fontSize)
         {
             this._option.FontSize = fontSize;
-            return this;
-        }
-
-        /// <summary>
-        /// fontStyle
-        /// </summary>
-        /// <param name="fontStyle"></param>
-        /// <returns></returns>
-        public DefaultCaptchaImageOptionBuilder FontFamily(FontStyle fontStyle)
-        {
-            this._option.FontStyle = fontStyle;
             return this;
         }
 

@@ -7,6 +7,7 @@ using Lazy.Captcha.Core.Storage;
 using Lazy.Captcha.Core.Storeage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using SkiaSharp;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -31,7 +32,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 var backgroundColor = configuration?.GetSection("CaptchaOptions:ImageOption:BackgroundColor")?.Value;
                 if (!string.IsNullOrWhiteSpace(backgroundColor))
                 {
-                    if (SixLabors.ImageSharp.Color.TryParse(backgroundColor, out var color))
+                    if (SKColor.TryParse(backgroundColor, out var color))
                     {
                         options.ImageOption.BackgroundColor = color;
                     }
@@ -43,11 +44,11 @@ namespace Microsoft.Extensions.DependencyInjection
                     var colors = foregroudColors.Split(',').ToList().Where(e => !string.IsNullOrEmpty(e));
                     foreach (var item in colors)
                     {
-                        if (SixLabors.ImageSharp.Color.TryParse(item, out var color))
+                        if (SKColor.TryParse(item, out var color))
                         {
                             if (options.ImageOption.ForegroundColors == null)
                             {
-                                options.ImageOption.ForegroundColors = new List<SixLabors.ImageSharp.Color>();
+                                options.ImageOption.ForegroundColors = new List<SKColor>();
                             }
                             options.ImageOption.ForegroundColors.Add(color);
                         }

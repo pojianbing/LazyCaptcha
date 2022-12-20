@@ -6,8 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCaptcha(builder.Configuration, options =>
 {
     // 自定义字体
-    options.ImageOption.FontSize = 28;
-    options.ImageOption.FontFamily = ResourceFontFamilysFinder.Find("KG HAPPY");
+    //options.ImageOption.FontSize = 28;
+    //options.ImageOption.FontFamily = ResourceFontFamilysFinder.Find("KG HAPPY");
 });
 // 如果开启随机验码，请打开注释即可。
 //builder.Services.Add(ServiceDescriptor.Scoped<ICaptcha, RandomCaptcha>());

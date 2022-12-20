@@ -159,18 +159,18 @@ namespace Lazy.Captcha.Core
                     if (item == "√")
                     {
                         var v = stack.Pop();
-                        stack.Push(Math.Sqrt((double)v));
+                        stack.Push((Math.Sqrt((double)v)).ToString());
                     }
                     else if (item == "%")
                     {
-                        stack.Push(PopDouble() / 100.0d);
+                        stack.Push((PopDouble() / 100.0d).ToString());
                     }
                     else
                     {
                         var v1 = PopDouble();
                         var v2 = PopDouble();
                         var v = Cacl(v2, v1, item);
-                        stack.Push(v);
+                        stack.Push(v.ToString());
                     }
                 }
 
@@ -181,7 +181,7 @@ namespace Lazy.Captcha.Core
                 }
             }
 
-            return (double)stack.Pop();
+            return double.Parse((string)stack.Pop());
         }
 
         /// <summary>

@@ -1,5 +1,4 @@
-﻿using SixLabors.Fonts;
-using SixLabors.ImageSharp;
+﻿using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,19 +16,15 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
         /// <summary>
         /// 背景色
         /// </summary>
-        public Color BackgroundColor { get; set; } = Color.White;
+        public SKColor BackgroundColor { get; set; } = SKColors.White;
         /// <summary>
         /// 前景色
         /// </summary>
-        public List<Color> ForegroundColors { get; set; }
+        public List<SKColor> ForegroundColors { get; set; }
         /// <summary>
         /// FontFamily
         /// </summary>
-        public FontFamily FontFamily { get; set;}= DefaultFontFamilys.Instance.Kaiti;
-        /// <summary>
-        /// FontStyle
-        /// </summary>
-        public FontStyle FontStyle { get; set;} = FontStyle.Regular;
+        public SKTypeface FontFamily { get; set;}= DefaultFontFamilys.Instance.Kaiti;
         /// <summary>
         /// 字体大小
         /// </summary>
@@ -46,11 +41,11 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
         /// <summary>
         /// 气泡最小半径
         /// </summary>
-        public int BubbleMinRadius { get; set; } = 5;
+        public int BubbleMinRadius { get; set; } = 3;
         /// <summary>
         /// 气泡最小半径
         /// </summary>
-        public int BubbleMaxRadius { get; set; } = 15;
+        public int BubbleMaxRadius { get; set; } = 8;
         /// <summary>
         /// 气泡数量
         /// </summary>
@@ -66,17 +61,10 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
         /// <summary>
         /// 每帧延迟,Animation=true时有效
         /// </summary>
-        public int FrameDelay { get; set; } = 30;
-
+        public int FrameDelay { get; set; } = 300;
         /// <summary>
-        /// 字体
+        /// 图片质量（仅对静态验证有效）
         /// </summary>
-        public Font Font
-        {
-            get
-            {
-                return this.FontFamily.CreateFont(this.FontSize, this.FontStyle);
-            }
-        }
+        public int Quality { get; set; } = 100;
     }
 }

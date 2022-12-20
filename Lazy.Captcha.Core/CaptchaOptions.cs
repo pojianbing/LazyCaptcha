@@ -2,8 +2,6 @@
 using Lazy.Captcha.Core.Generator.Code;
 using Lazy.Captcha.Core.Generator.Image;
 using Lazy.Captcha.Core.Generator.Image.Option;
-using SixLabors.Fonts;
-using SixLabors.ImageSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;

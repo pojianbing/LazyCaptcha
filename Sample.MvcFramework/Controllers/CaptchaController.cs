@@ -21,7 +21,7 @@ namespace Sample.MvcFramework.Controllers
                 Base64 = captchaData.Base64
             };
             return Json(output, JsonRequestBehavior.AllowGet);
-           
+
         }
 
         /// <summary>

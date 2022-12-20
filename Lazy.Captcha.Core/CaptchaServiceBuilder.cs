@@ -1,7 +1,6 @@
 ﻿using Lazy.Captcha.Core.Generator;
 using Lazy.Captcha.Core.Storage;
-using SixLabors.Fonts;
-using SixLabors.ImageSharp;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -122,7 +121,7 @@ namespace Lazy.Captcha.Core
         /// </summary>
         /// <param name="backgroundColor"></param>
         /// <returns></returns>
-        public CaptchaServiceBuilder BackgroundColor(Color backgroundColor)
+        public CaptchaServiceBuilder BackgroundColor(SKColor backgroundColor)
         {
             CaptchaOptions.ImageOption.BackgroundColor = backgroundColor;
             return this;
@@ -133,7 +132,7 @@ namespace Lazy.Captcha.Core
         /// </summary>
         /// <param name="animation"></param>
         /// <returns></returns>
-        public CaptchaServiceBuilder ForegroundColors(List<Color> foregroundColors)
+        public CaptchaServiceBuilder ForegroundColors(List<SKColor> foregroundColors)
         {
             CaptchaOptions.ImageOption.ForegroundColors = foregroundColors;
             return this;
@@ -144,20 +143,9 @@ namespace Lazy.Captcha.Core
         /// </summary>
         /// <param name="fontFamily"></param>
         /// <returns></returns>
-        public CaptchaServiceBuilder FontFamily(FontFamily fontFamily)
+        public CaptchaServiceBuilder FontFamily(SKTypeface fontFamily)
         {
             CaptchaOptions.ImageOption.FontFamily = fontFamily;
-            return this;
-        }
-
-        /// <summary>
-        /// FontStyle
-        /// </summary>
-        /// <param name="fontStyle"></param>
-        /// <returns></returns>
-        public CaptchaServiceBuilder FontStyle(FontStyle fontStyle)
-        {
-            CaptchaOptions.ImageOption.FontStyle = fontStyle;
             return this;
         }
 
@@ -257,6 +245,17 @@ namespace Lazy.Captcha.Core
         public CaptchaServiceBuilder FrameDelay(int frameDelay)
         {
             CaptchaOptions.ImageOption.FrameDelay = frameDelay;
+            return this;
+        }
+
+        /// <summary>
+        /// 图片质量
+        /// </summary>
+        /// <param name="quality"></param>
+        /// <returns></returns>
+        public CaptchaServiceBuilder Quality(int quality)
+        {
+            CaptchaOptions.ImageOption.Quality = quality;
             return this;
         }
 

@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>SyntaxHighlighter Build Test Page</title>
+    <link type="text/css" rel="stylesheet" media="all" href="highlight/jquery.highlight.css" />
+    <style type="text/css">
+        body {
+            background: none repeat scroll 0 0 #FFFFFF;
+            color: #494949;
+            font-family: Verdana,sans-serif;
+            font-size: 62.5%;
+            margin: 0;
+            padding: 0 1.0em;
+        }
+
+        p {
+            margin: 0.5em 0 0;
+            padding: 0 0 0.5em;
+            font-size: 1.3em;
+            line-height: 1.6em;
+        }
+
+        div.highlight ul.tabs li {
+            font-size: 14px;
+        }
+    </style>
+    <script type="text/javascript" src="highlight/jquery.min.js"></script>
+    <script type="text/javascript" src="highlight/jquery.highlight.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('pre.code').highlight({ source: 0, zebra: 1, indent: 'space', list: 'ol' });
+        });
+    </script>
+</head>
+<body>
+    <pre class="code" lang="default">
+{{data}}
+    </pre>
+</body>
+</html>

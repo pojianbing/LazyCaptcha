@@ -1,4 +1,4 @@
-﻿using SixLabors.ImageSharp;
+﻿using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,21 +10,21 @@ namespace Lazy.Captcha.Core
     public class DefaultColors
     {
         public static DefaultColors Instance = new DefaultColors();
-        
-        public List<Color> Colors = new List<Color>
+
+        public List<SKColor> Colors = new List<SKColor>
         {
-            Color.Parse("#0087ff"),
-            Color.Parse("#339933"),
-            Color.Parse("#ff6666"),
-            Color.Parse("#ff9900"),
-            Color.Parse("#996600"),
-            Color.Parse("#996699"),
-            Color.Parse("#339999"),
-            Color.Parse("#6666ff"),
-            Color.Parse("#0066cc"),
-            Color.Parse("#cc3333"),
-            Color.Parse("#0099cc"),
-            Color.Parse("#003366"),
+            SKColor.Parse("#0087ff"),
+            SKColor.Parse("#339933"),
+            SKColor.Parse("#ff6666"),
+            SKColor.Parse("#ff9900"),
+            SKColor.Parse("#996600"),
+            SKColor.Parse("#996699"),
+            SKColor.Parse("#339999"),
+            SKColor.Parse("#6666ff"),
+            SKColor.Parse("#0066cc"),
+            SKColor.Parse("#cc3333"),
+            SKColor.Parse("#0099cc"),
+            SKColor.Parse("#003366"),
         };
     }
 }

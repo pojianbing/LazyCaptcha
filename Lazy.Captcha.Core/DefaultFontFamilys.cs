@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using SixLabors.Fonts;
+using SkiaSharp;
 
 namespace Lazy.Captcha.Core
 {
     public class DefaultFontFamilys
     {
         public static DefaultFontFamilys Instance = new DefaultFontFamilys();
-        private static List<FontFamily> _fontFamilies = null;
+        private static List<SKTypeface> _fontFamilies = null;
         private static Dictionary<string, string> FamilyNameMapper = new Dictionary<string, string>
         {
             { "actionj", "Action Jackson" },
@@ -17,9 +17,9 @@ namespace Lazy.Captcha.Core
             { "fresnel", "Fresnel" },
             { "headache", "Tom's Headache" },
             { "lexo", "Lexographer" },
-            { "prefix", "Prefix" },
+            { "prefix", "Prefix Endangered" },
             { "progbot", "PROG.BOT" },
-            { "ransom", "Ransom" },
+            { "ransom", "Ransom CutUpLetters" },
             { "robot", "Robot Teacher" },
             { "scandal", "Potassium Scandal" },
             { "kaiti", "FZKai-Z03" }
@@ -31,21 +31,23 @@ namespace Lazy.Captcha.Core
             {
                 var assembly = Assembly.GetExecutingAssembly();
                 var names = assembly.GetManifestResourceNames();
-                _fontFamilies = new List<FontFamily>();
+                _fontFamilies = new List<SKTypeface>();
 
                 if (names?.Length > 0 == true)
                 {
-                    var fontList = new List<Font>();
-                    var fontCollection = new FontCollection();
-
                     foreach (var name in names)
                     {
-                        _fontFamilies.Add(fontCollection.Add(assembly.GetManifestResourceStream(name)));
+                        _fontFamilies.Add(SKTypeface.FromStream(assembly.GetManifestResourceStream(name)));
                     }
                 }
                 else
                 {
                     throw new Exception($"绘制验证码字体文件加载失败");
+                }
+
+                foreach (var f in _fontFamilies)
+                {
+                    Console.WriteLine(f.FamilyName);
                 }
             }
         }
@@ -53,7 +55,7 @@ namespace Lazy.Captcha.Core
         /// <summary>
         /// 获取字体
         /// </summary>
-        public FontFamily GetFontFamily(string name)
+        public SKTypeface GetFontFamily(string name)
         {
             var realName = "Epilog";
             var normalizeName = name.ToLowerInvariant();
@@ -62,13 +64,13 @@ namespace Lazy.Captcha.Core
                 // 默认字体
                 realName = FamilyNameMapper[normalizeName];
             }
-            return _fontFamilies.First(f => f.Name == realName);
+            return _fontFamilies.First(f => f.FamilyName == realName);
         }
 
         /// <summary>
         /// ACTIONJ
         /// </summary>
-        public FontFamily Actionj
+        public SKTypeface Actionj
         {
             get
             {
@@ -79,7 +81,7 @@ namespace Lazy.Captcha.Core
         /// <summary>
         /// Epilog
         /// </summary>
-        public FontFamily Epilog
+        public SKTypeface Epilog
         {
             get
             {
@@ -90,7 +92,7 @@ namespace Lazy.Captcha.Core
         /// <summary>
         /// Fresnel
         /// </summary>
-        public FontFamily Fresnel
+        public SKTypeface Fresnel
         {
             get
             {
@@ -101,7 +103,7 @@ namespace Lazy.Captcha.Core
         /// <summary>
         /// headache
         /// </summary>
-        public FontFamily Headache
+        public SKTypeface Headache
         {
             get
             {
@@ -112,7 +114,7 @@ namespace Lazy.Captcha.Core
         /// <summary>
         /// Lexo
         /// </summary>
-        public FontFamily Lexo
+        public SKTypeface Lexo
         {
             get
             {
@@ -123,7 +125,7 @@ namespace Lazy.Captcha.Core
         /// <summary>
         /// Prefix
         /// </summary>
-        public FontFamily Prefix
+        public SKTypeface Prefix
         {
             get
             {
@@ -134,7 +136,7 @@ namespace Lazy.Captcha.Core
         /// <summary>
         /// Progbot
         /// </summary>
-        public FontFamily Progbot
+        public SKTypeface Progbot
         {
             get
             {
@@ -145,7 +147,7 @@ namespace Lazy.Captcha.Core
         /// <summary>
         /// Ransom
         /// </summary>
-        public FontFamily Ransom
+        public SKTypeface Ransom
         {
             get
             {
@@ -156,7 +158,7 @@ namespace Lazy.Captcha.Core
         /// <summary>
         /// Robot
         /// </summary>
-        public FontFamily Robot
+        public SKTypeface Robot
         {
             get
             {
@@ -167,7 +169,7 @@ namespace Lazy.Captcha.Core
         /// <summary>
         /// Scandal
         /// </summary>
-        public FontFamily Scandal
+        public SKTypeface Scandal
         {
             get
             {
@@ -178,7 +180,7 @@ namespace Lazy.Captcha.Core
         /// <summary>
         /// 楷体
         /// </summary>
-        public FontFamily Kaiti
+        public SKTypeface Kaiti
         {
             get
             {
