@@ -1,10 +1,11 @@
-# LazyCaptcha (v1基于ImageSharp, [v2基于SkiaShap(点击查看文档)](README.md))
+# LazyCaptcha v1(基于ImageSharp)
 
 ## 介绍
 
 仿[EasyCaptcha](https://gitee.com/ele-admin/EasyCaptcha)和[SimpleCaptcha](https://github.com/1992w/SimpleCaptcha),基于.Net Standard 2.0 的图形验证码模块。
 可运行在.Net Framework >= 4.6.1，Core >= 2.0 环境下。.Net Framework下使用，[请参照](#user-content-net-framwork下使用-)
->  v1.1.6版本开始支持.Net Standard 2.0，之前为.Net Standard 2.1，如果要在 .Net Framework中使用，请使用>=1.1.6版本。
+>  v1.1.6版本开始支持.Net Standard 2.0，之前为.Net Standard 2.1，如果要在 .Net Framework中使用，请使用>=1.1.6版本。  
+[v2文档地址](README.md)
 
  **滑动验证码请移步[lazy-slide-captcha](https://gitee.com/pojianbing/lazy-slide-captcha)。**   
 [码云地址](https://gitee.com/pojianbing/lazy-captcha)
