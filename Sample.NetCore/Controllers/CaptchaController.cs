@@ -62,7 +62,7 @@ namespace Sample.NetCore.Controllers
               .FontSize(26)
               .CaptchaType(Enum.Parse<CaptchaType>(type))
               .FontFamily(DefaultFontFamilys.Instance.GetFontFamily(font))
-              .InterferenceLineCount(1)
+              .InterferenceLineCount(2)
               .Animation(false)
               .Build();
             var info = captchaService.Generate(id);
