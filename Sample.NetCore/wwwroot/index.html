@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="index.css"></link>
+</head>
+<body>
+  <div id="app">
+    <div class="grid">
+      <!-- 第一行显示字体 -->
+      <div class="cell">类型/字体</div>
+      <div class="cell" v-for="font in fonts">{{font}}</div>
+
+      <template v-for="group in groupCaptchas">
+        <div class="cell">{{group.type}}</div>
+
+        <div class="cell" v-for="captcha in group.captchas">
+          <img :src="captcha.url" v-if="captcha.isSupport"/>
+          <span class="unsupport" v-else>不支持</span>
+        </div>
+      </template>
+
+    </div>
+  </div>
+
+  <script src="vue.min.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>

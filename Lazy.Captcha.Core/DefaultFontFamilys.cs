@@ -17,9 +17,9 @@ namespace Lazy.Captcha.Core
             { "fresnel", "Fresnel" },
             { "headache", "Tom's Headache" },
             { "lexo", "Lexographer" },
-            { "prefix", "Prefix Endangered" },
+            { "prefix", "Prefix" },
             { "progbot", "PROG.BOT" },
-            { "ransom", "Ransom CutUpLetters" },
+            { "ransom", "Ransom" },
             { "robot", "Robot Teacher" },
             { "scandal", "Potassium Scandal" },
             { "kaiti", "FZKai-Z03" }
@@ -64,7 +64,8 @@ namespace Lazy.Captcha.Core
                 // 默认字体
                 realName = FamilyNameMapper[normalizeName];
             }
-            return _fontFamilies.First(f => f.FamilyName == realName);
+            // 改用StartsWith, 某些环境下： Prefix取到的值为Prefix Endangered, Ransom取到的值为Ransom CutUpLetters
+            return _fontFamilies.First(f => f.FamilyName.StartsWith(realName));
         }
 
         /// <summary>

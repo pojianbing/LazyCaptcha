@@ -1,0 +1,33 @@
+body{
+  background-color: black;
+}
+
+.grid{
+  margin-top:100px;
+  height: 800px;
+  width: 1280px;
+  margin: auto;
+  /* 设置容器布局为grid布局 */
+  display: grid;
+    /* 指定每一行的宽度 每个宽度中间用空格隔开 */
+  grid-template-rows: repeat(12, 8.33%);
+  /* 指定每一列的宽度 每个宽度中间用空格隔开 */
+  grid-template-columns: repeat(12, 8.33%);
+}
+
+.grid .cell{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 10px;
+}
+
+.grid .cell .text{
+  color: green;
+}
+
+.unsupport{
+  color: #8f8f8f;
+}
