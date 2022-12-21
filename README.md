@@ -1,19 +1,16 @@
-# LazyCaptcha
-
-
+# LazyCaptcha v2(基于SkiaSharp，未发布)
 
 ## 介绍
 
 仿[EasyCaptcha](https://gitee.com/ele-admin/EasyCaptcha)和[SimpleCaptcha](https://github.com/1992w/SimpleCaptcha),基于.Net Standard 2.0 的图形验证码模块。
-可运行在.Net Framework >= 4.6.1，Core >= 2.0 环境下。.Net Framework下使用，[请参照](#user-content-net-framwork下使用-)
->  v1.1.6版本开始支持.Net Standard 2.0，之前为.Net Standard 2.1，如果要在 .Net Framework中使用，请使用>=1.1.6版本。
+**v2是指版本号>=2.0.0的版本，<2.0.0则称为v1。 v1版本基于ImageSharp，v2版本基于为SkiaSharp**。SkiaSharp性能更好，但发布到linux时需要安装对应NativeAssets（ImageSharp则不需要安装额外的包）。 目前v2版本暂未发布nuget，待测试充分后再上线，敬请期待。 [v1文档地址](README_V1.md)
+
 
  **滑动验证码请移步[lazy-slide-captcha](https://gitee.com/pojianbing/lazy-slide-captcha)。**   
 [码云地址](https://gitee.com/pojianbing/lazy-captcha)
 [Github 地址](https://github.com/pojianbing/LazyCaptcha)
 
-### 演示地址
-[点击](http://www.sunseeyou.com:8081/index.html)
+### [在线演示](http://www.sunseeyou.com:8081/index.html)
 
 ### 效果展示
 
@@ -41,6 +38,7 @@
 | Ransom  | ![输入图片说明](Images/Font_Ransom.gif)  | Robot    | ![输入图片说明](Images/Font_Robot.gif)    |
 | Scandal | ![输入图片说明](Images/Font_Scandal.gif) |
 
+
 ### 安装
 
 - [Package Manager](https://www.nuget.org/packages/Lazy.Captcha.Core)
@@ -54,6 +52,7 @@ Install-Package Lazy.Captcha.Core
 ```powershell
 dotnet add package Lazy.Captcha.Core
 ```
+> linux环境下运行，请安装[SkiaSharp.NativeAssets.Linux](https://www.nuget.org/packages/SkiaSharp.NativeAssets.Linux)包，更多细节请查看[SkiaSharp](https://github.com/mono/SkiaSharp)官方文档。
 
 ### 使用说明
 
@@ -102,11 +101,14 @@ builder.Services.AddCaptcha(builder.Configuration);
       "FontFamily": "kaiti", // 包含actionj,epilog,fresnel,headache,lexo,prefix,progbot,ransom,robot,scandal,kaiti
       "FrameDelay": 15, // 每帧延迟,Animation=true时有效, 默认30
       "BackgroundColor": "#ffff00", //  格式: rgb, rgba, rrggbb, or rrggbbaa format to match web syntax, 默认#fff
-      "ForegroundColors": "" //  颜色格式同BackgroundColor,多个颜色逗号分割，随机选取。不填，空值，则使用默认颜色集
+      "ForegroundColors": "", //  颜色格式同BackgroundColor,多个颜色逗号分割，随机选取。不填，空值，则使用默认颜色集
+      "Quality": 100 // 图片质量（质量越高图片越大，gif调整无效可能会更大）
     }
   }
 }
 ```
+配置可以通过运行[Sample.Winfrom](Sample.Winfrom)生成。
+![输入图片说明](Images/Config.png)
 
 ##### 代码配置
 
@@ -190,7 +192,7 @@ public class CaptchaController : Controller
 }
 ```
 
-### 自定义随机验证码（需要版本1.1.2）
+### 自定义随机验证码
 动图和静态图随机出现， CaptchaType随机。
 #### 1. 自定义RandomCaptcha
 ```csharp
@@ -273,19 +275,18 @@ builder.Services.AddCaptcha(builder.Configuration);
 ```csharp
 public class ResourceFontFamilysFinder
 {
-    private static Lazy<List<FontFamily>> _fontFamilies = new Lazy<List<FontFamily>>(() =>
+    private static Lazy<List<SKTypeface>> _fontFamilies = new Lazy<List<SKTypeface>>(() =>
     {
-        var fontFamilies = new List<FontFamily>();
+        var fontFamilies = new List<SKTypeface>();
         var assembly = Assembly.GetExecutingAssembly();
         var names = assembly.GetManifestResourceNames();
 
         if (names?.Length > 0 == true)
         {
-            var fontCollection = new FontCollection();
             foreach (var name in names)
             {
                 if (!name.EndsWith("ttf")) continue;
-                fontFamilies.Add(fontCollection.Add(assembly.GetManifestResourceStream(name)));
+                fontFamilies.Add(SKTypeface.FromStream(assembly.GetManifestResourceStream(name)));
             }
         }
 
@@ -293,9 +294,9 @@ public class ResourceFontFamilysFinder
     });
 
 
-    public static FontFamily Find(string name)
+    public static SKTypeface Find(string name)
     {
-        return _fontFamilies.Value.First(e => e.Name == name);
+        return _fontFamilies.Value.First(e => e.FamilyName == name);
     }
 }
 ```
@@ -312,12 +313,10 @@ builder.Services.AddCaptcha(builder.Configuration, options =>
 ```
 
 ### .Net Framework下使用 <a id="framework"></a> 
-新建mvc项目，.Net Framework选择4.6.1。
+新建mvc项目，.Net Framework选择4.6.2。
 
 #### 1. Nuget安装
-先安装SixLabors.ImageSharp.Drawing  **1.0.0-beta14**
-
-再安装Lazy.Captcha.Core **1.1.6**
+先安装SkiaSharp, 再安装Lazy.Captcha.Core
 
 #### 2. Global.asax增加
 ``` c#
@@ -386,31 +385,18 @@ public class CaptchaResponse
 
 具体示例请参照 [Sample.MvcFramework](Sample.MvcFramework)项目。
 
+### 常见问题
+
+#### 1. linux下如何运行
+除安装Lazy.Captcha.Core外，还需要安装[SkiaSharp.NativeAssets.Linux](https://www.nuget.org/packages/SkiaSharp.NativeAssets.Linux)，更多细节请查看[SkiaSharp](https://github.com/mono/SkiaSharp)官方文档。
+
+#### 2. docker发布注意事项
+需要安装fontconfig, 具体参考Sample.NetCore示例项目[Dockerfile]( Sample.NetCore/Dockerfile)
+
+
+
 ### 版本历史
 
-#### v1.1.6
--  新增Framework支持
+#### v2.0.0
+-  XXXXXX
 
-#### v1.1.5
--  修复校验接口code传入null返回为true的bug
-
-#### v1.1.4
--  优化干扰线显示，多条时适当分散
--  增加前景色配置ForegroundColors
--  优化部分代码
-
-#### v1.1.3
--  ImageSharp升级到2.1.0
-
-#### v1.1.2
-
-- 改进DefaultCaptcha以方便自定义验证码。
-
-#### v1.1.1
-
-- 多次验证实现
-
-#### v1.1.0
-
-- 新增 FrameDelay 参数，控制每帧延迟，Animation = true 时有效。
-- BackgroundColor 参数支持配置文件设置。
