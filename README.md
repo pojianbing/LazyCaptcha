@@ -107,7 +107,7 @@ builder.Services.AddCaptcha(builder.Configuration);
   }
 }
 ```
-配置可以通过运行[Sample.Winfrom](Sample.Winfrom)生成。
+配置可以通过运行[Sample.Winfrom](Sample.Winfrom)生成或直接[下载Release](ConfigTool/Release.zip)运行。
 ![输入图片说明](Images/Config.png)
 
 ##### 代码配置
