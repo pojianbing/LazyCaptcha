@@ -4,6 +4,8 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>8f38fd12-0eb2-4a15-992a-68e26293d7f5</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +18,11 @@
     <EmbeddedResource Include="CustomFonts\BunnyeggsRegular-8M5aZ.ttf" />
     <EmbeddedResource Include="CustomFonts\KgHappy-wWZZ.ttf" />
     <EmbeddedResource Include="CustomFonts\WhoaSaucePersonalUseBold-mLmV5.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.3" />
   </ItemGroup>
 
   <ItemGroup>
