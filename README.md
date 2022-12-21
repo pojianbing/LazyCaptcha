@@ -60,7 +60,7 @@ Install-Package Lazy.Captcha.Core
 ```powershell
 dotnet add package Lazy.Captcha.Core
 ```
-> linux环境下运行，请安装SkiaSharp.NativeAssets.Linux包，更多细节请查看[SkiaSharp](https://github.com/mono/SkiaSharp)官方文档。
+> linux环境下运行，请安装[SkiaSharp.NativeAssets.Linux](https://www.nuget.org/packages/SkiaSharp.NativeAssets.Linux)包，更多细节请查看[SkiaSharp](https://github.com/mono/SkiaSharp)官方文档。
 
 ### 使用说明
 
@@ -392,6 +392,16 @@ public class CaptchaResponse
 ```
 
 具体示例请参照 [Sample.MvcFramework](Sample.MvcFramework)项目。
+
+### 常见问题
+
+#### 1. linux下如何运行
+除安装Lazy.Captcha.Core外，还需要安装[SkiaSharp.NativeAssets.Linux](https://www.nuget.org/packages/SkiaSharp.NativeAssets.Linux)，更多细节请查看[SkiaSharp](https://github.com/mono/SkiaSharp)官方文档。
+
+#### 2. docker发布注意事项
+需要安装fontconfig, 具体参考Sample.NetCore示例项目[Dockerfile]( Sample.NetCore/Dockerfile)
+
+
 
 ### 版本历史
 
