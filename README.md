@@ -10,6 +10,8 @@
 [码云地址](https://gitee.com/pojianbing/lazy-captcha)
 [Github 地址](https://github.com/pojianbing/LazyCaptcha)
 
+### [在线演示](http://www.sunseeyou.com:8081/index.html)
+
 ### 效果展示
 
 | CaptchaType           | 字体    | 静态图                                          | 动图                                            |
@@ -36,16 +38,6 @@
 | Ransom  | ![输入图片说明](Images/Font_Ransom.gif)  | Robot    | ![输入图片说明](Images/Font_Robot.gif)    |
 | Scandal | ![输入图片说明](Images/Font_Scandal.gif) |
 
-### 在线演示（已停止服务）
-
-```shell
-# 此次返回的是 uyfx
-http://wosperry.com.cn:8006/captcha?id=999
-
-# 更改参数为对应的ID和图形上的验证码uyfx，通过则返回true
-http://wosperry.com.cn:8006/captcha/validate?id=999&code=uyfx
-
-```
 
 ### 安装
 
