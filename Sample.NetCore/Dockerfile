@@ -1,4 +1,4 @@
-﻿#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
 FROM registry.cn-hangzhou.aliyuncs.com/newbe36524/aspnet:6.0 AS base
 WORKDIR /app
@@ -26,7 +26,6 @@ RUN sed -i s@/deb.debian.org/@/mirrors.163.com/@g /etc/apt/sources.list
 RUN cat /etc/apt/sources.list
 #安装fontconfig
 RUN apt-get clean
-RUN apt-get update
 RUN apt-get update && apt-get install -y fontconfig
 
 ENTRYPOINT ["dotnet", "Sample.NetCore.dll"]
