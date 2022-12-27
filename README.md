@@ -1,9 +1,9 @@
-# LazyCaptcha v2(基于SkiaSharp，未发布)
+# LazyCaptcha v2(基于SkiaSharp)
 
 ## 介绍
 
 仿[EasyCaptcha](https://gitee.com/ele-admin/EasyCaptcha)和[SimpleCaptcha](https://github.com/1992w/SimpleCaptcha),基于.Net Standard 2.0 的图形验证码模块。
-**v2是指版本号>=2.0.0的版本，<2.0.0则称为v1。 v1基于ImageSharp，v2基于SkiaSharp**。SkiaSharp性能更好，但发布到linux时需要安装对应NativeAssets（ImageSharp则不需要）。 目前v2版本暂未发布nuget，待测试充分后再上线，敬请期待。 [v1文档地址](README_V1.md)
+**v2是指版本号>=2.0.0的版本，<2.0.0则称为v1。 v1基于ImageSharp，v2基于SkiaSharp**。SkiaSharp性能更好，但发布到linux时需要安装对应NativeAssets（ImageSharp则不需要）。 [v1文档地址](README_V1.md)
 
 
  **滑动验证码请移步[lazy-slide-captcha](https://gitee.com/pojianbing/lazy-slide-captcha)。**   
