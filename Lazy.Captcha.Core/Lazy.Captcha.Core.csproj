@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Description>仿EasyCaptcha和SimpleCaptcha,基于.Net Standard 2.0的图形验证码模块。版本2.0.0起绘图由ImageSharp调整为SkiaSharp。文档地址: https://gitee.com/pojianbing/lazy-captch</Description>
+    <Description>仿EasyCaptcha和SimpleCaptcha,基于.Net Standard 2.0的图形验证码模块。版本2.0.0起绘图由ImageSharp调整为SkiaSharp。文档地址: https://gitee.com/pojianbing/lazy-captcha</Description>
     <PackageProjectUrl>https://gitee.com/pojianbing/lazy-captcha</PackageProjectUrl>
     <RepositoryUrl>https://gitee.com/pojianbing/lazy-captcha</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
