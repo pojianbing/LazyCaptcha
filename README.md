@@ -398,5 +398,9 @@ public class CaptchaResponse
 ### 版本历史
 
 #### v2.0.0
--  XXXXXX
+-  优化减法算术表达式，避免结果负数（目前仅限两个操作数）。
+-  优化验证码绘图显示。
+
+#### v2.0.0
+-  绘图改为SkiaSharp.
 
