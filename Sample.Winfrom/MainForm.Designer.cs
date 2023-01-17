@@ -89,6 +89,7 @@
             this.Quality_Nud = new System.Windows.Forms.NumericUpDown();
             this.label27 = new System.Windows.Forms.Label();
             this.Progress_Lbl = new System.Windows.Forms.Label();
+            this.Code_Lbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.CaptchaPbx)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.captchaTypeOptionBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontFamilyOptionBindingSource)).BeginInit();
@@ -808,11 +809,20 @@
             this.Progress_Lbl.TabIndex = 37;
             this.Progress_Lbl.Text = "%";
             // 
+            // Code_Lbl
+            // 
+            this.Code_Lbl.AutoSize = true;
+            this.Code_Lbl.Location = new System.Drawing.Point(930, 127);
+            this.Code_Lbl.Name = "Code_Lbl";
+            this.Code_Lbl.Size = new System.Drawing.Size(0, 12);
+            this.Code_Lbl.TabIndex = 38;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1069, 811);
+            this.Controls.Add(this.Code_Lbl);
             this.Controls.Add(this.Progress_Lbl);
             this.Controls.Add(this.Quality_Nud);
             this.Controls.Add(this.label27);
@@ -947,6 +957,7 @@
         private System.Windows.Forms.NumericUpDown Quality_Nud;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label Progress_Lbl;
+        private System.Windows.Forms.Label Code_Lbl;
     }
 }
 

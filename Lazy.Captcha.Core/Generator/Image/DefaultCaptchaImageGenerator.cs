@@ -253,6 +253,11 @@ namespace Lazy.Captcha.Core.Generator.Image
                 var charTotalWidth = charWidths.Sum(x => x);
                 var charXs = new List<float>();
 
+                // 计算字体高度（取最高的）
+                SKRect textBounds = new SKRect();
+                paint.MeasureText(text, ref textBounds);
+                var fontHeight = (int)textBounds.Height;
+
                 for (var i = 0; i < text.Count(); i++)
                 {
                     // 根据文字宽度比例，计算文字包含框宽度
@@ -260,14 +265,8 @@ namespace Lazy.Captcha.Core.Generator.Image
                     // 文字在包含框内的padding
                     var padding = (wrapperWidth - charWidths[i]) / 2;
                     var textX = currentX + padding;
-
-                    SKRect textBounds = new SKRect();
-                    paint.MeasureText(text[i].ToString(), ref textBounds);
-                    var fontHeight = (int)textBounds.Height;
                     int textY = (height + fontHeight) / 2;  // 文字的纵坐标
-
                     result.Add(new PointF(textX, textY));
-
                     currentX += wrapperWidth;
                 }
 

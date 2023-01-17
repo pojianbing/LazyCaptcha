@@ -28,6 +28,14 @@ namespace Lazy.Captcha.Core.Generator.Code
 
         private static readonly EvaluationEngine EvaluationEngine = new EvaluationEngine();
 
+        /// <summary>
+        /// 中文操作符
+        /// </summary>
+        private static Dictionary<char,char> OPERATOR_MAP = new Dictionary<char, char>
+        { 
+             { '+', '加' },  { '-', '减' }, { 'x', '乘' }
+        };
+
         public DefaultCaptchaCodeGenerator() : this(CaptchaType.DEFAULT)
         {
 
@@ -72,7 +80,7 @@ namespace Lazy.Captcha.Core.Generator.Code
         {
             var sb1 = new StringBuilder();
             var sb2 = new StringBuilder();
-            var characters = isHk? Characters.NUMBER_ZH_HK : Characters.NUMBER_ZH_CN;
+            var characters = isHk ? Characters.NUMBER_ZH_HK : Characters.NUMBER_ZH_CN;
 
             for (int i = 0; i < length; i++)
             {
@@ -84,75 +92,96 @@ namespace Lazy.Captcha.Core.Generator.Code
             return (sb1.ToString(), sb2.ToString());
         }
 
+        /// <summary>
+        /// 生成算术表达式组成部分
+        /// </summary>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        private (List<int> operands, List<char> operators) GenerateaArithmeticParts(int length)
+        {
+            // 生成操作数
+            var operands = new List<int>();
+            Enumerable.Range(0, length).ToList().ForEach(x => operands.Add(random.Next(10)));
+
+            // 生成操作符
+            var operators = new List<char>();
+            Enumerable.Range(0, length - 1).ToList().ForEach(x =>
+            {
+                switch (random.Next(3))
+                {
+                    case 0:
+                        operators.Add('+');
+                        break;
+                    case 1:
+                        operators.Add('-');
+                        break;
+                    case 2:
+                        operators.Add('x');
+                        break;
+                }
+            });
+
+            // fix: 在数字运算的时候出现减法，建议结果不要出现负数 https://gitee.com/pojianbing/lazy-captcha/issues/I6ATSJ
+            // 多操作数比较复杂，目前仅修复两个操作数的情况
+            if (length == 2 && operators[0] == '-')
+            {
+                var max = Math.Max(operands[0], operands[1]);
+                var min = Math.Min(operands[0], operands[1]);
+                operands[0] = max;
+                operands[1] = min;
+            }
+
+            return (operands, operators);
+        }
+
+        /// <summary>
+        /// 生成阿拉伯算术表达式
+        /// </summary>
+        /// <param name="length"></param>
+        /// <returns></returns>
         private (string renderText, string code) GenerateaArithmetic(int length)
         {
-            var sb = new StringBuilder();
+            (var operands, var operators) = GenerateaArithmeticParts(length);
 
-            for (var i = 0; i < length; i++)
+            // 生成表达式
+            var sb = new StringBuilder();
+            sb.Append(operands[0]);
+            for (var i = 0; i < length - 1; i++)
             {
-                sb.Append(random.Next(10));
-                if (i < length - 1)
-                {
-                    int type = random.Next(1, 4);
-                    if (type == 1)
-                    {
-                        sb.Append("+");
-                    }
-                    else if (type == 2)
-                    {
-                        sb.Append("-");
-                    }
-                    else if (type == 3)
-                    {
-                        sb.Append("x");
-                    }
-                }
+                sb.Append(operators[i]);
+                sb.Append(operands[i + 1]);
             }
 
             var result = ((int)EvaluationEngine.Evaluate(sb.ToString())).ToString();
-
-            sb.Append("=?");
-
-            return (sb.ToString(), result);
+            return (sb.Append("=?").ToString(), result);
         }
 
+        /// <summary>
+        /// 生成汉字算术表达式
+        /// </summary>
+        /// <param name="length"></param>
+        /// <returns></returns>
         private (string renderText, string code) GenerateaArithmeticZh(int length)
         {
+            (var operands, var operators) = GenerateaArithmeticParts(length);
+
+            // 生成表达式
             var sb1 = new StringBuilder();
             var sb2 = new StringBuilder();
-
-            for (var i = 0; i < length; i++)
+            sb1.Append(operands[0]);
+            sb2.Append(Characters.NUMBER_ZH_CN[operands[0]]);
+            for (var i = 0; i < length - 1; i++)
             {
-                var operand = random.Next(10);
-                sb1.Append(operand);
-                sb2.Append(Characters.NUMBER_ZH_CN[operand]);
-
-                if (i < length - 1)
-                {
-                    int type = random.Next(1, 4);
-                    if (type == 1)
-                    {
-                        sb1.Append("+");
-                        sb2.Append("加");
-                    }
-                    else if (type == 2)
-                    {
-                        sb1.Append("-");
-                        sb2.Append("减");
-                    }
-                    else if (type == 3)
-                    {
-                        sb1.Append("x");
-                        sb2.Append("乘");
-                    }
-                }
+                // 操作符
+                sb1.Append(operators[i]);
+                sb2.Append(OPERATOR_MAP[operators[i]]);
+                // 操作符
+                sb1.Append(operands[i + 1]);
+                sb2.Append(Characters.NUMBER_ZH_CN[operands[i + 1]]);
             }
 
             var result = ((int)EvaluationEngine.Evaluate(sb1.ToString())).ToString();
-
-            sb2.Append("=?");
-
-            return (sb2.ToString(), result);
+            return (sb2.Append("=?").ToString(), result);
         }
 
         /// <summary>

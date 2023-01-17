@@ -147,6 +147,7 @@ namespace Sample.Winfrom
             var data = captchaService.Generate(captchaId, 10);
             CaptchaPbx.Image = Image.FromStream(new MemoryStream(data.Bytes));
             currentCaptchaBytes = data.Bytes;
+            Code_Lbl.Text = data.Code;
 
             // 生成全字体
             foreach (var fontFamily in FontFamilyOptionProvider.Provide())
