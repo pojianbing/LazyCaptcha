@@ -390,8 +390,8 @@ public class CaptchaResponse
 #### 1. linux下如何运行
 除安装Lazy.Captcha.Core外，还需要安装[SkiaSharp.NativeAssets.Linux](https://www.nuget.org/packages/SkiaSharp.NativeAssets.Linux)，更多细节请查看[SkiaSharp](https://github.com/mono/SkiaSharp)官方文档。
 
-如果运行时出现如下类似错误：
-```
+如果运行时出现如下类似错误([相关issue](https://gitee.com/pojianbing/lazy-captcha/issues/I6CYGA))：
+``` 
 System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation.
 ---> System.TypeInitializationException: The type initializer for 'Lazy.Captcha.Core.DefaultFontFamilys' threw an exception.
 ---> System.TypeInitializationException: The type initializer for 'SkiaSharp.SKTypeface' threw an exception.
