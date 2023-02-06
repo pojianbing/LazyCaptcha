@@ -390,6 +390,20 @@ public class CaptchaResponse
 #### 1. linux下如何运行
 除安装Lazy.Captcha.Core外，还需要安装[SkiaSharp.NativeAssets.Linux](https://www.nuget.org/packages/SkiaSharp.NativeAssets.Linux)，更多细节请查看[SkiaSharp](https://github.com/mono/SkiaSharp)官方文档。
 
+如果运行时出现如下类似错误：
+```
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation.
+---> System.TypeInitializationException: The type initializer for 'Lazy.Captcha.Core.DefaultFontFamilys' threw an exception.
+---> System.TypeInitializationException: The type initializer for 'SkiaSharp.SKTypeface' threw an exception.
+---> System.DllNotFoundException: Unable to load shared library 'libSkiaSharp' or one of its dependencies. 
+```
+可以尝试安装fontconfig
+
+```
+yum install fontconfig  // centos
+apt-get install fontconfig // ubuntu
+```
+
 #### 2. docker发布注意事项
 需要安装fontconfig, 具体参考Sample.NetCore示例项目[Dockerfile]( Sample.NetCore/Dockerfile)
 
