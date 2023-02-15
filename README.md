@@ -10,7 +10,7 @@
 [码云地址](https://gitee.com/pojianbing/lazy-captcha)
 [Github 地址](https://github.com/pojianbing/LazyCaptcha)
 
-### [在线演示](http://www.sunseeyou.com:8081/index.html)
+### [在线演示](http://captcha.sunseeyou.com/index.html)
 
 ### 效果展示
 
