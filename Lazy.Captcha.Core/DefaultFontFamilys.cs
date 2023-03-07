@@ -44,11 +44,6 @@ namespace Lazy.Captcha.Core
                 {
                     throw new Exception($"绘制验证码字体文件加载失败");
                 }
-
-                foreach (var f in _fontFamilies)
-                {
-                    Console.WriteLine(f.FamilyName);
-                }
             }
         }
 
