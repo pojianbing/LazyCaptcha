@@ -1,5 +1,7 @@
 using Lazy.Captcha.Core;
 using Lazy.Captcha.Core.Generator;
+using Lazy.Captcha.Core.Generator.Image;
+using Lazy.Captcha.Core.Generator.Image.Option;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Sample.NetCore.Controllers
@@ -67,6 +69,24 @@ namespace Sample.NetCore.Controllers
               .Build();
             var info = captchaService.Generate(id);
             var stream = new MemoryStream(info.Bytes);
+            return File(stream, "image/gif");
+        }
+
+        /// <summary>
+        /// 仅生成验证码图片
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("image")]
+        public IActionResult Image()
+        {
+            var imageGenerator = new DefaultCaptchaImageGenerator();
+            var imageGeneratorOption = new CaptchaImageGeneratorOption()
+            {
+                // 必须设置
+                ForegroundColors = DefaultColors.Instance.Colors
+            };
+            var bytes = imageGenerator.Generate("hello", imageGeneratorOption);
+            var stream = new MemoryStream(bytes);
             return File(stream, "image/gif");
         }
     }
