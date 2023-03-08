@@ -407,6 +407,17 @@ apt-get install fontconfig // ubuntu
 #### 2. docker发布注意事项
 需要安装fontconfig, 具体参考Sample.NetCore示例项目[Dockerfile]( Sample.NetCore/Dockerfile)
 
+#### 3. 仅生成验证码图片，不需要LazyCaptcha存储，验证，怎么做？([相关issue](https://gitee.com/pojianbing/lazy-captcha/issues/I6KXBL))
+```
+var imageGenerator = new DefaultCaptchaImageGenerator();
+var imageGeneratorOption = new CaptchaImageGeneratorOption()
+{
+    // 必须设置
+    ForegroundColors = DefaultColors.Instance.Colors
+};
+var bytes = imageGenerator.Generate("hello", imageGeneratorOption);
+```
+
 
 
 ### 版本历史
