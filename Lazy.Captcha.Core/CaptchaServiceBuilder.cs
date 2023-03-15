@@ -260,6 +260,17 @@ namespace Lazy.Captcha.Core
         }
 
         /// <summary>
+        /// 文本粗体
+        /// </summary>
+        /// <param name="textBold"></param>
+        /// <returns></returns>
+        public CaptchaServiceBuilder TextBold(bool textBold)
+        {
+            CaptchaOptions.ImageOption.TextBold = textBold;
+            return this;
+        }
+
+        /// <summary>
         /// 构建
         /// </summary>
         /// <returns></returns>

@@ -66,5 +66,9 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
         /// 图片质量（仅对静态验证有效）
         /// </summary>
         public int Quality { get; set; } = 100;
+        /// <summary>
+        /// 文本粗体
+        /// </summary>
+        public bool TextBold { get; set; } = false;
     }
 }

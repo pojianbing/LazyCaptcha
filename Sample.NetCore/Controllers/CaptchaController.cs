@@ -55,7 +55,7 @@ namespace Sample.NetCore.Controllers
         /// <param name="font"></param>
         /// <returns></returns>
         [HttpGet("dynamic")]
-        public IActionResult DynamicCaptcha(string id, string type, string font)
+        public IActionResult DynamicCaptcha(string id, string type, string font, bool textBold = true)
         {
             var captchaService = CaptchaServiceBuilder
               .New()
@@ -66,6 +66,7 @@ namespace Sample.NetCore.Controllers
               .FontFamily(DefaultFontFamilys.Instance.GetFontFamily(font))
               .InterferenceLineCount(2)
               .Animation(false)
+              .TextBold(textBold)
               .Build();
             var info = captchaService.Generate(id);
             var stream = new MemoryStream(info.Bytes);

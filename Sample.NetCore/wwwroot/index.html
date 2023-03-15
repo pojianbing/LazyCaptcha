@@ -8,28 +8,32 @@
   <link rel="stylesheet" href="index.css"></link>
 </head>
 <body>
-  <div id="app">
+    <div id="app">
 
-    <div class="tip">注意：注意类型与字体的合理搭配，否则会出现乱码</div>
-
-    <div class="grid">
-      <!-- 第一行显示字体 -->
-      <div class="cell">类型/字体</div>
-      <div class="cell" v-for="font in fonts">{{font}}</div>
-
-      <template v-for="group in groupCaptchas">
-        <div class="cell">{{group.type}}</div>
-
-        <div class="cell" v-for="captcha in group.captchas">
-          <img :src="captcha.url" v-if="captcha.isSupport"/>
-          <span class="unsupport" v-else>不支持</span>
+        <div class="tip">
+            <span>粗体<el-switch v-model="textBold" active-color="#13ce66" inactive-color="#ff4949" @change="handleChange"></el-switch></span>
         </div>
-      </template>
 
+        <div class="grid">
+            <!-- 第一行显示字体 -->
+            <div class="cell">类型/字体</div>
+            <div class="cell" v-for="font in fonts">{{font}}</div>
+
+            <template v-for="group in groupCaptchas">
+                <div class="cell">{{group.type}}</div>
+
+                <div class="cell" v-for="captcha in group.captchas">
+                    <lazy-img :src="captcha.url" v-if="captcha.isSupport"></lazy-img>
+                    <span class="unsupport" v-else>不支持</span>
+                </div>
+            </template>
+
+        </div>
     </div>
-  </div>
 
-  <script src="vue.min.js"></script>
-  <script src="index.js"></script>
+    <script src="vue.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>

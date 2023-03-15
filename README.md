@@ -102,7 +102,8 @@ builder.Services.AddCaptcha(builder.Configuration);
       "FrameDelay": 15, // 每帧延迟,Animation=true时有效, 默认30
       "BackgroundColor": "#ffff00", //  格式: rgb, rgba, rrggbb, or rrggbbaa format to match web syntax, 默认#fff
       "ForegroundColors": "", //  颜色格式同BackgroundColor,多个颜色逗号分割，随机选取。不填，空值，则使用默认颜色集
-      "Quality": 100 // 图片质量（质量越高图片越大，gif调整无效可能会更大）
+      "Quality": 100, // 图片质量（质量越高图片越大，gif调整无效可能会更大）
+      "TextBold": false // 粗体，该配置2.0.3新增
     }
   }
 }
@@ -143,6 +144,8 @@ builder.Services.AddCaptcha(builder.Configuration, option =>
      * 中文使用kaiti，其他字符可根据喜好设置（可能部分转字符会出现绘制不出的情况）。
      * 当验证码类型为“ARITHMETIC”时，不要使用“Ransom”字体。（运算符和等号绘制不出来）
      */
+
+     option.ImageOption.TextBold = true;// 粗体，该配置2.0.3新增
 });
 ```
 
@@ -422,6 +425,12 @@ var bytes = imageGenerator.Generate("hello", imageGeneratorOption);
 
 ### 版本历史
 
+#### v2.0.3
+-  增加粗体配置项。加粗后文字更清晰。  
+> TextBold= false ![输入图片说明](Images/normal.gif)   
+TextBold =  true    ![输入图片说明](Images/bold.gif) 
+-  文字颜色随机时，保持各个文字颜色不同。
+-  优化部分代码。
 #### v2.0.2
 -  去除启动时冗余调试信息
 

@@ -88,6 +88,7 @@ namespace Sample.Winfrom
                     InterferenceLineCount = (int)this.InterferenceLineCount_Nud.Value,
                     FontFamily = fontFamilyOption == null ? "Actionj" : fontFamilyOption.Text,
                     Quality = (int)this.Quality_Nud.Value,
+                    TextBold = TextBold_Cbx.Checked
                 }
             };
         }
@@ -111,6 +112,7 @@ namespace Sample.Winfrom
                .Width(options.ImageOption.Width)
                .Height(options.ImageOption.Height)
                .Quality(options.ImageOption.Quality)
+               .TextBold(options.ImageOption.TextBold)
                .Build();
         }
 
@@ -247,6 +249,11 @@ namespace Sample.Winfrom
         }
 
         private void Quality_Nud_ValueChanged(object sender, EventArgs e)
+        {
+            this.GenerateCaptcha();
+        }
+
+        private void TextBold_Cbx_CheckedChanged(object sender, EventArgs e)
         {
             this.GenerateCaptcha();
         }

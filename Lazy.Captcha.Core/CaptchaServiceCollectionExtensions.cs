@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using Lazy.Captcha.Core;
 using Lazy.Captcha.Core.Storage;
@@ -15,7 +16,14 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddCaptcha(this IServiceCollection services)
         {
-            return services.AddScoped<ICaptcha, DefaultCaptcha>();
+            return AddCaptcha(services, null);
+        }
+
+        public static IServiceCollection AddCaptcha(this IServiceCollection services, Action<CaptchaOptions> optionsAction)
+        {
+            var factory = services.FirstOrDefault(p => p.ServiceType == typeof(IConfiguration));
+            IConfiguration configuration = (IConfiguration)factory.ImplementationFactory(null);
+            return AddCaptcha(services, configuration, optionsAction);
         }
 
         public static IServiceCollection AddCaptcha(this IServiceCollection services, IConfiguration configuration, Action<CaptchaOptions> optionsAction = null)
@@ -37,7 +45,7 @@ namespace Microsoft.Extensions.DependencyInjection
                         options.ImageOption.BackgroundColor = color;
                     }
                 }
-                                                                
+
                 var foregroudColors = configuration?.GetSection("CaptchaOptions:ImageOption:ForegroundColors")?.Value;
                 if (!string.IsNullOrWhiteSpace(foregroudColors))
                 {
@@ -61,7 +69,7 @@ namespace Microsoft.Extensions.DependencyInjection
             });
             if (optionsAction != null) services.PostConfigure(optionsAction);
 
-            services.AddScoped<ICaptcha, DefaultCaptcha>(); 
+            services.AddScoped<ICaptcha, DefaultCaptcha>();
             services.AddScoped<IStorage, DefaultStorage>();
             services.AddDistributedMemoryCache();
 

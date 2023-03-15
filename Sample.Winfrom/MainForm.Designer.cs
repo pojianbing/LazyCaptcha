@@ -90,6 +90,8 @@
             this.label27 = new System.Windows.Forms.Label();
             this.Progress_Lbl = new System.Windows.Forms.Label();
             this.Code_Lbl = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.TextBold_Cbx = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.CaptchaPbx)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.captchaTypeOptionBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontFamilyOptionBindingSource)).BeginInit();
@@ -817,11 +819,33 @@
             this.Code_Lbl.Size = new System.Drawing.Size(0, 12);
             this.Code_Lbl.TabIndex = 38;
             // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(180, 145);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(53, 12);
+            this.label28.TabIndex = 40;
+            this.label28.Text = "文字粗体";
+            // 
+            // TextBold_Cbx
+            // 
+            this.TextBold_Cbx.AutoSize = true;
+            this.TextBold_Cbx.Location = new System.Drawing.Point(239, 144);
+            this.TextBold_Cbx.Name = "TextBold_Cbx";
+            this.TextBold_Cbx.Size = new System.Drawing.Size(36, 16);
+            this.TextBold_Cbx.TabIndex = 39;
+            this.TextBold_Cbx.Text = "是";
+            this.TextBold_Cbx.UseVisualStyleBackColor = true;
+            this.TextBold_Cbx.CheckedChanged += new System.EventHandler(this.TextBold_Cbx_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1069, 811);
+            this.Controls.Add(this.label28);
+            this.Controls.Add(this.TextBold_Cbx);
             this.Controls.Add(this.Code_Lbl);
             this.Controls.Add(this.Progress_Lbl);
             this.Controls.Add(this.Quality_Nud);
@@ -958,6 +982,8 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label Progress_Lbl;
         private System.Windows.Forms.Label Code_Lbl;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.CheckBox TextBold_Cbx;
     }
 }
 

@@ -68,5 +68,9 @@ namespace Sample.Winfrom.Models
         /// 图片质量（影响生成图片的大小）
         /// </summary>
         public int Quality { get; set; } = 100;
+        /// <summary>
+        /// 文本粗体
+        /// </summary>
+        public bool TextBold { get; set; } = false;
     }
 }

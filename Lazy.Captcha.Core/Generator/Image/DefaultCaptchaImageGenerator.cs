@@ -20,10 +20,48 @@ namespace Lazy.Captcha.Core.Generator.Image
     {
         private static Random Random = new Random();
 
-        private SKColor RandomColor(IEnumerable<SKColor> foregroundColors)
+        /// <summary>
+        /// 随机颜色
+        /// </summary>
+        /// <param name="colors">颜色源</param>
+        /// <returns></returns>
+        private SKColor RandomColor(IEnumerable<SKColor> colors)
         {
-            var index = Random.Next(foregroundColors.Count());
-            return foregroundColors.ElementAt(index);
+            var index = Random.Next(colors.Count());
+            return colors.ElementAt(index);
+        }
+
+        /// <summary>
+        /// 随机颜色
+        /// </summary>
+        /// <param name="colors">颜色源</param>
+        /// <param name="count">随机个数</param>
+        /// <returns></returns>
+        private List<SKColor> RandomColor(IEnumerable<SKColor> colors, int count)
+        {
+            var result = new List<SKColor>();
+
+            if (colors.Count() < count)
+            {
+                // 可重复选择
+                for (var i = 0; i < count; i++)
+                {
+                    result.Add(RandomColor(colors));
+                }
+            }
+            else
+            {
+                // 不重复选择
+                var pickIndexs = Enumerable.Range(0, colors.Count()).ToList();
+                for (var i = 0; i < count; i++)
+                {
+                    var selectedIndex = Random.Next(pickIndexs.Count());
+                    result.Add(colors.ElementAt(pickIndexs[selectedIndex]));
+                    pickIndexs.RemoveAt(selectedIndex);
+                }
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -166,11 +204,13 @@ namespace Lazy.Captcha.Core.Generator.Image
         /// <param name="text">文本</param>
         /// <param name="font">字体</param>
         /// <param name="fontSize">字体大小</param>
+        /// <param name="textBold">是否粗体</param>
         /// <returns>文本图形描述</returns>
-        protected virtual List<TextGraphicDescription> GenerateTextGraphicDescriptions(int width, int height, string text, SKTypeface font, float fontSize, IEnumerable<SKColor> foregroundColors)
+        protected virtual List<TextGraphicDescription> GenerateTextGraphicDescriptions(int width, int height, string text, SKTypeface font, float fontSize, IEnumerable<SKColor> foregroundColors, bool textBold)
         {
             var result = new List<TextGraphicDescription>();
             var textPositions = MeasureTextPositions(width, height, text, font, fontSize);
+            var colors = RandomColor(foregroundColors, text.Count());
 
             for (var i = 0; i < text.Count(); i++)
             {
@@ -178,9 +218,10 @@ namespace Lazy.Captcha.Core.Generator.Image
                 {
                     Text = text[i].ToString(),
                     Font = font,
-                    Color = RandomColor(foregroundColors),
+                    Color = colors[i],
                     Location = textPositions[i],
-                    FontSize = fontSize
+                    FontSize = fontSize,
+                    TextBold = textBold
                 });
             }
 
@@ -203,6 +244,7 @@ namespace Lazy.Captcha.Core.Generator.Image
                     paint.IsAntialias = true;
                     paint.Typeface = gd.Font;
                     paint.Color = gd.Color.WithAlpha((byte)(255 * gd.BlendPercentage));
+                    paint.FakeBoldText = gd.TextBold;
                     canvas.DrawText(gd.Text, gd.Location.X, gd.Location.Y, paint);
                 }
             });
@@ -216,7 +258,7 @@ namespace Lazy.Captcha.Core.Generator.Image
         /// <param name="option"></param>
         protected virtual void DrawTexts(SKCanvas canvas, string text, CaptchaImageGeneratorOption option)
         {
-            var graphicDescriptions = GenerateTextGraphicDescriptions(option.Width, option.Height, text, option.FontFamily, option.FontSize, option.ForegroundColors);
+            var graphicDescriptions = GenerateTextGraphicDescriptions(option.Width, option.Height, text, option.FontFamily, option.FontSize, option.ForegroundColors, option.TextBold);
             DrawTexts(canvas, graphicDescriptions);
         }
 
@@ -338,7 +380,7 @@ namespace Lazy.Captcha.Core.Generator.Image
         /// <returns></returns>
         private byte[] GenerateAnimation(string text, CaptchaImageGeneratorOption option)
         {
-            var texGraphicDescriptions = GenerateTextGraphicDescriptions(option.Width, option.Height, text, option.FontFamily, option.FontSize, option.ForegroundColors);
+            var texGraphicDescriptions = GenerateTextGraphicDescriptions(option.Width, option.Height, text, option.FontFamily, option.FontSize, option.ForegroundColors, option.TextBold);
             var bubbleGraphicDescriptions = option.BubbleCount != 0 ?
                 GenerateBubbleGraphicDescriptions(option.Width, option.Height, option.BubbleCount, option.BubbleMinRadius, option.BubbleMaxRadius, option.BubbleThickness, option.ForegroundColors)
                 :
