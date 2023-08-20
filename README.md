@@ -84,7 +84,7 @@ builder.Services.AddCaptcha(builder.Configuration);
   },
   "CaptchaOptions": {
     "CaptchaType": 5, // 验证码类型
-    "CodeLength": 4, // 验证码长度, 要放在CaptchaType设置后  当类型为算术表达式时，长度代表操作的个数
+    "CodeLength": 4, // 验证码长度, 要放在CaptchaType设置后  当类型为算术表达式时，长度代表操作的个数, 例如2
     "ExpirySeconds": 60, // 验证码过期秒数
     "IgnoreCase": true, // 比较时是否忽略大小写
     "StoreageKeyPrefix": "", // 存储键前缀
@@ -97,10 +97,10 @@ builder.Services.AddCaptcha(builder.Configuration);
       "BubbleMaxRadius": 10, // 气泡最大半径
       "BubbleCount": 3, // 气泡数量
       "BubbleThickness": 1.0, // 气泡边沿厚度
-      "InterferenceLineCount": 4, // 干扰线数量
+      "InterferenceLineCount": 3, // 干扰线数量
       "FontFamily": "kaiti", // 包含actionj,epilog,fresnel,headache,lexo,prefix,progbot,ransom,robot,scandal,kaiti
       "FrameDelay": 15, // 每帧延迟,Animation=true时有效, 默认30
-      "BackgroundColor": "#ffff00", //  格式: rgb, rgba, rrggbb, or rrggbbaa format to match web syntax, 默认#fff
+      "BackgroundColor": "#ffffff", //  格式: rgb, rgba, rrggbb, or rrggbbaa format to match web syntax, 默认#fff
       "ForegroundColors": "", //  颜色格式同BackgroundColor,多个颜色逗号分割，随机选取。不填，空值，则使用默认颜色集
       "Quality": 100, // 图片质量（质量越高图片越大，gif调整无效可能会更大）
       "TextBold": false // 粗体，该配置2.0.3新增
