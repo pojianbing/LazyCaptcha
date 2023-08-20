@@ -425,12 +425,16 @@ var bytes = imageGenerator.Generate("hello", imageGeneratorOption);
 
 ### 版本历史
 
+#### v2.0.4
+-  裁剪kaiti字体文件，使dll大小从14M缩减为不到1M.
+
 #### v2.0.3
 -  增加粗体配置项。加粗后文字更清晰。  
 > TextBold= false ![输入图片说明](Images/normal.gif)   
 TextBold =  true    ![输入图片说明](Images/bold.gif) 
 -  文字颜色随机时，保持各个文字颜色不同。
--  优化部分代码。
+-  优化部分代码。  
+
 #### v2.0.2
 -  去除启动时冗余调试信息
 
