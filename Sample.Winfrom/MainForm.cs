@@ -1,5 +1,6 @@
 ﻿using Lazy.Captcha.Core;
 using Lazy.Captcha.Core.Generator;
+using Lazy.Captcha.Core.Generator.Code;
 using Lazy.Captcha.Core.Generator.Image.Option;
 using Newtonsoft.Json;
 using Sample.Winfrom.Helpers;
@@ -37,6 +38,33 @@ namespace Sample.Winfrom
             InitFontPictureBoxMap();
             BindDataSource();
             GenerateCaptcha();
+        }
+
+        /// <summary>
+        /// 生成裁剪字体文字
+        /// </summary>
+        private void GeneateCropFontWords()
+        {
+            var words = new List<char>();
+            words.AddRange(Characters.CHINESE);
+            words.AddRange(Characters.NUMBER_ZH_CN);
+            words.AddRange(Characters.NUMBER_ZH_HK);
+            words.AddRange(Characters.WORD_LOWER);
+            words.AddRange(Characters.WORD_UPPER);
+            words.AddRange(Characters.WORD_UPPER);
+            words.AddRange(Characters.NUMBER);
+            words.Add('+');
+            words.Add('-');
+            words.Add('x');
+            words.Add('/');
+            words.Add('?');
+            words.Add('=');
+            words.Add('加');
+            words.Add('减');
+            words.Add('乘');
+            words.Add('除');
+            var text = string.Join("", words);
+            File.WriteAllText("D:/tmp/fonts/words.txt", text);
         }
 
         private void InitFontPictureBoxMap()

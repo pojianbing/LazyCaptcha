@@ -1,0 +1,1 @@
+fonttools subset "kaiti.ttf" --text-file="words.txt" --output-file="kaiti_output.ttf"
